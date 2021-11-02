@@ -9,7 +9,9 @@ local function dump(var, ...) return DevTools_Dump(var, ...) end
 ------4. CLICK WHISPER
 ------5. OPTIONS!
 ------5. LOCALIZATION
----
+------6. FIX RAID FILTER?
+------misc. REPLACE IPAIRS
+
 LFM_GroupFinder.Tests = {};
 LFM_GroupFinder.isRunning = true;
 LFM_GroupFinder.POST_HEIGHT = 16;
