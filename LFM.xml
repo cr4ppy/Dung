@@ -1,0 +1,767 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+    <Button name="LFM_GroupFinder_TitleBtn" virtual="true">
+		<Size>
+			<AbsDimension x="600" y="16"/>
+		</Size>
+        <Anchors>
+            <Anchor point="LEFT">
+                <Offset>
+                    <AbsDimension x="0" y="0"/>
+                </Offset>
+            </Anchor>
+        </Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+                <Texture name="$parentRole1" hidden="true">
+					<Size>
+						<AbsDimension x="12" y="12"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="50" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+                <Texture name="$parentRole2" hidden="true">
+					<Size>
+						<AbsDimension x="12" y="12"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="50" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+                <Texture name="$parentRole3" hidden="true">
+					<Size>
+						<AbsDimension x="12" y="12"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="50" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+                <Texture name="$parentRole4" hidden="true">
+					<Size>
+						<AbsDimension x="12" y="12"/>
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="50" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+				<FontString name="$parentTag" inherits="GameFontNormal" text="" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="0" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor relativeTo="$parent" point="RIGHT">
+							<Offset>
+								<AbsDimension x="-69" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+                <FontString name="$parentTime" inherits="GameFontNormal" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="0" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor relativeTo="$parent" point="RIGHT">
+							<Offset>
+								<AbsDimension x="-40" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<Texture name="$parentCheck" file="Interface\Buttons\UI-CheckBox-Check" hidden="true">
+					<Size>
+						<AbsDimension x="16" y="16"/>
+					</Size>
+					<Anchors>
+						<Anchor relativeTo="$parent" point="LEFT">
+							<Offset>
+								<AbsDimension x="50" y="0"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<NormalTexture file="Interface\Buttons\UI-MinusButton-UP">
+			<Size>
+				<AbsDimension x="16" y="16"/>
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT">
+					<Offset>
+						<AbsDimension x="3" y="0"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</NormalTexture>
+        <HighlightTexture name="$parentHighlight" file="Interface\Buttons\UI-PlusButton-Hilight" alphaMode="ADD">
+			<Size>
+				<AbsDimension x="16" y="16"/>
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT">
+					<Offset>
+						<AbsDimension x="3" y="0"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</HighlightTexture>
+<!--		<HighlightTexture name="$parentHighlight" file="Interface\Buttons\UI-PlusButton-Hilight" alphaMode="ADD">-->
+<!--			<Size>-->
+<!--				<AbsDimension x="16" y="16"/>-->
+<!--			</Size>-->
+<!--			<Anchors>-->
+<!--				<Anchor point="LEFT">-->
+<!--					<Offset>-->
+<!--						<AbsDimension x="3" y="0"/>-->
+<!--					</Offset>-->
+<!--				</Anchor>-->
+<!--			</Anchors>-->
+<!--		</HighlightTexture>-->
+        <ButtonText name="$parentPlayerName" parentKey="Text" justifyH="RIGHT" nonspacewrap="true">
+			<Size>
+				<AbsDimension x="80" y="10"/>
+			</Size>
+			<Anchors>
+				<Anchor relativeTo="$parent" point="LEFT">
+					<Offset>
+						<AbsDimension x="0" y="0"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</ButtonText>
+		<ButtonText name="$parentNormalText" parentKey="Text" justifyH="LEFT" nonspacewrap="true">
+			<Size>
+				<AbsDimension x="0" y="10"/>
+			</Size>
+			<Anchors>
+				<Anchor point="LEFT">
+					<Offset>
+						<AbsDimension x="20" y="0"/>
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</ButtonText>
+		<NormalFont style="GameFontNormal"/>
+		<HighlightFont style="GameFontHighlight"/>
+		<DisabledFont style="GameFontHighlight"/>
+        <Scripts>
+            <OnEnter>
+				LFM_GroupFinder_OnPostHover(self);
+			</OnEnter>
+            <OnLeave>
+				LFM_GroupFinder_OnPostLeave(self);
+			</OnLeave>
+            <OnClick>
+                LFM_GroupFinder_OnPostClick(self);
+            </OnClick>
+        </Scripts>
+	</Button>
+
+    <Frame name="LFM_GroupFinder_Frame" movable="true" toplevel="true" parent="UIParent" inherits="ButtonFrameTemplate" hidden="true" enableMouse="true">
+        <Size x="600" y="350"/>
+        <Layers>
+            <Layer level="OVERLAY" textureSubLevel="-1">
+				<Texture name="$parentIcon" file="Interface\FriendsFrame\Battlenet-Portrait">
+					<Size x="60" y="60"/>
+					<Anchors>
+						<Anchor point="TOPLEFT" x="-5" y="7"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+            <Layer level="BACKGROUND">
+				<FontString inherits="GameFontHighlight" text="Dung" parentKey="Text">
+					<Size>
+						<AbsDimension x="500" y="14"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOP" relativeTo="LFM_GroupFinder_Frame" relativePoint="TOP">
+							<Offset>
+								<AbsDimension x="0" y="-4"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+            </Layer>
+        </Layers>
+        <Anchors>
+            <Anchor point="LEFT" x="30" y="0"/>
+        </Anchors>
+        <Scripts>
+         <OnMouseDown>
+          if button == "LeftButton" and not self.isMoving then
+           self:StartMoving();
+           self.isMoving = true;
+          end
+         </OnMouseDown>
+         <OnMouseUp>
+          if button == "LeftButton" and self.isMoving then
+           self:StopMovingOrSizing();
+           self.isMoving = false;
+          end
+         </OnMouseUp>
+         <OnHide>
+<!--          if ( this.isMoving ) then-->
+<!--           this:StopMovingOrSizing();-->
+<!--           this.isMoving = false;-->
+<!--          end-->
+         </OnHide>
+        </Scripts>
+
+        <Frames>
+            <Button name="LFM_GroupFinder_CollapseAllButton" hidden="false" inherits="LFM_GroupFinder_TitleBtn" text="ALL">
+                <Size>
+                    <AbsDimension x="40" y="40"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="60" y="-28"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <Texture name="LFM_GroupFinder_CollapseAllButtonTabLeft" file="Interface\QuestFrame\UI-QuestLogSortTab-Left">
+                            <Size>
+                                <AbsDimension x="8" y="44"/>
+                            </Size>
+                            <Anchors>
+                                <Anchor point="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="-6" y="8"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </Texture>
+                        <Texture name="LFM_GroupFinder_CollapseAllButtonTabMiddle" file="Interface\QuestFrame\UI-QuestLogSortTab-Middle">
+                            <Size>
+                                <AbsDimension x="38" y="44"/>
+                            </Size>
+                            <Anchors>
+                                <Anchor point="LEFT" relativeTo="LFM_GroupFinder_CollapseAllButtonTabLeft" relativePoint="RIGHT">
+                                    <Offset>
+                                        <AbsDimension x="0" y="0"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </Texture>
+                        <Texture file="Interface\QuestFrame\UI-QuestLogSortTab-Right">
+                            <Size>
+                                <AbsDimension x="8" y="44"/>
+                            </Size>
+                            <Anchors>
+                                <Anchor point="LEFT" relativeTo="LFM_GroupFinder_CollapseAllButtonTabMiddle" relativePoint="RIGHT"/>
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnClick>
+                        LFM_GroupFinder_ToggleAllCollapsed(self);
+                    </OnClick>
+                </Scripts>
+            </Button>
+			<CheckButton name="LFM_GroupFinder_ShowNormal" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="1">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="120" y="-38"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <HitRectInsets>
+                    <AbsInset left="0" right="0" top="0" bottom="0"/>
+                </HitRectInsets>
+                <ButtonText inherits="GameFontHighlightLeft" name="$parentLabel" parentKey="Text" text="PLAYER_DIFFICULTY1" justifyH="LEFT" nonspacewrap="true">
+                    <Size>
+                        <AbsDimension x="0" y="0"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="CENTER" relativeTo="$parent">
+                            <Offset>
+                                <AbsDimension x="0" y="16"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                    <Scripts>
+                        <OnClick>
+                            LFM_GroupFinder_ToggleType($parent);
+                        </OnClick>
+                    </Scripts>
+
+                </ButtonText>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_Frame">
+						<Offset>
+							<AbsDimension x="11" y="3"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+                <Scripts>
+                    <OnClick>
+                        LFM_GroupFinder_ToggleType(self);
+                    </OnClick>
+				</Scripts>
+			</CheckButton>
+			<CheckButton name="LFM_GroupFinder_ShowHeroic" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="2">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="LFM_GroupFinder_ShowNormal">
+                        <Offset>
+                            <AbsDimension x="60" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <HitRectInsets>
+                    <AbsInset left="0" right="0" top="0" bottom="0"/>
+                </HitRectInsets>
+                <ButtonText inherits="GameFontHighlightLeft" name="$parentLabel" parentKey="Text" text="PLAYER_DIFFICULTY2" justifyH="LEFT" nonspacewrap="true">
+                    <Size>
+                        <AbsDimension x="0" y="0"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="CENTER" relativeTo="$parent">
+                            <Offset>
+                                <AbsDimension x="0" y="16"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </ButtonText>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="LFM_GroupFinder_ShowNormal" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="7" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+                <Scripts>
+                    <OnClick>
+                        LFM_GroupFinder_ToggleType(self);
+                    </OnClick>
+				</Scripts>
+			</CheckButton>
+            <CheckButton name="LFM_GroupFinder_ShowRaid" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="999991">
+                <Size>
+                    <AbsDimension x="20" y="20"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="LFM_GroupFinder_ShowHeroic">
+                        <Offset>
+                            <AbsDimension x="60" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <HitRectInsets>
+                    <AbsInset left="0" right="0" top="0" bottom="0"/>
+                </HitRectInsets>
+                <ButtonText inherits="GameFontHighlightLeft" name="$parentLabel" parentKey="Text" text="RAID" justifyH="LEFT" nonspacewrap="true">
+                    <Size>
+                        <AbsDimension x="0" y="0"/>
+                    </Size>
+                    <Anchors>
+                        <Anchor point="CENTER" relativeTo="$parent">
+                            <Offset>
+                                <AbsDimension x="0" y="16"/>
+                            </Offset>
+                        </Anchor>
+                    </Anchors>
+                </ButtonText>
+				<Anchors>
+					<Anchor point="LEFT" relativeTo="LFM_GroupFinder_ShowNormal" relativePoint="RIGHT">
+						<Offset>
+							<AbsDimension x="7" y="0"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+                <Scripts>
+                    <OnClick>
+                        LFM_GroupFinder_ToggleType(self);
+                    </OnClick>
+				</Scripts>
+			</CheckButton>
+<!--            <CheckButton name="LFM_GroupFinder_ShowTank" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="1">-->
+<!--                <Size>-->
+<!--                    <AbsDimension x="20" y="20"/>-->
+<!--                </Size>-->
+<!--                <Anchors>-->
+<!--                    <Anchor point="RIGHT" relativeTo="LFM_GroupFinder_ShowRaid">-->
+<!--                        <Offset>-->
+<!--                            <AbsDimension x="90" y="0"/>-->
+<!--                        </Offset>-->
+<!--                    </Anchor>-->
+<!--                </Anchors>-->
+<!--                <HitRectInsets>-->
+<!--                    <AbsInset left="0" right="0" top="0" bottom="0"/>-->
+<!--                </HitRectInsets>-->
+<!--                <ButtonText inherits="GameFontHighlightLeft" name="$parentLabel" parentKey="Text" text="Tank" justifyH="LEFT" nonspacewrap="true">-->
+<!--                    <Size>-->
+<!--                        <AbsDimension x="0" y="0"/>-->
+<!--                    </Size>-->
+<!--                    <Anchors>-->
+<!--                        <Anchor point="CENTER" relativeTo="$parent">-->
+<!--                            <Offset>-->
+<!--                                <AbsDimension x="0" y="16"/>-->
+<!--                            </Offset>-->
+<!--                        </Anchor>-->
+<!--                    </Anchors>-->
+<!--                </ButtonText>-->
+<!--				<Anchors>-->
+<!--					<Anchor point="LEFT" relativeTo="LFM_GroupFinder_ShowNormal" relativePoint="RIGHT">-->
+<!--						<Offset>-->
+<!--							<AbsDimension x="7" y="0"/>-->
+<!--						</Offset>-->
+<!--					</Anchor>-->
+<!--				</Anchors>-->
+<!--                <Scripts>-->
+<!--                    <OnClick>-->
+<!--                        LFM_GroupFinder:ToggleRole(self);-->
+<!--                    </OnClick>-->
+<!--				</Scripts>-->
+<!--			</CheckButton>-->
+<!--            <CheckButton name="LFM_GroupFinder_ShowHeals" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="2">-->
+<!--                <Size>-->
+<!--                    <AbsDimension x="20" y="20"/>-->
+<!--                </Size>-->
+<!--                <Anchors>-->
+<!--                    <Anchor point="RIGHT" relativeTo="LFM_GroupFinder_ShowTank">-->
+<!--                        <Offset>-->
+<!--                            <AbsDimension x="60" y="0"/>-->
+<!--                        </Offset>-->
+<!--                    </Anchor>-->
+<!--                </Anchors>-->
+<!--                <HitRectInsets>-->
+<!--                    <AbsInset left="0" right="0" top="0" bottom="0"/>-->
+<!--                </HitRectInsets>-->
+<!--                <ButtonText inherits="GameFontHighlightLeft" name="$parentLabel" parentKey="Text" text="Heals" justifyH="LEFT" nonspacewrap="true">-->
+<!--                    <Size>-->
+<!--                        <AbsDimension x="0" y="0"/>-->
+<!--                    </Size>-->
+<!--                    <Anchors>-->
+<!--                        <Anchor point="CENTER" relativeTo="$parent">-->
+<!--                            <Offset>-->
+<!--                                <AbsDimension x="0" y="16"/>-->
+<!--                            </Offset>-->
+<!--                        </Anchor>-->
+<!--                    </Anchors>-->
+<!--                </ButtonText>-->
+<!--				<Anchors>-->
+<!--					<Anchor point="LEFT" relativeTo="LFM_GroupFinder_ShowNormal" relativePoint="RIGHT">-->
+<!--						<Offset>-->
+<!--							<AbsDimension x="7" y="0"/>-->
+<!--						</Offset>-->
+<!--					</Anchor>-->
+<!--				</Anchors>-->
+<!--                <Scripts>-->
+<!--                    <OnClick>-->
+<!--                        LFM_GroupFinder:ToggleRole(self);-->
+<!--                    </OnClick>-->
+<!--				</Scripts>-->
+<!--			</CheckButton>-->
+<!--            <CheckButton name="LFM_GroupFinder_ShowDPS" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="3">-->
+<!--                <Size>-->
+<!--                    <AbsDimension x="20" y="20"/>-->
+<!--                </Size>-->
+<!--                <Anchors>-->
+<!--                    <Anchor point="RIGHT" relativeTo="LFM_GroupFinder_ShowHeals">-->
+<!--                        <Offset>-->
+<!--                            <AbsDimension x="60" y="0"/>-->
+<!--                        </Offset>-->
+<!--                    </Anchor>-->
+<!--                </Anchors>-->
+<!--                <HitRectInsets>-->
+<!--                    <AbsInset left="0" right="0" top="0" bottom="0"/>-->
+<!--                </HitRectInsets>-->
+<!--                <ButtonText inherits="GameFontHighlightLeft" name="$parentLabel" parentKey="Text" text="DPS" justifyH="LEFT" nonspacewrap="true">-->
+<!--                    <Size>-->
+<!--                        <AbsDimension x="0" y="0"/>-->
+<!--                    </Size>-->
+<!--                    <Anchors>-->
+<!--                        <Anchor point="CENTER" relativeTo="$parent">-->
+<!--                            <Offset>-->
+<!--                                <AbsDimension x="0" y="16"/>-->
+<!--                            </Offset>-->
+<!--                        </Anchor>-->
+<!--                    </Anchors>-->
+<!--                </ButtonText>-->
+<!--				<Anchors>-->
+<!--					<Anchor point="LEFT" relativeTo="LFM_GroupFinder_ShowNormal" relativePoint="RIGHT">-->
+<!--						<Offset>-->
+<!--							<AbsDimension x="7" y="0"/>-->
+<!--						</Offset>-->
+<!--					</Anchor>-->
+<!--				</Anchors>-->
+<!--                <Scripts>-->
+<!--                    <OnClick>-->
+<!--                        LFM_GroupFinder:ToggleRole(self);-->
+<!--                    </OnClick>-->
+<!--				</Scripts>-->
+<!--			</CheckButton>-->
+            <ScrollFrame name="LFM_GroupFinder_ScrollFrame" inherits="FauxScrollFrameTemplateLight">
+				<Size>
+					<AbsDimension x="564" y="305"/>
+				</Size>
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_Frame">
+						<Offset>
+							<AbsDimension x="4" y="-65"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnVerticalScroll>
+						FauxScrollFrame_OnVerticalScroll(self, offset, QUESTLOG_QUEST_HEIGHT, LFM_GroupFinder_BigBoyUpdate);
+					</OnVerticalScroll>
+				</Scripts>
+			</ScrollFrame>
+
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle1" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn" id="1">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrame">
+                        <Offset>
+                            <AbsDimension x="4" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle2" id="2" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle1" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle3" id="3" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle2" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle4" id="4" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle3" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle5" id="5" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle4" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle6" id="6" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle5" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle7" id="7" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle6" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle8" id="8" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle7" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle9" id="9" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle8" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle10" id="10" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle9" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle11" id="11" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle10" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle12" id="12" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle11" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle13" id="13" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle12" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle14" id="14" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle13" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle15" id="15" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle14" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle16" id="16" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle15" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle17" id="17" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle16" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle18" id="18" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle17" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle19" id="19" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle18" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle20" id="20" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle19" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+            <Button name="LFM_GroupFinder_ScrollFrameChildTitle21" id="21" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle20" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+                        <Button name="LFM_GroupFinder_ScrollFrameChildTitle22" id="22" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle21" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+                        <Button name="LFM_GroupFinder_ScrollFrameChildTitle23" id="23" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle22" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+                        <Button name="LFM_GroupFinder_ScrollFrameChildTitle24" id="24" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle23" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+                        <Button name="LFM_GroupFinder_ScrollFrameChildTitle25" id="25" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle24" relativePoint="BOTTOMLEFT">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+            </Button>
+        </Frames>
+    </Frame>
+</Ui>

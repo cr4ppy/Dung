@@ -1,0 +1,39 @@
+## Interface: 80200
+## Title: LFM Group Finder
+## Author: Bluefork
+## Version: 1.0
+
+## Config
+##Config.lua
+locales.lua
+
+## Base Name Space
+LFM.lua
+LFM.xml
+Events.lua
+
+## Helpers
+Helpers\Helpers.lua
+
+## Models
+Models\Model.lua
+Models\GroupType.lua
+Models\RoleType.lua
+Models\InstanceDifficulty.lua
+
+## Entities
+Entities\Entity.lua
+Entities\Instance.lua
+Entities\Post.lua
+Entities\Player.lua
+
+## Data
+Data\RoleKeywords.lua
+Data\HeroicKeywords.lua
+Data\Instances.lua
+
+## Tests
+Tests\Tests.lua
+Fixtures\DevData.lua
+
+init.lua
