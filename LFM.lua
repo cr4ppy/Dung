@@ -640,9 +640,7 @@ function LFM_GroupFinder:Run()
         handlerMethod(self, ...)
     end
 
-
-
-	LFM_GroupFinder.MinimapButton.Init(LFM_GroupFinder.Database, "Interface\\ICONS\\ability_townwatch", function(self, button) --onclick
+	LFM_GroupFinder.MinimapButton.Init(LFM_GroupFinder.Database, "Interface\\ICONS\\ability_townwatch", function(self, button)
         if button== "LeftButton" then
             if LFM_GroupFinder_Frame:IsVisible() then
                 LFM_GroupFinder_Frame:Hide();

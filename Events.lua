@@ -53,17 +53,7 @@ end
 function LFM_GroupFinder_OnPostClick(self)
     local instance_guid = self.Post:GetGuid();
     local player_name = self.Post:GetPlayer():GetName();
-
-    --send a /who request
-    if(IsShiftKeyDown()) then
-        C_FriendList.SendWho(player_name);
-    else --open chat window with a whisper
-        local edit_box = DEFAULT_CHAT_FRAME.editBox;
-        ChatEdit_ActivateChat(edit_box);
-        edit_box:SetAttribute("chatType", "WHISPER");
-        edit_box:Insert('/whisper '..player_name..' ');
-    end
-
+    
     if(self.is_header) then
         if(self.is_collapsed == true) then
             LFM_GroupFinder.Data.CollapsedStates[instance_guid] = nil;
@@ -74,7 +64,15 @@ function LFM_GroupFinder_OnPostClick(self)
         end
         LFM_GroupFinder_BigBoyUpdate();
     else
-        --todo: panel with full message??
+            --send a /who request
+        if(IsShiftKeyDown()) then
+            C_FriendList.SendWho(player_name);
+        else --open chat window with a whisper
+            local edit_box = DEFAULT_CHAT_FRAME.editBox;
+            ChatEdit_ActivateChat(edit_box);
+            edit_box:SetAttribute("chatType", "WHISPER");
+            edit_box:Insert('/whisper '..player_name..' ');
+        end
     end
 end
 
