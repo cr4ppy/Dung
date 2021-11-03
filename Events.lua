@@ -74,11 +74,15 @@ function LFM_GroupFinder_ToggleAllCollapsed()
     LFM_GroupFinder.PostTable.toggle_hide_all = not LFM_GroupFinder.PostTable.toggle_hide_all --toggle, true = false and false = true
 
     if(LFM_GroupFinder.PostTable.toggle_hide_all) then
-        for key,Instance in ipairs(LFM_GroupFinder.Data.Instances) do
-            local difficulties = Instance:GetAvailableDifficulties();
+        local Instance;
+        local difficulties;
+        
+        for i=1, LFM_GroupFinder.DungeonCount do
+            Instance = LFM_GroupFinder.Data.Instances[i];
+            difficulties = Instance:GetAvailableDifficulties();
 
-            for i=1, #difficulties, 1 do
-                LFM_GroupFinder.Data.CollapsedStates[Instance:GetId().. '_' .. difficulties[i]] = true;
+            for j=1, #difficulties do
+                LFM_GroupFinder.Data.CollapsedStates[Instance:GetId().. '_' .. difficulties[j]] = true;
             end
         end
     else

@@ -90,7 +90,7 @@ LFM_GroupFinder.PostTable = {
         end
     end,
 };
-
+LFM_GroupFinder.DungeonCount = 0;
 
 --- Adds a post from the table (then updates table)
 ---
@@ -228,8 +228,10 @@ function LFM_GroupFinder:CheckPost(post_msg)--Checks
     local words = self:Split(self:RemoveJunkFromString(string.lower(post_msg)), ' ');
     local Difficulty = self:GetModel('InstanceDifficulty');
     local Roles = self:GetModel('RoleType');
+    local Instance;
 
-    for i,Instance in ipairs(self.Data.Instances) do
+    for i=1, self.DungeonCount do
+        Instance = self.Data.Instances[i];
         if self:HasExcludedWords(words, Instance) then
             break;
         end

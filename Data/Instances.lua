@@ -5,7 +5,7 @@ local Difficulty = LFM_GroupFinder:GetModel('InstanceDifficulty');
 local Instance = LFM_GroupFinder:GetEntity('Instance');
 
 ---
----Decided to put these in an indexed array... bite me
+---Decided to put these in an array... bite me
 ---
 LFM_GroupFinder.Data.Instances = {
     -----------------------------------------------------------------------------------------------
@@ -498,7 +498,7 @@ LFM_GroupFinder.Data.Instances = {
     [37] = Instance:New({
         id = 'TheShatteredHalls',
         name = 'The Shattered Halls', --1
-        key_words = {'shattered halls', 'shattered hall', 'sh', 'shh', 'shalls', 'shat halls'};
+        key_words = {'shattered halls', 'shattered hall', 'sh', 'shh', 'shalls', 'shat halls', 'shatterend hall'};
         exclude_words = {'boost'},
         level_range = { {69, 70}, {70, 70} };
         avail_difficulty_types = {
@@ -700,7 +700,7 @@ LFM_GroupFinder.Data.Instances = {
     [51] = Instance:New({
         id = 'Karazhan',
         name = 'Karazhan', --1
-        key_words = {'kara', 'kazazhan', 'karas', 'karazan', 'kazazhan'};
+        key_words = {'kara', 'karazhan', 'karas', 'karazan', 'kazazhan'};
         exclude_words = {'boost'},
         level_range = { {70, 70}, {70, 70} };
         avail_difficulty_types = {
@@ -816,3 +816,4 @@ LFM_GroupFinder.Data.Instances = {
     }),
 }
 
+LFM_GroupFinder.DungeonCount = #LFM_GroupFinder.Data.Instances;
