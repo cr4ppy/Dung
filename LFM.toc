@@ -1,7 +1,14 @@
 ## Interface: 80200
 ## Title: LFM Group Finder
 ## Author: Bluefork
+## SavedVariables: LFM_GroupFinder_DB
+## SavedVariablesPerCharacter: LFM_GroupFinder_DB_Character
 ## Version: 1.0
+
+## Mini map icon
+LibGPIOptions.lua
+LibGPIMinimapButton.lua
+LibGPIToolBox.lua
 
 ## Config
 ##Config.lua

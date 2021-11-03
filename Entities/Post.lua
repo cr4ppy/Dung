@@ -150,7 +150,7 @@ function Post:SetInstance(instance)
 end
 
 --- Gets the post instance (since instances are only initiated once you can set the difficulty you want the instance as)
---- note: I think setting the difficulty is kinda buggy, use with caution :/ I'm new to lua - still learning it's nuances
+--- note: I think setting the difficulty is kinda buggy with the metatable maybe...(first time lua user)
 ---
 ---@param difficulty number|nil
 ---@return table(Instance)

@@ -52,6 +52,17 @@ end
 -----@return void
 function LFM_GroupFinder_OnPostClick(self)
     local instance_guid = self.Post:GetGuid();
+    local player_name = self.Post:GetPlayer():GetName();
+
+    --send a /who request
+    if(IsShiftKeyDown()) then
+        C_FriendList.SendWho(player_name);
+    else --open chat window with a whisper
+        local edit_box = DEFAULT_CHAT_FRAME.editBox;
+        ChatEdit_ActivateChat(edit_box);
+        edit_box:SetAttribute("chatType", "WHISPER");
+        edit_box:Insert('/whisper '..player_name..' ');
+    end
 
     if(self.is_header) then
         if(self.is_collapsed == true) then
@@ -76,7 +87,7 @@ function LFM_GroupFinder_ToggleAllCollapsed()
     if(LFM_GroupFinder.PostTable.toggle_hide_all) then
         local Instance;
         local difficulties;
-        
+
         for i=1, LFM_GroupFinder.DungeonCount do
             Instance = LFM_GroupFinder.Data.Instances[i];
             difficulties = Instance:GetAvailableDifficulties();

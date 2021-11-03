@@ -6,15 +6,21 @@ local function dump(var, ...) return DevTools_Dump(var, ...) end
 ------1. REMOVE ALL {r3} VARIABLES FROM STRINGS BEFORE CHECKS
 ------2. ADD RECRUITING TO ALL EXCLUDES
 ------3. ADD TRADE KEYWORDS LIKE ENCHANTER/JC FOR IGNORE ON ALL
-------4. CLICK WHISPER
+------4. CLICK WHISPER ✔️
 ------4. SLASH COMMANDS4
 ------5. OPTIONS!
 ------5. LOCALIZATION
 ------6. FIX RAID FILTER?
+------7. SEARCH FILTER
 ------misc. REPLACE IPAIRS
 ------misc. EXCLUDE "." FROM STRINGS
-------misc. MAGE MESSAGE TEXT GREYISH
+------misc. MAKE MESSAGE TEXT GREYISH
 
+if not LFM_GroupFinder_DB then LFM_GroupFinder_DB = {} end -- fresh DB
+if not LFM_GroupFinder_DB_Character then LFM_GroupFinder_DB_Character = {} end -- fresh DB
+
+LFM_GroupFinder.Database = LFM_GroupFinder_DB or {};
+LFM_GroupFinder.Database.Character = LFM_GroupFinder_DB_Character or {};
 LFM_GroupFinder.Tests = {};
 LFM_GroupFinder.isRunning = true;
 LFM_GroupFinder.POST_HEIGHT = 16;
@@ -22,6 +28,7 @@ LFM_GroupFinder.MAX_HEIGHT = 400;
 LFM_GroupFinder.TIME_POST_ALIVE = 60 * 2.5; --2.5 minutes
 LFM_GroupFinder.TIME_POST_ALIVE_DUNGEON_H = 60 * 3.5; --3.5 minutes
 LFM_GroupFinder.TIME_POST_ALIVE_RAID = 60 * 6; --6 minutes
+LFM_GroupFinder.DungeonCount = 0; -- amount of dungeons we have, gets populated after they get loaded
 LFM_GroupFinder.Data = {};
 LFM_GroupFinder.Data.CollapsedStates = {};
 LFM_GroupFinder.Models = {};
@@ -90,7 +97,7 @@ LFM_GroupFinder.PostTable = {
         end
     end,
 };
-LFM_GroupFinder.DungeonCount = 0;
+
 
 --- Adds a post from the table (then updates table)
 ---
@@ -247,6 +254,7 @@ function LFM_GroupFinder:CheckPost(post_msg)--Checks
             end
         end
 
+        --todo: these blocks are no good here
         if self:Contains(words, 'all') then
             roles_needed[Roles.Tank] = true;
             roles_needed[Roles.Heals] = true;
@@ -311,7 +319,7 @@ function LFM_GroupFinder:CheckPost(post_msg)--Checks
 end
 
 ---
---- Function that ticks every 5 seconds and removes posts if they've expired. + can do updates to the UI (5 delay so don't do anything big, right now it just changes time color).
+--- Function that ticks every 5 seconds and removes posts if they've expired. + can do updates to the UI (5 delay so don't do anything big).
 ---@return void
 function LFM_GroupFinder.TickTimers()
     local posts = LFM_GroupFinder:GetPostsForScrollWindow();
@@ -632,7 +640,21 @@ function LFM_GroupFinder:Run()
         handlerMethod(self, ...)
     end
 
+
+
+	LFM_GroupFinder.MinimapButton.Init(LFM_GroupFinder.Database, "Interface\\ICONS\\ability_townwatch", function(self, button) --onclick
+        if button== "LeftButton" then
+            if LFM_GroupFinder_Frame:IsVisible() then
+                LFM_GroupFinder_Frame:Hide();
+            else
+                LFM_GroupFinder_Frame:Show();
+            end
+        else
+
+        end
+    end)
+
     LFM_GroupFinder_Frame:SetScript("OnEvent", DispatchEvent);
-    LFM_GroupFinder_Frame:Show();
+    --LFM_GroupFinder_Frame:Show();
     self:TickTimers();
 end
