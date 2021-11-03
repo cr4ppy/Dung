@@ -7,18 +7,21 @@ local function dump(var, ...) return DevTools_Dump(var, ...) end
 ------2. ADD RECRUITING TO ALL EXCLUDES
 ------3. ADD TRADE KEYWORDS LIKE ENCHANTER/JC FOR IGNORE ON ALL
 ------4. CLICK WHISPER
+------4. SLASH COMMANDS4
 ------5. OPTIONS!
 ------5. LOCALIZATION
 ------6. FIX RAID FILTER?
 ------misc. REPLACE IPAIRS
+------misc. EXCLUDE "." FROM STRINGS
+------misc. MAGE MESSAGE TEXT GREYISH
 
 LFM_GroupFinder.Tests = {};
 LFM_GroupFinder.isRunning = true;
 LFM_GroupFinder.POST_HEIGHT = 16;
 LFM_GroupFinder.MAX_HEIGHT = 400;
 LFM_GroupFinder.TIME_POST_ALIVE = 60 * 2.5; --2.5 minutes
-LFM_GroupFinder.TIME_POST_ALIVE_DUNGEON_H = 60 * 5; --5 minutes
-LFM_GroupFinder.TIME_POST_ALIVE_RAID = 60 * 8; --10 minutes
+LFM_GroupFinder.TIME_POST_ALIVE_DUNGEON_H = 60 * 3.5; --3.5 minutes
+LFM_GroupFinder.TIME_POST_ALIVE_RAID = 60 * 6; --6 minutes
 LFM_GroupFinder.Data = {};
 LFM_GroupFinder.Data.CollapsedStates = {};
 LFM_GroupFinder.Models = {};
@@ -129,11 +132,11 @@ function LFM_GroupFinder:GetPostsForScrollWindow(order)
 
     local finalList = {}
 
-    local function addToList(Item, index, collapsed)
+    local function addToList(Post, index, collapsed)
         if index == nil then
             table.insert(finalList,{
                 is_header = true,
-                post = Item
+                post = Post
             });
 
             index = #finalList;
@@ -145,7 +148,7 @@ function LFM_GroupFinder:GetPostsForScrollWindow(order)
         if not collapsed then
             table.insert(finalList,index + 1, {
                 is_header = false,
-                post = Item
+                post = Post
             })
         end
     end
@@ -354,7 +357,7 @@ function LFM_GroupFinder:GetPostForPlayer(playerName, realm, playerGuid, Instanc
     return false
 end
 
---- Chat message callback - Triggers creating/updating a new post. (used by CHAT_MSG_SYSTEM, CHAT_MSG_CHANNEL, CHAT_MSG_GUILD, CHAT_MSG_OFFICER)
+--- Chat message callback - creating/updating a new post. (used by CHAT_MSG_SYSTEM, CHAT_MSG_CHANNEL, CHAT_MSG_GUILD, CHAT_MSG_OFFICER)
 ---
 ---@param msg string
 ---@param playerName string

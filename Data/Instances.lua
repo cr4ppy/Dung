@@ -8,26 +8,30 @@ local Instance = LFM_GroupFinder:GetEntity('Instance');
 ---Decided to put these in an indexed array... bite me
 ---
 LFM_GroupFinder.Data.Instances = {
-    [1] = Instance:New({ -- keep slave pens at the top for testing.
-        id = 'SlavePens',
-        name = 'Slave Pens', --1
-        key_words = {'sp', 'slave pens', 'pens'};
+    -----------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------
+    --- CLASSIC ERA DUNGEONS ----------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------
+    [1] = Instance:New({
+        id = 'RageFireChasm',
+        name = 'Rage Fire Chasm', --1
+        key_words = {'rfc', 'rage fire chasm', 'rage fire', 'rage chasm'};
         exclude_words = {'boost'},
-        level_range = { {62, 64}, {70, 70} };
+        level_range = { {13, 16}, {13, 16} };
         avail_difficulty_types = {
             [Difficulty.Normal] = Difficulty.Normal,
-            [Difficulty.Heroic] = Difficulty.Heroic
         };
         current_difficulty = Difficulty.Normal;
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
     [2] = Instance:New({
-        id = 'Deadmines',
-        name = 'Dead Mines', --1
-        key_words = {'vc', 'deadmines', 'dead mines'};
+        id = 'WailingCaverns',
+        name = 'Wailing Caverns', --1
+        key_words = {'wc', 'wailing caverns', 'waling caverns', 'wailing'};
         exclude_words = {'boost'},
-        level_range = { {10, 23}, {10, 23} };
+        level_range = { {17, 21}, {17, 21} };
         avail_difficulty_types = {
             [Difficulty.Normal] = Difficulty.Normal,
         };
@@ -36,11 +40,11 @@ LFM_GroupFinder.Data.Instances = {
         max_players = 5;
     }),
     [3] = Instance:New({
-        id = 'RageFireChasm',
-        name = 'Rage Fire Chasm', --1
-        key_words = {'rfc', 'rage dire chasm'};
+        id = 'Deadmines',
+        name = 'Dead Mines', --1
+        key_words = {'vc', 'deadmines', 'dead mines'};
         exclude_words = {'boost'},
-        level_range = { {10, 23}, {10, 23} };
+        level_range = { {18, 22}, {18, 22} };
         avail_difficulty_types = {
             [Difficulty.Normal] = Difficulty.Normal,
         };
@@ -49,51 +53,438 @@ LFM_GroupFinder.Data.Instances = {
         max_players = 5;
     }),
     [4] = Instance:New({
-        id = 'UberBog',
-        name = 'Uber Bog', --1
-        key_words = {'ub', 'uberbog', 'uber bog'};
+        id = 'ShadowfangKeep',
+        name = 'Shadowfang Keep', --1
+        key_words = {'sfk', 'shadowfang keep', 'fang keep', 'shadow keep', 'shadowkeep', 'fangkeep'};
         exclude_words = {'boost'},
-        level_range = { {62, 64}, {70, 70} };
+        level_range = { {18, 21}, {18, 21} };
         avail_difficulty_types = {
             [Difficulty.Normal] = Difficulty.Normal,
-            [Difficulty.Heroic] = Difficulty.Heroic
         };
         current_difficulty = Difficulty.Normal;
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
     [5] = Instance:New({
-        id = 'HellfireRamparts',
-        name = 'Hellfire Ramparts', --1
-        key_words = {'ramps', 'hellfireramparts', 'hellfire ramparts'};
+        id = 'Blackfathom Deeps',
+        name = 'Shadowfang Keep', --1
+        key_words = {'bfd', 'blackfathom deeps', 'blackfathom', 'fathom', 'fathom deeps'};
         exclude_words = {'boost'},
-        level_range = { {62, 64}, {70, 70} };
+        level_range = { {18, 21}, {18, 21} };
         avail_difficulty_types = {
             [Difficulty.Normal] = Difficulty.Normal,
-            [Difficulty.Heroic] = Difficulty.Heroic
         };
         current_difficulty = Difficulty.Normal;
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [6]= Instance:New({
-        id = 'SethekkHalls',
-        name = 'Sethekk Halls', --1
-        key_words = {'sethekkhalls', 'sethekk halls', 'seth Halls', 'sethekk', 'seth', 'sathekk', 'sathekk halls'};
+    [6] = Instance:New({
+        id = 'TheStockade',
+        name = 'The Stockade', --1
+        key_words = {'stocks', 'stocakdes', 'the stockade', 'stockade', 'stonks'};
         exclude_words = {'boost'},
-        level_range = { {66, 70}, {70, 70} };
+        level_range = { {23, 29}, {23, 29} };
         avail_difficulty_types = {
             [Difficulty.Normal] = Difficulty.Normal,
-            [Difficulty.Heroic] = Difficulty.Heroic
         };
         current_difficulty = Difficulty.Normal;
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
     [7] = Instance:New({
+        id = 'Gnomeregan',
+        name = 'Gnomeregan', --1
+        key_words = {'gnomer', 'gno', 'gnomeregan', 'gnomeragan', 'gnomregan', 'gnomragan', 'gnom', 'gnomergan', 'gnoma'};
+        exclude_words = {'boost'},
+        level_range = { {25, 28}, {25, 28} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [8] = Instance:New({
+        id = 'RazorfenKraul',
+        name = 'Razorfen Kraul', --1
+        key_words = {'rfk', 'razorfen kraul', 'kraul', 'razorfen k', 'razorfenkraul'};
+        exclude_words = {'boost'},
+        level_range = { {24, 27}, {24, 27} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [9] = Instance:New({
+        id = 'ScarletMonasteryGY',
+        name = 'Scarlet Monastery - Graveyard', --1
+        key_words = {'sm gy', 'smg', 'gy', 'smgy', 'scarlet monastery graveyard', 'graveyard', 'scarlet monastery gy'};
+        exclude_words = {'boost'},
+        level_range = { {30, 32}, {30, 32} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [10] = Instance:New({
+        id = 'ScarletMonasteryLIB',
+        name = 'Scarlet Monastery - Library', --1
+        key_words = {'sm lib', 'sm library', 'smlib', 'sml', 'scarlet monastery library', 'scarlet monastery lib'};
+        exclude_words = {'boost'},
+        level_range = { {30, 32}, {30, 32} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [11] = Instance:New({
+        id = 'ScarletMonasteryARMS',
+        name = 'Scarlet Monastery - Armory', --1
+        key_words = {'sm arm', 'sm arms', 'sma', 'scarlet monastery arms', 'scarlet monastery armory', 'armory'};
+        exclude_words = {'boost'},
+        level_range = { {35, 37}, {35, 37} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [12] = Instance:New({
+        id = 'ScarletMonasteryCATH',
+        name = 'Scarlet Monastery - Cathedral', --1
+        key_words = {'sm cath', 'smc', 'scarlet monastery cath', 'scarlet monastery cathedral', 'cath'};
+        exclude_words = {'boost'},
+        level_range = { {36, 40}, {36, 40} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [13] = Instance:New({
+        id = 'RazorfenDowns',
+        name = 'Razorfen Downs', --1
+        key_words = {'rfd', 'razorfen down', 'razorfen downs', 'razorfen d', 'razorfendown', 'razorfendowns'};
+        exclude_words = {'boost'},
+        level_range = { {34, 37}, {34, 37} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [14] = Instance:New({
+        id = 'Uldaman',
+        name = 'Uldaman', --1
+        key_words = {'ulda', 'uldaman'};
+        exclude_words = {'boost'},
+        level_range = { {36, 40}, {36, 40} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [15] = Instance:New({
+        id = 'ZulFarrak',
+        name = 'Zul\'Farrak', --1
+        key_words = {'zf', 'zul farrak', 'zul\'furrak', 'zfgy'};
+        exclude_words = {},
+        level_range = { {42, 46}, {42, 46} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [16] = Instance:New({
+        id = 'Maraudon',
+        name = 'Maraudon', --1
+        key_words = {'mara', 'maraudon', 'mar', 'mara ', 'maraudon', 'mauradon', 'mauro', 'maurodon', 'princessrun', 'maraudin', 'maura', 'marau', 'mauraudon'};
+        exclude_words = {},
+        level_range = { {43, 48}, {43, 48} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [17] = Instance:New({
+        id = 'SunkenTemple',
+        name = 'The Temple of Atal\'Hakkar', --1
+        key_words = {'st', 'sunken temple', 'atal\'hakkar', 'temple of atal', 'sunken'};
+        exclude_words = {},
+        level_range = { {47, 50}, {47, 50} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [18] = Instance:New({
+        id = 'BlackRockDepths',
+        name = 'Black Rock Depths', --1
+        key_words = {'brd', 'maraudon', 'arena run', 'angerun', 'anger run', 'emp run', 'emp', 'angerforge', 'blackrockdepth', 'blackrockdepths'};
+        exclude_words = {},
+        level_range = { {48, 56}, {48, 56} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [19] = Instance:New({
+        id = 'LowerBlackRock',
+        name = 'Lower Blackrock Spire', --1
+        key_words = {'lower', 'lbrs', 'lowers', 'lower blackrock spire'};
+        exclude_words = {},
+        level_range = { {54, 60}, {54, 60} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [20] = Instance:New({
+        id = 'LowerBlackRock',
+        name = 'Upper Blackrock Spire', --1
+        key_words = {'ubrs', 'upper blackrock spire', 'uppers'};
+        exclude_words = {},
+        level_range = { {58, 60}, {58, 60} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Raid;
+        max_players = 10;
+    }),
+    [21] = Instance:New({
+        id = 'DireMaulE',
+        name = 'Dire Maul East', --1
+        key_words = {'dme', 'dire maul east', 'dmeast', 'deast'};
+        exclude_words = {},
+        level_range = { {55, 60}, {55, 60} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [22] = Instance:New({
+        id = 'DireMaulW',
+        name = 'Dire Maul West', --1
+        key_words = {'dmw', 'dire maul west', 'dmwest', 'dwest', 'jumprun', 'jump run'};
+        exclude_words = {},
+        level_range = { {58, 60}, {58, 60} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [23] = Instance:New({
+        id = 'DireMaulN',
+        name = 'Dire Maul North', --1
+        key_words = {'dmn', 'dire maul north', 'dmnorth', 'dnorth', 'trib', 'trib run', 'tribute', 'tribute run', 'dmt', 'dm buffs'};
+        exclude_words = {},
+        level_range = { {58, 60}, {58, 60} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [24] = Instance:New({
+        id = 'DireMaulN',
+        name = 'Dire Maul North', --1
+        key_words = {'dmn', 'dire maul north', 'dmnorth', 'dnorth', 'trib', 'trib run', 'tribute', 'tribute run', 'dmt', 'dm buffs'};
+        exclude_words = {},
+        level_range = { {58, 60}, {58, 60} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [25] = Instance:New({
+        id = 'Stratholme',
+        name = 'Stratholme', --1
+        key_words = {'strath', 'strath ud', 'stratud', 'stratholme', 'ud', 'ud baron', 'stath', 'stratholm', 'strah', 'strat', 'starth', 'strat live', 'strathlive', 'baron'};
+        exclude_words = {},
+        level_range = { {58, 60}, {58, 60} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [26] = Instance:New({
+        id = 'Stratholme',
+        name = 'Stratholme', --1
+        key_words = {'strath', 'strath ud', 'stratud', 'stratholme', 'ud', 'ud baron', 'stath', 'stratholm', 'strah', 'strat', 'starth', 'strat live', 'strathlive', 'baron'};
+        exclude_words = {},
+        level_range = { {58, 60}, {58, 60} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [27] = Instance:New({
+        id = 'Scholomance',
+        name = 'Scholomance', --1
+        key_words = {'scholomance', 'scholo', 'sholo', 'sholomance', 'pally mount', 'pally mount quest', 'scolo'};
+        exclude_words = {},
+        level_range = { {58, 60}, {58, 60} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+
+    -----------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------
+    --- CLASSIC ERA RAIDS (except ubrs... cos let's be honest, it's a dungeon)---------------------
+    -----------------------------------------------------------------------------------------------
+    -----------------------------------------------------------------------------------------------
+    [28] = Instance:New({
+        id = 'ZulGurub',
+        name = 'Zul Gurub', --1
+        key_words = {'zg', '20 mans', '20 man', 'hakkar', 'zg mountrun'};
+        exclude_words = {},
+        level_range = { {60, 60}, {60, 60} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Raid;
+        max_players = 20;
+    }),
+    [29] = Instance:New({
+        id = 'AQRuins',
+        name = 'Ruins of Ahn\' Qiraj', --1
+        key_words = {'aq20', 'aq ruins', '20 mans', '20 man', 'ossirian'};
+        exclude_words = {},
+        level_range = { {60, 60}, {60, 60} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Raid;
+        max_players = 20;
+    }),
+    [30] = Instance:New({
+        id = 'MoltenCore',
+        name = 'Molten Core', --1
+        key_words = {'mc', 'molten core', 'rag', 'ragnaros', 'need douse', 'loot the dog'};
+        exclude_words = {},
+        level_range = { {60, 60}, {60, 60} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Raid;
+        max_players = 40;
+    }),
+    [31] = Instance:New({
+        id = 'OnyxiasLair',
+        name = 'Onyxia\'s Lair', --1
+        key_words = {'ony', 'onyxia', 'onyxia\'s lair'};
+        exclude_words = {},
+        level_range = { {60, 60}, {60, 60} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Raid;
+        max_players = 40;
+    }),
+    [32] = Instance:New({
+        id = 'BlackWingLair',
+        name = 'Black Wing Lair', --1
+        key_words = {'bwl', 'black wing lair'};
+        exclude_words = {},
+        level_range = { {60, 60}, {60, 60} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Raid;
+        max_players = 40;
+    }),
+    [33] = Instance:New({
+        id = 'AQ',
+        name = 'Ahn\' Qiraj', --1
+        key_words = {'aq40', 'twin emps', 'c\'thun', 'cthun', 'ouro'};
+        exclude_words = {},
+        level_range = { {60, 60}, {60, 60} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Raid;
+        max_players = 40;
+    }),
+    [34] = Instance:New({
+        id = 'Naxx',
+        name = 'Naxxramas', --1
+        key_words = {'naxxramas', 'nax', 'naxx', 'sapphiron'};
+        exclude_words = {},
+        level_range = { {60, 60}, {60, 60} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Raid;
+        max_players = 40;
+    }),
+    ---------------------------------------------------------------------------------------------------
+    ---------------------------------------------------------------------------------------------------
+    --- BURNING CRUSADE DUNGEONS ----------------------------------------------------------------------
+    ---------------------------------------------------------------------------------------------------
+    ---------------------------------------------------------------------------------------------------
+
+    [35] = Instance:New({
+        id = 'HellfireRamparts',
+        name = 'Hellfire Ramparts', --1
+        key_words = {'ramps', 'hellfireramparts', 'hellfire ramparts', 'ramp'};
+        exclude_words = {'boost'},
+        level_range = { {59, 67}, {70, 70} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+            [Difficulty.Heroic] = Difficulty.Heroic
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [36] = Instance:New({
         id = 'TheBloodFurnace',
         name = 'The Blood Furnace', --1
-        key_words = {'bf', 'blood furnace'};
+        key_words = {'bf', 'blood furnace', 'b furnace', 'bloodfurnace'};
         exclude_words = {'boost'},
         level_range = { {60, 68}, {70, 70} };
         avail_difficulty_types = {
@@ -104,7 +495,7 @@ LFM_GroupFinder.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [8] = Instance:New({
+    [37] = Instance:New({
         id = 'TheShatteredHalls',
         name = 'The Shattered Halls', --1
         key_words = {'shattered halls', 'shattered hall', 'sh', 'shh', 'shalls', 'shat halls'};
@@ -118,10 +509,10 @@ LFM_GroupFinder.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [9] = Instance:New({
+    [38] = Instance:New({
         id = 'ManaTombs',
         name = 'Mana Tombs', --1
-        key_words = {'mt', 'mana tombs'};
+        key_words = {'mt', 'mana tombs', 'mtombs', 'auch tombs'};
         exclude_words = {'boost'},
         level_range = { {63, 70}, {70, 70} };
         avail_difficulty_types = {
@@ -132,7 +523,7 @@ LFM_GroupFinder.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [10] = Instance:New({
+    [39] = Instance:New({
         id = 'AuchenaiCrypts',
         name = 'Auchenai Crypts', --1
         key_words = {'ac', 'auchenai crypts', 'crypts'};
@@ -146,7 +537,21 @@ LFM_GroupFinder.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [11] = Instance:New({
+    [40]= Instance:New({
+        id = 'SethekkHalls',
+        name = 'Sethekk Halls', --1
+        key_words = {'sethekkhalls', 'sethekk halls', 'seth Halls', 'sethekk', 'seth', 'sathekk', 'sathekk halls'};
+        exclude_words = {'boost'},
+        level_range = { {66, 70}, {70, 70} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+            [Difficulty.Heroic] = Difficulty.Heroic
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [41] = Instance:New({
         id = 'ShadowLabs',
         name = 'Shadow Labyrinth', --1
         key_words = {'sl', 'slabs', 'shadow labs', 'labs', 'shadow labyrinth', 'slab'};
@@ -160,10 +565,38 @@ LFM_GroupFinder.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [12] = Instance:New({
+    [42] = Instance:New({
+        id = 'SlavePens',
+        name = 'Slave Pens', --1
+        key_words = {'sp', 'slave pens', 'pens', 'slavepens', 'slave pen', 'slavepen'};
+        exclude_words = {'boost'},
+        level_range = { {61, 69}, {70, 70} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+            [Difficulty.Heroic] = Difficulty.Heroic
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [43] = Instance:New({
+        id = 'UberBog',
+        name = 'Uber Bog', --1
+        key_words = {'ub', 'uberbog', 'uber bog'};
+        exclude_words = {'boost'},
+        level_range = { {62, 70}, {70, 70} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+            [Difficulty.Heroic] = Difficulty.Heroic
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [44] = Instance:New({
         id = 'SteamVault',
         name = 'The Steamvault', --1
-        key_words = {'sv', 'steam vault'};
+        key_words = {'sv', 'steam vault', 'steamvault', 'steamvaults'};
         exclude_words = {'boost'},
         level_range = { {69, 70}, {70, 70} };
         avail_difficulty_types = {
@@ -174,10 +607,10 @@ LFM_GroupFinder.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [13] = Instance:New({
+    [45] = Instance:New({
         id = 'OldHillsBrad',
         name = 'Old Hillsbrad Foothills', --1
-        key_words = {'oh','ohb', 'old hillsbrad'};
+        key_words = {'oh','ohb', 'old hillsbrad', 'hillsbrad'};
         exclude_words = {'boost'},
         level_range = { {66, 70}, {70, 70} };
         avail_difficulty_types = {
@@ -188,7 +621,7 @@ LFM_GroupFinder.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [14] = Instance:New({
+    [46] = Instance:New({
         id = 'BlackMorass',
         name = 'The Black Morass', --1
         key_words = {'bm', 'black morass'};
@@ -202,7 +635,7 @@ LFM_GroupFinder.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [15] = Instance:New({
+    [47] = Instance:New({
         id = 'Arcatraz',
         name = 'The Arcatraz', --1
         key_words = {'arc', 'the arcatraz', 'arcatraz'};
@@ -216,7 +649,7 @@ LFM_GroupFinder.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [16] = Instance:New({
+    [48] = Instance:New({
         id = 'Botanica',
         name = 'The Botanica', --1
         key_words = {'bot', 'the botanica', 'botanica'};
@@ -230,10 +663,24 @@ LFM_GroupFinder.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [17] = Instance:New({
+    [49] = Instance:New({
         id = 'Mechanar',
         name = 'The Mechanar', --1
-        key_words = {'mech', 'the mechanar', 'mechanar'};
+        key_words = {'mech', 'the mechanar', 'mechanar', 'mechenar'};
+        exclude_words = {'boost'},
+        level_range = { {68, 70}, {70, 70} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+            [Difficulty.Heroic] = Difficulty.Heroic
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Dungeon;
+        max_players = 5;
+    }),
+    [50] = Instance:New({
+        id = 'MagistersTerrance',
+        name = 'Magisters\' Terrance', --1
+        key_words = {'magisters', 'magister', 'magst', 'mags terrace', 'terrace'};
         exclude_words = {'boost'},
         level_range = { {69, 70}, {70, 70} };
         avail_difficulty_types = {
@@ -244,7 +691,13 @@ LFM_GroupFinder.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [18] = Instance:New({
+
+    ---------------------------------------------------------------------------------------------------
+    ---------------------------------------------------------------------------------------------------
+    --- BURNING CRUSADE RAIDS -------------------------------------------------------------------------
+    ---------------------------------------------------------------------------------------------------
+    ---------------------------------------------------------------------------------------------------
+    [51] = Instance:New({
         id = 'Karazhan',
         name = 'Karazhan', --1
         key_words = {'kara', 'kazazhan', 'karas', 'karazan', 'kazazhan'};
@@ -257,56 +710,109 @@ LFM_GroupFinder.Data.Instances = {
         type =  GroupType.Raid;
         max_players = 10;
     }),
-    [19] = Instance:New({
-        id = 'ZulFarrak',
-        name = 'Zul\'Farrak', --1
-        key_words = {'ZF', 'Zul Farrak', 'Zul\'Furrak', 'zfgy'};
-        exclude_words = {},
-        level_range = { {42, 46}, {42, 46} };
-        avail_difficulty_types = {
-            [Difficulty.Normal] = Difficulty.Normal,
-        };
-        current_difficulty = Difficulty.Normal;
-        type =  GroupType.Dungeon;
-        max_players = 5;
-    }),
-    [20] = Instance:New({
-        id = 'ZulGurub',
-        name = 'Zul Gurub', --1
-        key_words = {'ZG'};
-        exclude_words = {},
-        level_range = { {60, 60}, {60, 60} };
+    [52] = Instance:New({
+        id = 'ZulAman',
+        name = 'Zul\'Aman', --1
+        key_words = {'za', 'timerun', 'timedrun', 'zul aman', 'za timed', 'za time', 'zulaman'};
+        exclude_words = {'boost'},
+        level_range = { {70, 70}, {70, 70} };
         avail_difficulty_types = {
             [Difficulty.Normal] = Difficulty.Normal,
         };
         current_difficulty = Difficulty.Normal;
         type =  GroupType.Raid;
-        max_players = 20;
+        max_players = 10;
     }),
-    [21] = Instance:New({
-        id = 'Stratholme',
-        name = 'Stratholme', --1
-        key_words = {'strath', 'strath ud', 'strat', 'stratholme'};
-        exclude_words = {},
-        level_range = { {60, 60}, {60, 60} };
+    [53] = Instance:New({
+        id = 'Magtheridon',
+        name = 'Magtheridon\'s Lair', --1
+        key_words = {'mags', 'magtheridon', 'magtheridons', 'magtheridon lair', 'magz'};
+        exclude_words = {'boost'},
+        level_range = { {70, 70}, {70, 70} };
         avail_difficulty_types = {
             [Difficulty.Normal] = Difficulty.Normal,
         };
         current_difficulty = Difficulty.Normal;
-        type =  GroupType.Dungeon;
-        max_players = 5;
+        type =  GroupType.Raid;
+        max_players = 25;
     }),
-    --LookingForGroup = Instance:New('LookingForGroup', {
-    --    name = 'LFG', --1
-    --    key_words = {};
-    --    exclude_words = {},
-    --    level_range = { {1, 70}, {1, 70} };
-    --    avail_difficulty_types = {
-    --        [Difficulty.Normal] = Difficulty.Normal,
-    --    };
-    --    current_difficulty = Difficulty.Normal;
-    --    type =  GroupType.Dungeon;
-    --    max_players = 0;
-    --}),
+    [54] = Instance:New({
+        id = 'Gruul',
+        name = 'Gruul\'s Lair', --1
+        key_words = {'gruul', 'grools', 'grool', 'gruul\'s lair', 'magz'};
+        exclude_words = {'boost'},
+        level_range = { {70, 70}, {70, 70} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Raid;
+        max_players = 25;
+    }),
+    [55] = Instance:New({
+        id = 'SerpentshrineCavern',
+        name = 'Serpentshrine Cavern', --1
+        key_words = {'ssc', 'serpentshrine', 'serpentshrinecavern', 'serpentshrine cavern'};
+        exclude_words = {'boost'},
+        level_range = { {70, 70}, {70, 70} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Raid;
+        max_players = 25;
+    }),
+    [56] = Instance:New({
+        id = 'TempestKeep',
+        name = 'Tempest Keep', --1
+        key_words = {'tk', 'tempest', 'tempest keep', 'tkeep'};
+        exclude_words = {'boost'},
+        level_range = { {70, 70}, {70, 70} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Raid;
+        max_players = 25;
+    }),
+    [57] = Instance:New({
+        id = 'HyjalSummit',
+        name = 'Hyjal Summit', --1
+        key_words = {'hyjal', 'hs', 'hyjal summit'};
+        exclude_words = {'boost'},
+        level_range = { {70, 70}, {70, 70} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Raid;
+        max_players = 25;
+    }),
+    [58] = Instance:New({
+        id = 'BlackTemple',
+        name = 'Black Temple', --1
+        key_words = {'bt', 'black temple'};
+        exclude_words = {'boost'},
+        level_range = { {70, 70}, {70, 70} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Raid;
+        max_players = 25;
+    }),
+    [59] = Instance:New({
+        id = 'Sunwell',
+        name = 'Sunwell Plateau', --1
+        key_words = {'sunwell', 'plateau', 'sunwell plateau'};
+        exclude_words = {'boost'},
+        level_range = { {70, 70}, {70, 70} };
+        avail_difficulty_types = {
+            [Difficulty.Normal] = Difficulty.Normal,
+        };
+        current_difficulty = Difficulty.Normal;
+        type =  GroupType.Raid;
+        max_players = 25;
+    }),
 }
 

@@ -7,10 +7,14 @@ local GroupType = LFM_GroupFinder.Models:CreateModel('GroupType', {
     ---@type number
     Raid = 999991;
 
+    ---@type number
+    WorldEvent = 999992;
+
     ---@type table
     labels = {
         [999990] = "Dungeon";
         [999991] = "Raid";
+        [999992] = "World Boss";
     };
 });
 
