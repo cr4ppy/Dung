@@ -175,14 +175,14 @@
         </Scripts>
 	</Button>
 
-    <Frame name="LFM_GroupFinder_Frame" movable="true" toplevel="true" parent="UIParent" inherits="ButtonFrameTemplate" hidden="true" enableMouse="true">
+    <Frame name="LFM_GroupFinder_Frame" movable="true" parent="UIParent" inherits="ButtonFrameTemplate" hidden="true" enableMouse="true">
         <Size x="600" y="350"/>
         <Layers>
-            <Layer level="OVERLAY" textureSubLevel="-1">
-				<Texture name="$parentIcon" file="Interface\FriendsFrame\Battlenet-Portrait">
-					<Size x="60" y="60"/>
+            <Layer level="OVERLAY" textureSubLevel="-2">
+				<Texture name="$parentIcon" file="Interface\Icons\inv_misc_head_dragon_green">
+					<Size x="55" y="55"/>
 					<Anchors>
-						<Anchor point="TOPLEFT" x="-5" y="7"/>
+						<Anchor point="TOPLEFT" x="-3" y="3"/>
 					</Anchors>
 				</Texture>
 			</Layer>
@@ -226,6 +226,35 @@
         </Scripts>
 
         <Frames>
+            <Button name="LFM_GroupFinder_OrderListButton">
+                <Size>
+                    <AbsDimension x="20" y="30"/>
+                </Size>
+                <Anchors>
+                    <Anchor relativeTo="LFM_GroupFinder_Frame" point="TOPRIGHT">
+                        <Offset>
+                            <AbsDimension x="-35" y="-32"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <NormalTexture inherits="HelpPlateArrowDOWN">
+					<Size x="16" y="8"/>
+					<Anchors>
+						<Anchor point="TOP" relativePoint="CENTER" x="0" y="3"/>
+					</Anchors>
+                </NormalTexture>
+                <HighlightTexture file="Interface\Buttons\UI-DialogBox-Button-Highlight" alphaMode="ADD">
+                    <TexCoords left="0.0" right="1.0" top="0.0" bottom="0.71875"/>
+                </HighlightTexture>
+                <NormalFont style="GameFontNormal"/>
+                <DisabledFont style="GameFontDisable"/>
+                <HighlightFont style="GameFontHighlight"/>
+                <Scripts>
+                    <OnClick>
+                        LFM_GroupFinder_OrderListButton_OnClick(self);
+                    </OnClick>
+                </Scripts>
+            </Button>
             <Button name="LFM_GroupFinder_CollapseAllButton" hidden="false" inherits="LFM_GroupFinder_TitleBtn" text="ALL">
                 <Size>
                     <AbsDimension x="40" y="40"/>
@@ -331,7 +360,7 @@
                 <Anchors>
                     <Anchor point="RIGHT" relativeTo="LFM_GroupFinder_ShowNormal">
                         <Offset>
-                            <AbsDimension x="60" y="0"/>
+                            <AbsDimension x="50" y="0"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -370,7 +399,7 @@
                 <Anchors>
                     <Anchor point="RIGHT" relativeTo="LFM_GroupFinder_ShowHeroic">
                         <Offset>
-                            <AbsDimension x="60" y="0"/>
+                            <AbsDimension x="50" y="0"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -519,6 +548,24 @@
 <!--                    </OnClick>-->
 <!--				</Scripts>-->
 <!--			</CheckButton>-->
+<!--            <EditBox hidden="false" name="LFM_GroupFinder_FrameFilterInput" autofocus="false" inherits="InsetFrameTemplate">-->
+<!--                <Size x="296" y="20"/>-->
+<!--                <Anchors relative="LFM_GroupFinder_Frame">-->
+<!--                    <Anchor point="BOTTOMLEFT" x="8" y="5"/>-->
+<!--                </Anchors>-->
+<!--                <Scripts>-->
+<!--                    <OnEscapePressed>-->
+<!--                        self:ClearFocus();-->
+<!--                    </OnEscapePressed>-->
+<!--                    <OnEnterPressed>-->
+<!--                        LFM_GroupFinder_FrameFilterInput_TextChange(self);-->
+<!--                    </OnEnterPressed>-->
+<!--                    <OnTextChanged>-->
+<!--                        LFM_GroupFinder_FrameFilterInput_TextChange(self);-->
+<!--                    </OnTextChanged>-->
+<!--                </Scripts>-->
+<!--                <FontString inherits="ChatFontNormal"/>-->
+<!--            </EditBox>-->
             <ScrollFrame name="LFM_GroupFinder_ScrollFrame" inherits="FauxScrollFrameTemplateLight">
 				<Size>
 					<AbsDimension x="564" y="305"/>

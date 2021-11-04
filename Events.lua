@@ -13,6 +13,13 @@ function LFM_GroupFinder_OnPostHover(self)
     local btnRole3 = _G[self:GetName().."Role3"];
     local btnRole4 = _G[self:GetName().."Role4"];
 
+    --show tool tip
+    if self.Post ~= nil and not self.is_header then
+        GameTooltip:SetOwner(self, "ANCHOR_CURSOR_RIGHT", 8, 0);
+        GameTooltip:SetText(format(self.Post:GetPlayer():GetName()..': %s', '|cffFFFFFF'..self.Post:GetMessage()..'|r'));
+        GameTooltip:Show();
+    end
+
     if(self.is_header) then
         btnText:SetTextColor(1, 0.8, 0.7);
     else
@@ -34,6 +41,9 @@ function LFM_GroupFinder_OnPostLeave(self)
     local btnRole2 = _G[self:GetName().."Role2"];
     local btnRole3 = _G[self:GetName().."Role3"];
     local btnRole4 = _G[self:GetName().."Role4"];
+
+    --hide tool tip
+    GameTooltip:Hide();
 
     if(self.is_header) then
         btnText:SetTextColor(1, 0.8, 0);
@@ -90,9 +100,10 @@ function LFM_GroupFinder_OnPostClick(self)
 end
 
 ----- Click collapse all
------
+---
+-----@param self self
 -----@return void
-function LFM_GroupFinder_ToggleAllCollapsed()
+function LFM_GroupFinder_ToggleAllCollapsed(self)
     LFM_GroupFinder.PostTable.toggle_hide_all = not LFM_GroupFinder.PostTable.toggle_hide_all --toggle, true = false and false = true
 
     if(LFM_GroupFinder.PostTable.toggle_hide_all) then
@@ -134,3 +145,22 @@ function LFM_GroupFinder_ToggleType(self)
 
     LFM_GroupFinder_BigBoyUpdate();
 end
+
+----- Click to order list asc or desc
+-----
+-----@param self self
+-----@return void
+function LFM_GroupFinder_OrderListButton_OnClick(self)
+    LFM_GroupFinder.PostTable.current_order = not LFM_GroupFinder.PostTable.current_order;
+    LFM_GroupFinder.PostTable:set_order_arrow();
+
+    LFM_GroupFinder_BigBoyUpdate();
+end
+
+----- Filters list by keyword
+-----
+-----@param self self
+-----@return void
+--function LFM_GroupFinder_FrameFilterInput_TextChange(self)
+--    print(self:GetText())
+--end

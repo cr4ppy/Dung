@@ -16,9 +16,6 @@ local function dump(var, ...) return DevTools_Dump(var, ...) end
 ------misc. EXCLUDE "." FROM STRINGS
 ------misc. MAKE MESSAGE TEXT GREYISH
 
-if not LFM_GroupFinder_DB then LFM_GroupFinder_DB = {} end -- fresh DB
-if not LFM_GroupFinder_DB_Character then LFM_GroupFinder_DB_Character = {} end -- fresh DB
-
 LFM_GroupFinder.Database = LFM_GroupFinder_DB or {};
 LFM_GroupFinder.Database.Character = LFM_GroupFinder_DB_Character or {};
 LFM_GroupFinder.Tests = {};
@@ -41,6 +38,8 @@ LFM_GroupFinder.PostTable = {
     show_heroic = true;
     show_raid = true;
     toggle_hide_all = false;
+    current_order = true;
+    search_word = '';
     sort = {
         ---Sorts posts highest to lowest (time posted)
         asc = function(postLeft, postRight)
@@ -89,13 +88,21 @@ LFM_GroupFinder.PostTable = {
         else
             if(is_heroic) then
                 --BLUE
-                textElement:SetTextColor(ITEM_QUALITY_COLORS[3], ITEM_QUALITY_COLORS[3], ITEM_QUALITY_COLORS[3]);
+                textElement:SetTextColor(ITEM_QUALITY_COLORS[3].r, ITEM_QUALITY_COLORS[3].g, ITEM_QUALITY_COLORS[3].b);
             else
                 --WHITE
                 textElement:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
             end
         end
     end,
+    ---Sets the direction of the order button depending on current order
+    set_order_arrow = function()
+        if not LFM_GroupFinder.PostTable.current_order then
+            LFM_GroupFinder_OrderListButton:GetNormalTexture():SetRotation(math.pi);
+        else
+            LFM_GroupFinder_OrderListButton:GetNormalTexture():SetRotation(0);
+        end
+    end
 };
 
 
@@ -128,14 +135,18 @@ end
 
 --- Get posts ready for the UI - orders them and returns a table of { is_header = (boolean), post = Post }
 ---
----@param order string
 ---@return table
-function LFM_GroupFinder:GetPostsForScrollWindow(order)
+function LFM_GroupFinder:GetPostsForScrollWindow()
     if(not self.PostTable.show_raid and not self.PostTable.show_heroic and not self.PostTable.show_normal) then
         return {}
     end
-    --sort newest to lowest default for now todo: more sorting
-    table.sort(self.PostTable.posts, self.PostTable.sort.desc);
+
+    --sorting
+    if self.PostTable.current_order then -- true = asc, false = desc
+        table.sort(self.PostTable.posts, self.PostTable.sort.desc);
+    else
+        table.sort(self.PostTable.posts, self.PostTable.sort.asc);
+    end
 
     local finalList = {}
 
@@ -170,7 +181,7 @@ function LFM_GroupFinder:GetPostsForScrollWindow(order)
             addToList(post, index, is_collapsed)
         elseif self.PostTable.show_heroic and post:IsHeroic() then
             addToList(post, index, is_collapsed)
-        elseif self.PostTable.show_normal and not post:IsHeroic() then
+        elseif self.PostTable.show_normal and not post:IsHeroic() and not post:GetInstance():IsRaid() then
             addToList(post, index, is_collapsed)
         end
     end
@@ -587,12 +598,16 @@ end
 ---
 ---@return void
 function LFM_GroupFinder:Run()
+
+    if not LFM_GroupFinder_DB then LFM_GroupFinder_DB = {} end
+    if not LFM_GroupFinder_DB_Character then LFM_GroupFinder_DB_Character = {} end
+
     LFM_GroupFinder_Frame:RegisterEvent("CHAT_MSG_SYSTEM");
 	LFM_GroupFinder_Frame:RegisterEvent("CHAT_MSG_CHANNEL");
 	LFM_GroupFinder_Frame:RegisterEvent("CHAT_MSG_GUILD");
 	LFM_GroupFinder_Frame:RegisterEvent("CHAT_MSG_OFFICER");
-
-    LFM_GroupFinder_Frame:ClearAllPoints();
+    --LFM_GroupFinder_Frame:SetPoint("CENTER", 0, 0)
+    --LFM_GroupFinder_Frame:ClearAllPoints();
     LFM_GroupFinder_Frame:SetResizable(true)
     LFM_GroupFinder_Frame:SetMinResize(320, 304)
     LFM_GroupFinder_Frame:SetMaxResize(600, 460)
@@ -603,6 +618,8 @@ function LFM_GroupFinder:Run()
     resizeHandle:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up")
     resizeHandle:SetHighlightTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Highlight")
     resizeHandle:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Down")
+
+
 
     resizeHandle:SetScript("OnMouseDown", function()
         LFM_GroupFinder_Frame:StartSizing("BOTTOMRIGHT")
@@ -622,6 +639,8 @@ function LFM_GroupFinder:Run()
     LFM_GroupFinder_ShowHeroic:SetChecked(self.PostTable.show_heroic)
     LFM_GroupFinder_ShowRaid:SetChecked(self.PostTable.show_raid)
 
+    LFM_GroupFinder.PostTable:set_order_arrow();
+
     function LFM_GroupFinder_Frame:CHAT_MSG_SYSTEM(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
         LFM_GroupFinder:OnChat(msg, playerName, guid);
     end
@@ -640,17 +659,44 @@ function LFM_GroupFinder:Run()
         handlerMethod(self, ...)
     end
 
-	LFM_GroupFinder.MinimapButton.Init(LFM_GroupFinder.Database, "Interface\\ICONS\\ability_townwatch", function(self, button)
-        if button== "LeftButton" then
-            if LFM_GroupFinder_Frame:IsVisible() then
-                LFM_GroupFinder_Frame:Hide();
-            else
-                LFM_GroupFinder_Frame:Show();
-            end
+    local function show()
+        SetPortraitTexture(LFM_GroupFinder_FrameIcon, "player");
+        LFM_GroupFinder_Frame:Show();
+        LFM_GroupFinder_BigBoyUpdate();
+    end
+    local function hide()
+        LFM_GroupFinder_Frame:Hide();
+    end
+
+    local function toggleShow()
+        if LFM_GroupFinder_Frame:IsVisible() then
+            hide();
+        else
+            show();
+        end
+    end
+
+    SLASH_LFM_GroupFinder_SlashDung1 = "/dung"
+    SlashCmdList["LFM_GroupFinder_SlashDung"] = function(msg)
+        if msg == 'show' then
+            show();
+            return;
+        elseif msg == 'hide' then
+            hide();
+            return;
+        end
+
+        toggleShow();
+    end
+
+	LFM_GroupFinder.MinimapButton.Init(LFM_GroupFinder.Database, "Interface\\ICONS\\inv_misc_head_dragon_green", function(self, btn)
+        if btn == "LeftButton" then
+            toggleShow();
         else
 
         end
     end)
+
 
     LFM_GroupFinder_Frame:SetScript("OnEvent", DispatchEvent);
     --LFM_GroupFinder_Frame:Show();

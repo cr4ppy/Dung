@@ -1,5 +1,5 @@
-## Interface: 80200
-## Title: LFM Group Finder
+## Interface: 20502
+## Title: Dung - A Classic Group Finder
 ## Author: Bluefork
 ## SavedVariables: LFM_GroupFinder_DB
 ## SavedVariablesPerCharacter: LFM_GroupFinder_DB_Character
