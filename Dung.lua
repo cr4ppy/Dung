@@ -383,7 +383,7 @@ end
 ---@param playerName string
 ---@param guid string
 ---@return void
-function Dung:OnChat(msg, playerName, guid)
+function Dung:OnChat(msg, playerName, guid, fakeClass)
     if not self.isRunning then return false end;
 
     --limit to one post per player for now,
@@ -414,7 +414,7 @@ function Dung:OnChat(msg, playerName, guid)
     -- Else they don't have a post
     ---if fixtures or dummy data then generate a random time for the dummy/test post.
     local localizedClass, englishClass;
-    if(guid == nil) then englishClass = 'WARRIOR' time = time-math.random(1,60);
+    if(guid == nil) then englishClass = fakeClass time = time-math.random(1,60);
     else
         localizedClass, englishClass = GetPlayerInfoByGUID(guid);
     end
