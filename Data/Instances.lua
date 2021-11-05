@@ -518,7 +518,7 @@ Dung.Data.Instances = {
         level_range = { {64, 70}, {70, 70} };
         avail_difficulty_types = {
             [Difficulty.Normal] = Difficulty.Normal,
-            [Difficulty.Heroic] = Difficulty.Heroic
+            [Difficulty.Heroic] = Difficulty.Heroic 
         };
         current_difficulty = Difficulty.Normal;
         type =  GroupType.Dungeon;
@@ -527,7 +527,7 @@ Dung.Data.Instances = {
     [39]= Instance:New({
         id = 'SethekkHalls',
         name = 'Sethekk Halls', --1
-        key_words = {'sethekkhalls', 'sethekk halls', 'seth Halls', 'sethekk', 'seth', 'sathekk', 'sathekk halls'};
+        key_words = {'sethekkhalls', 'sethekk halls','sethek halls', 'seth Halls', 'sethekk', 'seth', 'sathekk', 'sathekk halls', 'sethekk', 'sethek'};
         exclude_words = {'boost'},
         level_range = { {66, 70}, {70, 70} };
         avail_difficulty_types = {
