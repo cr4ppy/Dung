@@ -512,6 +512,8 @@ function Dung_GroupFinder_BigBoyUpdate(self)
             btnTitle.is_collapsed = Dung.Data.CollapsedStates[post_guid] == true;
             btnTitle:SetWidth(Dung_GroupFinder_Frame:GetWidth());
 
+
+
             Dung_GroupFinder_ScrollFrame:SetWidth(Dung_GroupFinder_Frame:GetWidth() - 38);
             btnTitlePlayerName:SetPoint("LEFT", btnTitle, "LEFT", Dung_GroupFinder_Frame:GetWidth()-170, 0)
             btnTitleTag:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
@@ -633,7 +635,7 @@ end
 ---@return void
 function Dung:Run()
     Dung_GroupFinder_Frame:RegisterEvent("ADDON_LOADED");
-    Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_SYSTEM");
+    --Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_SYSTEM");
 	Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_CHANNEL");
 	Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_GUILD");
 	Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_OFFICER");
@@ -670,9 +672,9 @@ function Dung:Run()
     Dung_GroupFinder_ShowHeroic:SetChecked(self.PostTable.show_heroic)
     Dung_GroupFinder_ShowRaid:SetChecked(self.PostTable.show_raid)
 
-    function Dung_GroupFinder_Frame:CHAT_MSG_SYSTEM(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
-        Dung:OnChat(msg, playerName, guid);
-    end
+    --function Dung_GroupFinder_Frame:CHAT_MSG_SYSTEM(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
+        --Dung:OnChat(msg, playerName, guid);
+    --end
     function Dung_GroupFinder_Frame:CHAT_MSG_CHANNEL(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
         Dung:OnChat(msg, playerName, guid);
     end
