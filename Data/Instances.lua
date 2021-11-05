@@ -224,7 +224,7 @@ Dung.Data.Instances = {
     [17] = Instance:New({
         id = 'SunkenTemple',
         name = 'The Temple of Atal\'Hakkar', --1
-        key_words = {'sunken temple', 'atal\'hakkar', 'temple of atal', 'sunken', 'lfm st', 'lfg st', 'st lfm'}; --"st" removed because people use it for server time raids
+        key_words = {'sunken temple', 'atal\'hakkar', 'temple of atal', 'sunken', 'lfm st ', 'lfg st', ' st lfm '}; --"st" removed because people use it for server time raids
         exclude_words = {},
         level_range = { {47, 50}, {47, 50} };
         avail_difficulty_types = {
@@ -328,7 +328,7 @@ Dung.Data.Instances = {
     [25] = Instance:New({
         id = 'Stratholme',
         name = 'Stratholme', --1
-        key_words = {'strath', 'strath ud', 'stratud', 'stratholme', 'ud', 'ud baron', 'stath', 'stratholm', 'strah', 'strat', 'starth', 'strat live', 'strathlive', 'baron'};
+        key_words = {'strat ud', 'strath', 'strath ud', 'stratud', 'stratholme', 'ud', 'ud baron', 'stath', 'stratholm', 'strah', 'strat', 'starth', 'strat live', 'strathlive', 'baron'};
         exclude_words = {},
         level_range = { {58, 60}, {58, 60} };
         avail_difficulty_types = {
@@ -339,19 +339,6 @@ Dung.Data.Instances = {
         max_players = 5;
     }),
     [26] = Instance:New({
-        id = 'Stratholme',
-        name = 'Stratholme', --1
-        key_words = {'strath', 'strath ud', 'stratud', 'stratholme', 'ud', 'ud baron', 'stath', 'stratholm', 'strah', 'strat', 'starth', 'strat live', 'strathlive', 'baron'};
-        exclude_words = {},
-        level_range = { {58, 60}, {58, 60} };
-        avail_difficulty_types = {
-            [Difficulty.Normal] = Difficulty.Normal,
-        };
-        current_difficulty = Difficulty.Normal;
-        type =  GroupType.Dungeon;
-        max_players = 5;
-    }),
-    [27] = Instance:New({
         id = 'Scholomance',
         name = 'Scholomance', --1
         key_words = {'scholomance', 'scholo', 'sholo', 'sholomance', 'pally mount', 'pally mount quest', 'scolo'};
@@ -370,7 +357,7 @@ Dung.Data.Instances = {
     --- CLASSIC ERA RAIDS (except ubrs... cos let's be honest, it's a dungeon)---------------------
     -----------------------------------------------------------------------------------------------
     -----------------------------------------------------------------------------------------------
-    [28] = Instance:New({
+    [27] = Instance:New({
         id = 'ZulGurub',
         name = 'Zul Gurub', --1
         key_words = {'zg', '20 mans', '20 man', 'hakkar', 'zg mountrun'};
@@ -383,7 +370,7 @@ Dung.Data.Instances = {
         type =  GroupType.Raid;
         max_players = 20;
     }),
-    [29] = Instance:New({
+    [28] = Instance:New({
         id = 'AQRuins',
         name = 'Ruins of Ahn\' Qiraj', --1
         key_words = {'aq20', 'aq ruins', '20 mans', '20 man', 'ossirian'};
@@ -396,7 +383,7 @@ Dung.Data.Instances = {
         type =  GroupType.Raid;
         max_players = 20;
     }),
-    [30] = Instance:New({
+    [29] = Instance:New({
         id = 'MoltenCore',
         name = 'Molten Core', --1
         key_words = {'mc', 'molten core', 'rag', 'ragnaros', 'need douse', 'loot the dog'};
@@ -409,7 +396,7 @@ Dung.Data.Instances = {
         type =  GroupType.Raid;
         max_players = 40;
     }),
-    [31] = Instance:New({
+    [30] = Instance:New({
         id = 'OnyxiasLair',
         name = 'Onyxia\'s Lair', --1
         key_words = {'ony', 'onyxia', 'onyxia\'s lair'};
@@ -422,7 +409,7 @@ Dung.Data.Instances = {
         type =  GroupType.Raid;
         max_players = 40;
     }),
-    [32] = Instance:New({
+    [31] = Instance:New({
         id = 'BlackWingLair',
         name = 'Black Wing Lair', --1
         key_words = {'bwl', 'black wing lair'};
@@ -435,7 +422,7 @@ Dung.Data.Instances = {
         type =  GroupType.Raid;
         max_players = 40;
     }),
-    [33] = Instance:New({
+    [32] = Instance:New({
         id = 'AQ',
         name = 'Ahn\' Qiraj', --1
         key_words = {'aq40', 'twin emps', 'c\'thun', 'cthun', 'ouro'};
@@ -448,7 +435,7 @@ Dung.Data.Instances = {
         type =  GroupType.Raid;
         max_players = 40;
     }),
-    [34] = Instance:New({
+    [33] = Instance:New({
         id = 'Naxx',
         name = 'Naxxramas', --1
         key_words = {'naxxramas', 'nax', 'naxx', 'sapphiron'};
@@ -467,7 +454,7 @@ Dung.Data.Instances = {
     ---------------------------------------------------------------------------------------------------
     ---------------------------------------------------------------------------------------------------
 
-    [35] = Instance:New({
+    [34] = Instance:New({
         id = 'HellfireRamparts',
         name = 'Hellfire Ramparts', --1
         key_words = {'ramps', 'hellfireramparts', 'hellfire ramparts', 'ramp'};
@@ -481,7 +468,7 @@ Dung.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [36] = Instance:New({
+    [35] = Instance:New({
         id = 'TheBloodFurnace',
         name = 'The Blood Furnace', --1
         key_words = {'bf', 'blood furnace', 'b furnace', 'bloodfurnace'};
@@ -495,7 +482,7 @@ Dung.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [37] = Instance:New({
+    [36] = Instance:New({
         id = 'TheShatteredHalls',
         name = 'The Shattered Halls', --1
         key_words = {'shattered halls', 'shattered hall', 'sh', 'shh', 'shalls', 'shat halls', 'shat hall', 'shatterend hall'};
@@ -509,7 +496,7 @@ Dung.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [38] = Instance:New({
+    [37] = Instance:New({
         id = 'ManaTombs',
         name = 'Mana Tombs', --1
         key_words = {'mt', 'mana tombs', 'mtombs', 'auch tombs'};
@@ -523,7 +510,7 @@ Dung.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [39] = Instance:New({
+    [38] = Instance:New({
         id = 'AuchenaiCrypts',
         name = 'Auchenai Crypts', --1
         key_words = {'ac', 'auchenai crypts', 'crypts'};
@@ -537,7 +524,7 @@ Dung.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [40]= Instance:New({
+    [39]= Instance:New({
         id = 'SethekkHalls',
         name = 'Sethekk Halls', --1
         key_words = {'sethekkhalls', 'sethekk halls', 'seth Halls', 'sethekk', 'seth', 'sathekk', 'sathekk halls'};
@@ -551,7 +538,7 @@ Dung.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [41] = Instance:New({
+    [40] = Instance:New({
         id = 'ShadowLabs',
         name = 'Shadow Labyrinth', --1
         key_words = {'sl', 'slabs', 'shadow labs', 'labs', 'shadow labyrinth', 'slab'};
@@ -565,7 +552,7 @@ Dung.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [42] = Instance:New({
+    [41] = Instance:New({
         id = 'SlavePens',
         name = 'Slave Pens', --1
         key_words = {'sp', 'slave pens', 'pens', 'slavepens', 'slave pen', 'slavepen'};
@@ -579,7 +566,7 @@ Dung.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [43] = Instance:New({
+    [42] = Instance:New({
         id = 'UberBog',
         name = 'Uber Bog', --1
         key_words = {'ub', 'uberbog', 'uber bog'};
@@ -593,7 +580,7 @@ Dung.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [44] = Instance:New({
+    [43] = Instance:New({
         id = 'SteamVault',
         name = 'The Steamvault', --1
         key_words = {'sv', 'steam vault', 'steamvault', 'steamvaults'};
@@ -607,7 +594,7 @@ Dung.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [45] = Instance:New({
+    [44] = Instance:New({
         id = 'OldHillsBrad',
         name = 'Old Hillsbrad Foothills', --1
         key_words = {'oh','ohb', 'old hillsbrad', 'hillsbrad'};
@@ -621,7 +608,7 @@ Dung.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [46] = Instance:New({
+    [45] = Instance:New({
         id = 'BlackMorass',
         name = 'The Black Morass', --1
         key_words = {'bm', 'black morass'};
@@ -635,7 +622,7 @@ Dung.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [47] = Instance:New({
+    [46] = Instance:New({
         id = 'Arcatraz',
         name = 'The Arcatraz', --1
         key_words = {'arc', 'the arcatraz', 'arcatraz'};
@@ -649,7 +636,7 @@ Dung.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [48] = Instance:New({
+    [47] = Instance:New({
         id = 'Botanica',
         name = 'The Botanica', --1
         key_words = {'bot', 'the botanica', 'botanica'};
@@ -663,7 +650,7 @@ Dung.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [49] = Instance:New({
+    [48] = Instance:New({
         id = 'Mechanar',
         name = 'The Mechanar', --1
         key_words = {'mech', 'the mechanar', 'mechanar', 'mechenar'};
@@ -677,7 +664,7 @@ Dung.Data.Instances = {
         type =  GroupType.Dungeon;
         max_players = 5;
     }),
-    [50] = Instance:New({
+    [49] = Instance:New({
         id = 'MagistersTerrance',
         name = 'Magisters\' Terrance', --1
         key_words = {'magisters', 'magister', 'magst', 'mags terrace', 'terrace'};
@@ -697,7 +684,7 @@ Dung.Data.Instances = {
     --- BURNING CRUSADE RAIDS -------------------------------------------------------------------------
     ---------------------------------------------------------------------------------------------------
     ---------------------------------------------------------------------------------------------------
-    [51] = Instance:New({
+    [50] = Instance:New({
         id = 'Karazhan',
         name = 'Karazhan', --1
         key_words = {'kara', 'karazhan', 'karas', 'karazan', 'kazazhan'};
@@ -710,7 +697,7 @@ Dung.Data.Instances = {
         type =  GroupType.Raid;
         max_players = 10;
     }),
-    [52] = Instance:New({
+    [51] = Instance:New({
         id = 'ZulAman',
         name = 'Zul\'Aman', --1
         key_words = {'za', 'timerun', 'timedrun', 'zul aman', 'za timed', 'za time', 'zulaman'};
@@ -723,7 +710,7 @@ Dung.Data.Instances = {
         type =  GroupType.Raid;
         max_players = 10;
     }),
-    [53] = Instance:New({
+    [52] = Instance:New({
         id = 'Magtheridon',
         name = 'Magtheridon\'s Lair', --1
         key_words = {'mags', 'magtheridon', 'magtheridons', 'magtheridon lair', 'magz'};
@@ -736,7 +723,7 @@ Dung.Data.Instances = {
         type =  GroupType.Raid;
         max_players = 25;
     }),
-    [54] = Instance:New({
+    [53] = Instance:New({
         id = 'Gruul',
         name = 'Gruul\'s Lair', --1
         key_words = {'gruul', 'grools', 'grool', 'gruul\'s lair', 'magz'};
@@ -749,7 +736,7 @@ Dung.Data.Instances = {
         type =  GroupType.Raid;
         max_players = 25;
     }),
-    [55] = Instance:New({
+    [54] = Instance:New({
         id = 'SerpentshrineCavern',
         name = 'Serpentshrine Cavern', --1
         key_words = {'ssc', 'serpentshrine', 'serpentshrinecavern', 'serpentshrine cavern'};
@@ -762,7 +749,7 @@ Dung.Data.Instances = {
         type =  GroupType.Raid;
         max_players = 25;
     }),
-    [56] = Instance:New({
+    [55] = Instance:New({
         id = 'TempestKeep',
         name = 'Tempest Keep', --1
         key_words = {'tk', 'tempest', 'tempest keep', 'tkeep'};
@@ -775,7 +762,7 @@ Dung.Data.Instances = {
         type =  GroupType.Raid;
         max_players = 25;
     }),
-    [57] = Instance:New({
+    [56] = Instance:New({
         id = 'HyjalSummit',
         name = 'Hyjal Summit', --1
         key_words = {'hyjal', 'hs', 'hyjal summit'};
@@ -788,7 +775,7 @@ Dung.Data.Instances = {
         type =  GroupType.Raid;
         max_players = 25;
     }),
-    [58] = Instance:New({
+    [57] = Instance:New({
         id = 'BlackTemple',
         name = 'Black Temple', --1
         key_words = {'bt', 'black temple'};
@@ -801,7 +788,7 @@ Dung.Data.Instances = {
         type =  GroupType.Raid;
         max_players = 25;
     }),
-    [59] = Instance:New({
+    [58] = Instance:New({
         id = 'Sunwell',
         name = 'Sunwell Plateau', --1
         key_words = {'sunwell', 'plateau', 'sunwell plateau'};

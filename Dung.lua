@@ -9,9 +9,8 @@ local function dump(var, ...) return DevTools_Dump(var, ...) end
 ------5. OPTIONS! - next version 1.1
 ------5. LOCALIZATION - next version 1.1
 ------7. SEARCH FILTER - next version 1.1
-------misc. REPLACE IPAIRS
 ------misc. EXCLUDE "." FROM STRINGS
-------misc. MAKE MESSAGE TEXT GREYISH
+------misc. MAKE MESSAGE TEXT DARKER
 
 Dung.DB_DEFAULTS = {}
 Dung.DB_DEFAULTS_CHAR = {}
