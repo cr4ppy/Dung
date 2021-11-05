@@ -367,7 +367,7 @@ end
 ---
 --  todo 1. do we need to compare realm and player guid too?
 ---
----@return void
+---@return table|boolean (Post)
 function Dung:GetPostForPlayer(playerName, realm, playerGuid, Instance)
     for i,Post in ipairs(self.PostTable.posts) do
         if Post.player.name == playerName then
