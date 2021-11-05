@@ -21,7 +21,6 @@ I plan on supporting the addon and adding updates and features for TBC and Seaso
 Please report any issues or even feature ideas!  
 
 Planned features:  
-
- Search filter posts by dungeon or player name.  
- Some sort of instance tagging or tracking with a notification.  
- Settings for keywords + keyword locales
+ - Search filter posts by dungeon or player name.
+ - Some sort of instance tagging or tracking with a notification.
+ - Settings for keywords + keyword locales
