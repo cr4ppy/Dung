@@ -6,7 +6,7 @@ local function dump(var, ...) return DevTools_Dump(var, ...) end
 -----
 -----@param self self
 -----@return void
-function LFM_GroupFinder_OnPostHover(self)
+function Dung_GroupFinder_OnPostHover(self)
     local btnText = _G[self:GetName().."NormalText"];
     local btnRole1 = _G[self:GetName().."Role1"];
     local btnRole2 = _G[self:GetName().."Role2"];
@@ -35,7 +35,7 @@ end
 -----
 -----@param self self
 -----@return void
-function LFM_GroupFinder_OnPostLeave(self)
+function Dung_GroupFinder_OnPostLeave(self)
     local btnText = _G[self:GetName().."NormalText"];
     local btnRole1 = _G[self:GetName().."Role1"];
     local btnRole2 = _G[self:GetName().."Role2"];
@@ -60,7 +60,7 @@ end
 -----
 -----@param self self
 -----@return void
-function LFM_GroupFinder_OnPostClick(self)
+function Dung_GroupFinder_OnPostClick(self)
     local instance_guid = self.Post:GetGuid();
     local player_name = self.Post:GetPlayer():GetName();
 
@@ -72,7 +72,7 @@ function LFM_GroupFinder_OnPostClick(self)
             Dung.Data.CollapsedStates[instance_guid] = true;
             self.is_collapsed = true;
         end
-        LFM_GroupFinder_BigBoyUpdate();
+        Dung_GroupFinder_BigBoyUpdate();
     else
         local activeWindow = ChatEdit_GetActiveWindow();
         --send a /who request
@@ -103,7 +103,7 @@ end
 ---
 -----@param self self
 -----@return void
-function LFM_GroupFinder_ToggleAllCollapsed(self)
+function Dung_GroupFinder_ToggleAllCollapsed(self)
     Dung.PostTable.toggle_hide_all = not Dung.PostTable.toggle_hide_all --toggle, true = false and false = true
 
     if(Dung.PostTable.toggle_hide_all) then
@@ -122,14 +122,14 @@ function LFM_GroupFinder_ToggleAllCollapsed(self)
         Dung.Data.CollapsedStates = {};
     end
 
-    LFM_GroupFinder_BigBoyUpdate();
+    Dung_GroupFinder_BigBoyUpdate();
 end
 
 ----- Click filter checkbox (normal, heroic, raid)
 -----
 -----@param self self
 -----@return void
-function LFM_GroupFinder_ToggleType(self)
+function Dung_GroupFinder_ToggleType(self)
     local Difficulty = Dung:GetModel('InstanceDifficulty');
     local GroupType = Dung:GetModel('GroupType');
 
@@ -143,24 +143,24 @@ function LFM_GroupFinder_ToggleType(self)
         Dung.PostTable.show_raid = not Dung.PostTable.show_raid;
     end
 
-    LFM_GroupFinder_BigBoyUpdate();
+    Dung_GroupFinder_BigBoyUpdate();
 end
 
 ----- Click to order list asc or desc
 -----
 -----@param self self
 -----@return void
-function LFM_GroupFinder_OrderListButton_OnClick(self)
+function Dung_GroupFinder_OrderListButton_OnClick(self)
     Dung.PostTable.current_order = not Dung.PostTable.current_order;
     Dung.PostTable:set_order_arrow();
 
-    LFM_GroupFinder_BigBoyUpdate();
+    Dung_GroupFinder_BigBoyUpdate();
 end
 
 ----- Filters list by keyword
 -----
 -----@param self self
 -----@return void
---function LFM_GroupFinder_FrameFilterInput_TextChange(self)
+--function Dung_GroupFinder_FrameFilterInput_TextChange(self)
 --    print(self:GetText())
 --end

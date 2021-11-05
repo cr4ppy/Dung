@@ -18,8 +18,8 @@ local function dump(var, ...) return DevTools_Dump(var, ...) end
 
 Dung.DB_DEFAULTS = {}
 Dung.DB_DEFAULTS_CHAR = {}
-LFM_GroupFinder_DB = LFM_GroupFinder_DB or Dung.DB_DEFAULTS
-LFM_GroupFinder_DB_Character = LFM_GroupFinder_DB_Character or Dung.DB_DEFAULTS_CHAR;
+Dung_GroupFinder_DB = Dung_GroupFinder_DB or Dung.DB_DEFAULTS
+Dung_GroupFinder_DB_Character = Dung_GroupFinder_DB_Character or Dung.DB_DEFAULTS_CHAR;
 
 Dung.Tests = {};
 Dung.isRunning = true;
@@ -64,17 +64,17 @@ Dung.PostTable = {
     ---Sets a post text length by how many roles it has (Needs be shifted over to make room for the role icons (tank,dps) etc
     --You can probably use the role count and multiply the icon width (12px).. but whatever they're fine hardcoded
     set_msg_length = function(textElement, roleCount)
-        if ( textElement:GetWidth() >= LFM_GroupFinder_Frame:GetWidth() - 216) then
+        if ( textElement:GetWidth() >= Dung_GroupFinder_Frame:GetWidth() - 216) then
             if roleCount == 1 then
-                textElement:SetWidth((LFM_GroupFinder_Frame:GetWidth() - 192))
+                textElement:SetWidth((Dung_GroupFinder_Frame:GetWidth() - 192))
             elseif roleCount == 2 then
-                textElement:SetWidth((LFM_GroupFinder_Frame:GetWidth() - 204))
+                textElement:SetWidth((Dung_GroupFinder_Frame:GetWidth() - 204))
             elseif roleCount == 3 then
-                textElement:SetWidth((LFM_GroupFinder_Frame:GetWidth() - 216))
+                textElement:SetWidth((Dung_GroupFinder_Frame:GetWidth() - 216))
             elseif roleCount == 4 then
-                textElement:SetWidth((LFM_GroupFinder_Frame:GetWidth() - 228))
+                textElement:SetWidth((Dung_GroupFinder_Frame:GetWidth() - 228))
             else
-                textElement:SetWidth((LFM_GroupFinder_Frame:GetWidth() - 180))
+                textElement:SetWidth((Dung_GroupFinder_Frame:GetWidth() - 180))
             end
         end
     end;
@@ -101,9 +101,9 @@ Dung.PostTable = {
     ---Sets the direction of the order button depending on current order
     set_order_arrow = function()
         if not Dung.PostTable.current_order then
-            LFM_GroupFinder_OrderListButton:GetNormalTexture():SetRotation(math.pi);
+            Dung_GroupFinder_OrderListButton:GetNormalTexture():SetRotation(math.pi);
         else
-            LFM_GroupFinder_OrderListButton:GetNormalTexture():SetRotation(0);
+            Dung_GroupFinder_OrderListButton:GetNormalTexture():SetRotation(0);
         end
     end
 };
@@ -116,7 +116,7 @@ Dung.PostTable = {
 function Dung:AddPost(Post)
     table.insert(self.PostTable.posts, Post);
 
-    LFM_GroupFinder_BigBoyUpdate();
+    Dung_GroupFinder_BigBoyUpdate();
     return true;
 end
 
@@ -132,7 +132,7 @@ function Dung:RemovePost(Post)
         end
     end
 
-    LFM_GroupFinder_BigBoyUpdate()
+    Dung_GroupFinder_BigBoyUpdate()
     return false;
 end
 
@@ -339,19 +339,17 @@ function Dung.TickTimer()
     local posts = Dung:GetPostsForScrollWindow();
     local post_count = #posts;
 
-    FauxScrollFrame_Update(LFM_GroupFinder_ScrollFrame, post_count, Dung.PostTable.display_count, Dung.POST_HEIGHT, nil, nil, nil, nil, nil, nil)
-    
+    FauxScrollFrame_Update(Dung_GroupFinder_ScrollFrame, post_count, Dung.PostTable.display_count, Dung.POST_HEIGHT, nil, nil, nil, nil, nil, nil)
+
     local btnTitleTime, index;
 
     for i=1, Dung.PostTable.display_count, 1 do
-        index = i + FauxScrollFrame_GetOffset(LFM_GroupFinder_ScrollFrame);
-        btnTitleTime = _G["LFM_GroupFinder_ScrollFrameChildTitle"..i.."Time"];
+        index = i + FauxScrollFrame_GetOffset(Dung_GroupFinder_ScrollFrame);
+        btnTitleTime = _G["Dung_GroupFinder_ScrollFrameChildTitle"..i.."Time"];
 
         if (index <= post_count and not btnTitleTime.is_header) then
             local Post = posts[index].post;
-            dump(Post:GetLastTimeSeconds())
             if(Post:HasExpired()) then
-
                 Dung:RemovePost(Post);
             else
                 local elapsed = Post:GetElapsedTime();
@@ -414,7 +412,7 @@ function Dung:OnChat(msg, playerName, guid)
         existing_post:SetRolesNeeded(RolesNeeded);
         existing_post:SetInstance(Instance);
 
-        return LFM_GroupFinder_BigBoyUpdate();
+        return Dung_GroupFinder_BigBoyUpdate();
     end
     -- Else they don't have a post
     ---if fixtures or dummy data then generate a random time for the dummy/test post.
@@ -451,13 +449,13 @@ end
 ---
 ---@param self self
 ---@return void
-function LFM_GroupFinder_BigBoyUpdate(self)
+function Dung_GroupFinder_BigBoyUpdate(self)
     local posts = Dung:GetPostsForScrollWindow();
     local Roles = Dung:GetModel('RoleType');
     local post_count = #posts;
 
     --Get the num of posts we can display in the height of our window (minus 5 to account for the graphic space on top and bottom)
-    Dung.PostTable.display_count = math.floor((LFM_GroupFinder_Frame:GetHeight() / Dung.POST_HEIGHT)+0.5) -5;
+    Dung.PostTable.display_count = math.floor((Dung_GroupFinder_Frame:GetHeight() / Dung.POST_HEIGHT)+0.5) -5;
 
     --Stop display count exceeding max amount of posts
     if(Dung.PostTable.display_count > Dung.PostTable.max_display_count) then
@@ -467,16 +465,16 @@ function LFM_GroupFinder_BigBoyUpdate(self)
     --Hide every list item before update todo: can be better or not done at all?
     for i=1, Dung.PostTable.max_display_count, 1 do
         if(i > Dung.PostTable.display_count) then
-            _G["LFM_GroupFinder_ScrollFrameChildTitle"..i]:Hide();
+            _G["Dung_GroupFinder_ScrollFrameChildTitle"..i]:Hide();
         end
     end
 
     --Set our scroll frame size (in case window has been re-sized)
-    LFM_GroupFinder_ScrollFrame:SetWidth(LFM_GroupFinder_Frame:GetWidth());
-    LFM_GroupFinder_ScrollFrame:SetHeight(LFM_GroupFinder_Frame:GetHeight() - 95);
+    Dung_GroupFinder_ScrollFrame:SetWidth(Dung_GroupFinder_Frame:GetWidth());
+    Dung_GroupFinder_ScrollFrame:SetHeight(Dung_GroupFinder_Frame:GetHeight() - 95);
 
     --Update the scroll frame faux data (in case window has been re-sized)
-    FauxScrollFrame_Update(LFM_GroupFinder_ScrollFrame, post_count, Dung.PostTable.display_count, Dung.POST_HEIGHT, nil, nil, nil, nil, 0, 0 )
+    FauxScrollFrame_Update(Dung_GroupFinder_ScrollFrame, post_count, Dung.PostTable.display_count, Dung.POST_HEIGHT, nil, nil, nil, nil, 0, 0 )
 
     local btnTitle,
     btnTitleTag,
@@ -493,19 +491,19 @@ function LFM_GroupFinder_BigBoyUpdate(self)
 
     --Loop over the amount of posts we can theoretically display
     for i=1, Dung.PostTable.display_count, 1 do
-        index = i + FauxScrollFrame_GetOffset(LFM_GroupFinder_ScrollFrame);
+        index = i + FauxScrollFrame_GetOffset(Dung_GroupFinder_ScrollFrame);
 
-        btnTitle = _G["LFM_GroupFinder_ScrollFrameChildTitle"..i];
-        btnTitleTag = _G["LFM_GroupFinder_ScrollFrameChildTitle"..i.."Tag"];
-		btnTitleNumGroupMates = _G["LFM_GroupFinder_ScrollFrameChildTitle"..i.."GroupMates"];
-		btnTitleRole1 = _G["LFM_GroupFinder_ScrollFrameChildTitle"..i.."Role1"];
-        btnTitleRole2 = _G["LFM_GroupFinder_ScrollFrameChildTitle"..i.."Role2"];
-        btnTitleRole3 = _G["LFM_GroupFinder_ScrollFrameChildTitle"..i.."Role3"];
-        btnTitleRole4 = _G["LFM_GroupFinder_ScrollFrameChildTitle"..i.."Role4"];
-		btnTitleNormalText = _G["LFM_GroupFinder_ScrollFrameChildTitle"..i.."NormalText"];
-		btnTitleHighlight = _G["LFM_GroupFinder_ScrollFrameChildTitle"..i.."Highlight"];
-        btnTitlePlayerName = _G["LFM_GroupFinder_ScrollFrameChildTitle"..i.."PlayerName"];
-        btnTitleTime = _G["LFM_GroupFinder_ScrollFrameChildTitle"..i.."Time"];
+        btnTitle = _G["Dung_GroupFinder_ScrollFrameChildTitle"..i];
+        btnTitleTag = _G["Dung_GroupFinder_ScrollFrameChildTitle"..i.."Tag"];
+		btnTitleNumGroupMates = _G["Dung_GroupFinder_ScrollFrameChildTitle"..i.."GroupMates"];
+		btnTitleRole1 = _G["Dung_GroupFinder_ScrollFrameChildTitle"..i.."Role1"];
+        btnTitleRole2 = _G["Dung_GroupFinder_ScrollFrameChildTitle"..i.."Role2"];
+        btnTitleRole3 = _G["Dung_GroupFinder_ScrollFrameChildTitle"..i.."Role3"];
+        btnTitleRole4 = _G["Dung_GroupFinder_ScrollFrameChildTitle"..i.."Role4"];
+		btnTitleNormalText = _G["Dung_GroupFinder_ScrollFrameChildTitle"..i.."NormalText"];
+		btnTitleHighlight = _G["Dung_GroupFinder_ScrollFrameChildTitle"..i.."Highlight"];
+        btnTitlePlayerName = _G["Dung_GroupFinder_ScrollFrameChildTitle"..i.."PlayerName"];
+        btnTitleTime = _G["Dung_GroupFinder_ScrollFrameChildTitle"..i.."Time"];
         btnTitle.is_header = false;
 
         --If we have a post to display
@@ -516,10 +514,10 @@ function LFM_GroupFinder_BigBoyUpdate(self)
             local is_raid = Post:GetInstance():IsRaid();
             local is_heroic = Post:IsHeroic();
             btnTitle.is_collapsed = Dung.Data.CollapsedStates[post_guid] == true;
-            btnTitle:SetWidth(LFM_GroupFinder_Frame:GetWidth());
+            btnTitle:SetWidth(Dung_GroupFinder_Frame:GetWidth());
 
-            LFM_GroupFinder_ScrollFrame:SetWidth(LFM_GroupFinder_Frame:GetWidth() - 38);
-            btnTitlePlayerName:SetPoint("LEFT", btnTitle, "LEFT", LFM_GroupFinder_Frame:GetWidth()-170, 0)
+            Dung_GroupFinder_ScrollFrame:SetWidth(Dung_GroupFinder_Frame:GetWidth() - 38);
+            btnTitlePlayerName:SetPoint("LEFT", btnTitle, "LEFT", Dung_GroupFinder_Frame:GetWidth()-170, 0)
             btnTitleTag:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
             btnTitleTag:SetText('')
             btnTitleNormalText:SetTextColor(1, 0.8, 0)
@@ -577,7 +575,7 @@ function LFM_GroupFinder_BigBoyUpdate(self)
                 --role icons
                 local n = 1;
                 for role_ref in pairs(Post:GetRolesNeeded()) do
-                    local btnTitleRole = _G["LFM_GroupFinder_ScrollFrameChildTitle"..i.."Role" ..n];
+                    local btnTitleRole = _G["Dung_GroupFinder_ScrollFrameChildTitle"..i.."Role" ..n];
                     btnTitleRole:SetTexture(Roles:GetIconFile(role_ref))
                     btnTitleRole:Show();
                     btnTitleRole:SetPoint("LEFT", btnTitle, "LEFT", 14*n+6, 0);
@@ -603,18 +601,18 @@ end
 ---@return void
 function Dung:Run()
     --ADDON_LOADED
-    LFM_GroupFinder_Frame:RegisterEvent("ADDON_LOADED");
-    LFM_GroupFinder_Frame:RegisterEvent("CHAT_MSG_SYSTEM");
-	LFM_GroupFinder_Frame:RegisterEvent("CHAT_MSG_CHANNEL");
-	LFM_GroupFinder_Frame:RegisterEvent("CHAT_MSG_GUILD");
-	LFM_GroupFinder_Frame:RegisterEvent("CHAT_MSG_OFFICER");
-    --LFM_GroupFinder_Frame:SetPoint("CENTER", 0, 0)
-    --LFM_GroupFinder_Frame:ClearAllPoints();
-    LFM_GroupFinder_Frame:SetResizable(true)
-    LFM_GroupFinder_Frame:SetMinResize(320, 304)
-    LFM_GroupFinder_Frame:SetMaxResize(600, 460)
+    Dung_GroupFinder_Frame:RegisterEvent("ADDON_LOADED");
+    Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_SYSTEM");
+	Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_CHANNEL");
+	Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_GUILD");
+	Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_OFFICER");
+    --Dung_GroupFinder_Frame:SetPoint("CENTER", 0, 0)
+    --Dung_GroupFinder_Frame:ClearAllPoints();
+    Dung_GroupFinder_Frame:SetResizable(true)
+    Dung_GroupFinder_Frame:SetMinResize(320, 304)
+    Dung_GroupFinder_Frame:SetMaxResize(600, 460)
 
-    local resizeHandle = CreateFrame("Button", nil, LFM_GroupFinder_Frame)
+    local resizeHandle = CreateFrame("Button", nil, Dung_GroupFinder_Frame)
     resizeHandle:SetPoint("BOTTOMRIGHT", -6, 7)
     resizeHandle:SetSize(16, 16)
     resizeHandle:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up")
@@ -622,57 +620,57 @@ function Dung:Run()
     resizeHandle:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Down")
 
     resizeHandle:SetScript("OnMouseDown", function()
-        LFM_GroupFinder_Frame:StartSizing("BOTTOMRIGHT")
-        LFM_GroupFinder_ScrollFrame:Hide()
+        Dung_GroupFinder_Frame:StartSizing("BOTTOMRIGHT")
+        Dung_GroupFinder_ScrollFrame:Hide()
     end)
     resizeHandle:SetScript("OnMouseUp", function()
-        LFM_GroupFinder_Frame:StopMovingOrSizing()
-        LFM_GroupFinder_ScrollFrame:Show()
-        LFM_GroupFinder_BigBoyUpdate()
+        Dung_GroupFinder_Frame:StopMovingOrSizing()
+        Dung_GroupFinder_ScrollFrame:Show()
+        Dung_GroupFinder_BigBoyUpdate()
     end)
 
-    LFM_GroupFinder_ShowNormalLabel:SetFont(LFM_GroupFinder_ShowNormalLabel:GetFont(), 9, nil)
-    LFM_GroupFinder_ShowHeroicLabel:SetFont(LFM_GroupFinder_ShowNormalLabel:GetFont());
-    LFM_GroupFinder_ShowRaidLabel:SetFont(LFM_GroupFinder_ShowNormalLabel:GetFont());
+    Dung_GroupFinder_ShowNormalLabel:SetFont(Dung_GroupFinder_ShowNormalLabel:GetFont(), 9, nil)
+    Dung_GroupFinder_ShowHeroicLabel:SetFont(Dung_GroupFinder_ShowNormalLabel:GetFont());
+    Dung_GroupFinder_ShowRaidLabel:SetFont(Dung_GroupFinder_ShowNormalLabel:GetFont());
 
-    LFM_GroupFinder_ShowNormal:SetChecked(self.PostTable.show_normal)
-    LFM_GroupFinder_ShowHeroic:SetChecked(self.PostTable.show_heroic)
-    LFM_GroupFinder_ShowRaid:SetChecked(self.PostTable.show_raid)
+    Dung_GroupFinder_ShowNormal:SetChecked(self.PostTable.show_normal)
+    Dung_GroupFinder_ShowHeroic:SetChecked(self.PostTable.show_heroic)
+    Dung_GroupFinder_ShowRaid:SetChecked(self.PostTable.show_raid)
 
     Dung.PostTable:set_order_arrow();
 
-    function LFM_GroupFinder_Frame:CHAT_MSG_SYSTEM(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
+    function Dung_GroupFinder_Frame:CHAT_MSG_SYSTEM(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
         Dung:OnChat(msg, playerName, guid);
     end
-    function LFM_GroupFinder_Frame:CHAT_MSG_CHANNEL(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
+    function Dung_GroupFinder_Frame:CHAT_MSG_CHANNEL(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
         Dung:OnChat(msg, playerName, guid);
     end
-    function LFM_GroupFinder_Frame:CHAT_MSG_GUILD(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
+    function Dung_GroupFinder_Frame:CHAT_MSG_GUILD(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
         Dung:OnChat(msg, playerName, guid);
     end
-    function LFM_GroupFinder_Frame:CHAT_MSG_OFFICER(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
+    function Dung_GroupFinder_Frame:CHAT_MSG_OFFICER(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
         Dung:OnChat(msg, playerName, guid);
     end
-    function LFM_GroupFinder_Frame:ADDON_LOADED(arg1)
+    function Dung_GroupFinder_Frame:ADDON_LOADED(arg1)
         local function show()
-            SetPortraitTexture(LFM_GroupFinder_FrameIcon, "player");
-            LFM_GroupFinder_Frame:Show();
-            LFM_GroupFinder_BigBoyUpdate();
+            SetPortraitTexture(Dung_GroupFinder_FrameIcon, "player");
+            Dung_GroupFinder_Frame:Show();
+            Dung_GroupFinder_BigBoyUpdate();
         end
         local function hide()
-            LFM_GroupFinder_Frame:Hide();
+            Dung_GroupFinder_Frame:Hide();
         end
 
         local function toggleShow()
-            if LFM_GroupFinder_Frame:IsVisible() then
+            if Dung_GroupFinder_Frame:IsVisible() then
                 hide();
             else
                 show();
             end
         end
 
-        SLASH_LFM_GroupFinder_SlashDung1 = "/dung"
-        SlashCmdList["LFM_GroupFinder_SlashDung"] = function(msg)
+        SLASH_Dung_GroupFinder_SlashDung1 = "/dung"
+        SlashCmdList["Dung_GroupFinder_SlashDung"] = function(msg)
             if msg == 'show' then
                 show();
                 return;
@@ -680,8 +678,8 @@ function Dung:Run()
                 hide();
                 return;
             elseif msg == 'reset' then
-                LFM_GroupFinder_Frame:ClearAllPoints()
-                LFM_GroupFinder_Frame:SetPoint("CENTER", 0, 0)
+                Dung_GroupFinder_Frame:ClearAllPoints()
+                Dung_GroupFinder_Frame:SetPoint("CENTER", 0, 0)
                 return;
             end
             toggleShow();
@@ -694,5 +692,5 @@ function Dung:Run()
     end
 
     Dung.TickTimer();
-    LFM_GroupFinder_Frame:SetScript("OnEvent", DispatchEvent);
+    Dung_GroupFinder_Frame:SetScript("OnEvent", DispatchEvent);
 end

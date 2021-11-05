@@ -1,6 +1,6 @@
 local _, Dung = ...
 
---function LFM_GroupFinder:RunTests()
+--function Dung:RunTests()
 --    return true;
 --end
 

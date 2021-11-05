@@ -1,6 +1,6 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
 ..\FrameXML\UI.xsd">
-    <Button name="LFM_GroupFinder_TitleBtn" virtual="true">
+    <Button name="Dung_GroupFinder_TitleBtn" virtual="true">
 		<Size>
 			<AbsDimension x="600" y="16"/>
 		</Size>
@@ -164,19 +164,21 @@
 		<DisabledFont style="GameFontHighlight"/>
         <Scripts>
             <OnEnter>
-				LFM_GroupFinder_OnPostHover(self);
+				Dung_GroupFinder_OnPostHover(self);
 			</OnEnter>
             <OnLeave>
-				LFM_GroupFinder_OnPostLeave(self);
+				Dung_GroupFinder_OnPostLeave(self);
 			</OnLeave>
             <OnClick>
-                LFM_GroupFinder_OnPostClick(self);
+                Dung_GroupFinder_OnPostClick(self);
             </OnClick>
         </Scripts>
 	</Button>
-
-    <Frame name="LFM_GroupFinder_Frame" movable="true" parent="UIParent" inherits="ButtonFrameTemplate" hidden="true" enableMouse="true">
+    <Frame name="Dung_GroupFinder_Frame" movable="true" parent="UIParent" inherits="ButtonFrameTemplate" hidden="true" enableMouse="true">
         <Size x="380" y="430"/>
+        <Anchors>
+            <Anchor point="LEFT" x="20" y="97"/>
+        </Anchors>
         <Layers>
             <Layer level="OVERLAY" textureSubLevel="-2">
 				<Texture name="$parentIcon" file="Interface\Icons\inv_misc_head_dragon_green">
@@ -192,7 +194,7 @@
 						<AbsDimension x="500" y="14"/>
 					</Size>
 					<Anchors>
-						<Anchor point="TOP" relativeTo="LFM_GroupFinder_Frame" relativePoint="TOP">
+						<Anchor point="TOP" relativeTo="Dung_GroupFinder_Frame" relativePoint="TOP">
 							<Offset>
 								<AbsDimension x="0" y="-4"/>
 							</Offset>
@@ -201,9 +203,6 @@
 				</FontString>
             </Layer>
         </Layers>
-        <Anchors>
-            <Anchor point="LEFT" x="20" y="97"/>
-        </Anchors>
         <Scripts>
          <OnMouseDown>
           if button == "LeftButton" and not self.isMoving then
@@ -224,14 +223,13 @@
           end
          </OnHide>
         </Scripts>
-
         <Frames>
-            <Button name="LFM_GroupFinder_OrderListButton">
+            <Button name="Dung_GroupFinder_OrderListButton">
                 <Size>
                     <AbsDimension x="20" y="30"/>
                 </Size>
                 <Anchors>
-                    <Anchor relativeTo="LFM_GroupFinder_Frame" point="TOPRIGHT">
+                    <Anchor relativeTo="Dung_GroupFinder_Frame" point="TOPRIGHT">
                         <Offset>
                             <AbsDimension x="-35" y="-32"/>
                         </Offset>
@@ -251,11 +249,11 @@
                 <HighlightFont style="GameFontHighlight"/>
                 <Scripts>
                     <OnClick>
-                        LFM_GroupFinder_OrderListButton_OnClick(self);
+                        Dung_GroupFinder_OrderListButton_OnClick(self);
                     </OnClick>
                 </Scripts>
             </Button>
-            <Button name="LFM_GroupFinder_CollapseAllButton" hidden="false" inherits="LFM_GroupFinder_TitleBtn" text="ALL">
+            <Button name="Dung_GroupFinder_CollapseAllButton" hidden="false" inherits="Dung_GroupFinder_TitleBtn" text="ALL">
                 <Size>
                     <AbsDimension x="40" y="40"/>
                 </Size>
@@ -268,7 +266,7 @@
                 </Anchors>
                 <Layers>
                     <Layer level="BACKGROUND">
-                        <Texture name="LFM_GroupFinder_CollapseAllButtonTabLeft" file="Interface\QuestFrame\UI-QuestLogSortTab-Left">
+                        <Texture name="Dung_GroupFinder_CollapseAllButtonTabLeft" file="Interface\QuestFrame\UI-QuestLogSortTab-Left">
                             <Size>
                                 <AbsDimension x="8" y="44"/>
                             </Size>
@@ -280,12 +278,12 @@
                                 </Anchor>
                             </Anchors>
                         </Texture>
-                        <Texture name="LFM_GroupFinder_CollapseAllButtonTabMiddle" file="Interface\QuestFrame\UI-QuestLogSortTab-Middle">
+                        <Texture name="Dung_GroupFinder_CollapseAllButtonTabMiddle" file="Interface\QuestFrame\UI-QuestLogSortTab-Middle">
                             <Size>
                                 <AbsDimension x="38" y="44"/>
                             </Size>
                             <Anchors>
-                                <Anchor point="LEFT" relativeTo="LFM_GroupFinder_CollapseAllButtonTabLeft" relativePoint="RIGHT">
+                                <Anchor point="LEFT" relativeTo="Dung_GroupFinder_CollapseAllButtonTabLeft" relativePoint="RIGHT">
                                     <Offset>
                                         <AbsDimension x="0" y="0"/>
                                     </Offset>
@@ -297,18 +295,18 @@
                                 <AbsDimension x="8" y="44"/>
                             </Size>
                             <Anchors>
-                                <Anchor point="LEFT" relativeTo="LFM_GroupFinder_CollapseAllButtonTabMiddle" relativePoint="RIGHT"/>
+                                <Anchor point="LEFT" relativeTo="Dung_GroupFinder_CollapseAllButtonTabMiddle" relativePoint="RIGHT"/>
                             </Anchors>
                         </Texture>
                     </Layer>
                 </Layers>
                 <Scripts>
                     <OnClick>
-                        LFM_GroupFinder_ToggleAllCollapsed(self);
+                        Dung_GroupFinder_ToggleAllCollapsed(self);
                     </OnClick>
                 </Scripts>
             </Button>
-			<CheckButton name="LFM_GroupFinder_ShowNormal" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="1">
+			<CheckButton name="Dung_GroupFinder_ShowNormal" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="1">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
@@ -335,13 +333,13 @@
                     </Anchors>
                     <Scripts>
                         <OnClick>
-                            LFM_GroupFinder_ToggleType($parent);
+                            Dung_GroupFinder_ToggleType($parent);
                         </OnClick>
                     </Scripts>
 
                 </ButtonText>
 				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_Frame">
+					<Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_Frame">
 						<Offset>
 							<AbsDimension x="11" y="3"/>
 						</Offset>
@@ -349,16 +347,16 @@
 				</Anchors>
                 <Scripts>
                     <OnClick>
-                        LFM_GroupFinder_ToggleType(self);
+                        Dung_GroupFinder_ToggleType(self);
                     </OnClick>
 				</Scripts>
 			</CheckButton>
-			<CheckButton name="LFM_GroupFinder_ShowHeroic" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="2">
+			<CheckButton name="Dung_GroupFinder_ShowHeroic" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="2">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="RIGHT" relativeTo="LFM_GroupFinder_ShowNormal">
+                    <Anchor point="RIGHT" relativeTo="Dung_GroupFinder_ShowNormal">
                         <Offset>
                             <AbsDimension x="50" y="0"/>
                         </Offset>
@@ -380,7 +378,7 @@
                     </Anchors>
                 </ButtonText>
 				<Anchors>
-					<Anchor point="LEFT" relativeTo="LFM_GroupFinder_ShowNormal" relativePoint="RIGHT">
+					<Anchor point="LEFT" relativeTo="Dung_GroupFinder_ShowNormal" relativePoint="RIGHT">
 						<Offset>
 							<AbsDimension x="7" y="0"/>
 						</Offset>
@@ -388,16 +386,16 @@
 				</Anchors>
                 <Scripts>
                     <OnClick>
-                        LFM_GroupFinder_ToggleType(self);
+                        Dung_GroupFinder_ToggleType(self);
                     </OnClick>
 				</Scripts>
 			</CheckButton>
-            <CheckButton name="LFM_GroupFinder_ShowRaid" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="999991">
+            <CheckButton name="Dung_GroupFinder_ShowRaid" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="999991">
                 <Size>
                     <AbsDimension x="20" y="20"/>
                 </Size>
                 <Anchors>
-                    <Anchor point="RIGHT" relativeTo="LFM_GroupFinder_ShowHeroic">
+                    <Anchor point="RIGHT" relativeTo="Dung_GroupFinder_ShowHeroic">
                         <Offset>
                             <AbsDimension x="50" y="0"/>
                         </Offset>
@@ -419,7 +417,7 @@
                     </Anchors>
                 </ButtonText>
 				<Anchors>
-					<Anchor point="LEFT" relativeTo="LFM_GroupFinder_ShowNormal" relativePoint="RIGHT">
+					<Anchor point="LEFT" relativeTo="Dung_GroupFinder_ShowNormal" relativePoint="RIGHT">
 						<Offset>
 							<AbsDimension x="7" y="0"/>
 						</Offset>
@@ -427,16 +425,16 @@
 				</Anchors>
                 <Scripts>
                     <OnClick>
-                        LFM_GroupFinder_ToggleType(self);
+                        Dung_GroupFinder_ToggleType(self);
                     </OnClick>
 				</Scripts>
 			</CheckButton>
-<!--            <CheckButton name="LFM_GroupFinder_ShowTank" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="1">-->
+<!--            <CheckButton name="Dung_GroupFinder_ShowTank" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="1">-->
 <!--                <Size>-->
 <!--                    <AbsDimension x="20" y="20"/>-->
 <!--                </Size>-->
 <!--                <Anchors>-->
-<!--                    <Anchor point="RIGHT" relativeTo="LFM_GroupFinder_ShowRaid">-->
+<!--                    <Anchor point="RIGHT" relativeTo="Dung_GroupFinder_ShowRaid">-->
 <!--                        <Offset>-->
 <!--                            <AbsDimension x="90" y="0"/>-->
 <!--                        </Offset>-->
@@ -458,7 +456,7 @@
 <!--                    </Anchors>-->
 <!--                </ButtonText>-->
 <!--				<Anchors>-->
-<!--					<Anchor point="LEFT" relativeTo="LFM_GroupFinder_ShowNormal" relativePoint="RIGHT">-->
+<!--					<Anchor point="LEFT" relativeTo="Dung_GroupFinder_ShowNormal" relativePoint="RIGHT">-->
 <!--						<Offset>-->
 <!--							<AbsDimension x="7" y="0"/>-->
 <!--						</Offset>-->
@@ -470,12 +468,12 @@
 <!--                    </OnClick>-->
 <!--				</Scripts>-->
 <!--			</CheckButton>-->
-<!--            <CheckButton name="LFM_GroupFinder_ShowHeals" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="2">-->
+<!--            <CheckButton name="Dung_GroupFinder_ShowHeals" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="2">-->
 <!--                <Size>-->
 <!--                    <AbsDimension x="20" y="20"/>-->
 <!--                </Size>-->
 <!--                <Anchors>-->
-<!--                    <Anchor point="RIGHT" relativeTo="LFM_GroupFinder_ShowTank">-->
+<!--                    <Anchor point="RIGHT" relativeTo="Dung_GroupFinder_ShowTank">-->
 <!--                        <Offset>-->
 <!--                            <AbsDimension x="60" y="0"/>-->
 <!--                        </Offset>-->
@@ -497,7 +495,7 @@
 <!--                    </Anchors>-->
 <!--                </ButtonText>-->
 <!--				<Anchors>-->
-<!--					<Anchor point="LEFT" relativeTo="LFM_GroupFinder_ShowNormal" relativePoint="RIGHT">-->
+<!--					<Anchor point="LEFT" relativeTo="Dung_GroupFinder_ShowNormal" relativePoint="RIGHT">-->
 <!--						<Offset>-->
 <!--							<AbsDimension x="7" y="0"/>-->
 <!--						</Offset>-->
@@ -509,12 +507,12 @@
 <!--                    </OnClick>-->
 <!--				</Scripts>-->
 <!--			</CheckButton>-->
-<!--            <CheckButton name="LFM_GroupFinder_ShowDPS" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="3">-->
+<!--            <CheckButton name="Dung_GroupFinder_ShowDPS" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="3">-->
 <!--                <Size>-->
 <!--                    <AbsDimension x="20" y="20"/>-->
 <!--                </Size>-->
 <!--                <Anchors>-->
-<!--                    <Anchor point="RIGHT" relativeTo="LFM_GroupFinder_ShowHeals">-->
+<!--                    <Anchor point="RIGHT" relativeTo="Dung_GroupFinder_ShowHeals">-->
 <!--                        <Offset>-->
 <!--                            <AbsDimension x="60" y="0"/>-->
 <!--                        </Offset>-->
@@ -536,7 +534,7 @@
 <!--                    </Anchors>-->
 <!--                </ButtonText>-->
 <!--				<Anchors>-->
-<!--					<Anchor point="LEFT" relativeTo="LFM_GroupFinder_ShowNormal" relativePoint="RIGHT">-->
+<!--					<Anchor point="LEFT" relativeTo="Dung_GroupFinder_ShowNormal" relativePoint="RIGHT">-->
 <!--						<Offset>-->
 <!--							<AbsDimension x="7" y="0"/>-->
 <!--						</Offset>-->
@@ -548,9 +546,9 @@
 <!--                    </OnClick>-->
 <!--				</Scripts>-->
 <!--			</CheckButton>-->
-<!--            <EditBox hidden="false" name="LFM_GroupFinder_FrameFilterInput" autofocus="false" inherits="InsetFrameTemplate">-->
+<!--            <EditBox hidden="false" name="Dung_GroupFinder_FrameFilterInput" autofocus="false" inherits="InsetFrameTemplate">-->
 <!--                <Size x="296" y="20"/>-->
-<!--                <Anchors relative="LFM_GroupFinder_Frame">-->
+<!--                <Anchors relative="Dung_GroupFinder_Frame">-->
 <!--                    <Anchor point="BOTTOMLEFT" x="8" y="5"/>-->
 <!--                </Anchors>-->
 <!--                <Scripts>-->
@@ -558,20 +556,20 @@
 <!--                        self:ClearFocus();-->
 <!--                    </OnEscapePressed>-->
 <!--                    <OnEnterPressed>-->
-<!--                        LFM_GroupFinder_FrameFilterInput_TextChange(self);-->
+<!--                        Dung_GroupFinder_FrameFilterInput_TextChange(self);-->
 <!--                    </OnEnterPressed>-->
 <!--                    <OnTextChanged>-->
-<!--                        LFM_GroupFinder_FrameFilterInput_TextChange(self);-->
+<!--                        Dung_GroupFinder_FrameFilterInput_TextChange(self);-->
 <!--                    </OnTextChanged>-->
 <!--                </Scripts>-->
 <!--                <FontString inherits="ChatFontNormal"/>-->
 <!--            </EditBox>-->
-            <ScrollFrame name="LFM_GroupFinder_ScrollFrame" inherits="FauxScrollFrameTemplateLight">
+            <ScrollFrame name="Dung_GroupFinder_ScrollFrame" inherits="FauxScrollFrameTemplateLight">
 				<Size>
 					<AbsDimension x="564" y="305"/>
 				</Size>
 				<Anchors>
-					<Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_Frame">
+					<Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_Frame">
 						<Offset>
 							<AbsDimension x="4" y="-65"/>
 						</Offset>
@@ -579,230 +577,230 @@
 				</Anchors>
 				<Scripts>
 					<OnVerticalScroll>
-						FauxScrollFrame_OnVerticalScroll(self, offset, QUESTLOG_QUEST_HEIGHT, LFM_GroupFinder_BigBoyUpdate);
+						FauxScrollFrame_OnVerticalScroll(self, offset, QUESTLOG_QUEST_HEIGHT, Dung_GroupFinder_BigBoyUpdate);
 					</OnVerticalScroll>
 				</Scripts>
 			</ScrollFrame>
 
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle1" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn" id="1">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle1" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn" id="1">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrame">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrame">
                         <Offset>
                             <AbsDimension x="4" y="0"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle2" id="2" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle2" id="2" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle1" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle1" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle3" id="3" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle3" id="3" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle2" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle2" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle4" id="4" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle4" id="4" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle3" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle3" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle5" id="5" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle5" id="5" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle4" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle4" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle6" id="6" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle6" id="6" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle5" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle5" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle7" id="7" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle7" id="7" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle6" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle6" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle8" id="8" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle8" id="8" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle7" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle7" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle9" id="9" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle9" id="9" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle8" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle8" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle10" id="10" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle10" id="10" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle9" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle9" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle11" id="11" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle11" id="11" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle10" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle10" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle12" id="12" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle12" id="12" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle11" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle11" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle13" id="13" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle13" id="13" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle12" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle12" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle14" id="14" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle14" id="14" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle13" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle13" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle15" id="15" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle15" id="15" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle14" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle14" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle16" id="16" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle16" id="16" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle15" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle15" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle17" id="17" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle17" id="17" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle16" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle16" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle18" id="18" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle18" id="18" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle17" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle17" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle19" id="19" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle19" id="19" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle18" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle18" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle20" id="20" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle20" id="20" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle19" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle19" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="LFM_GroupFinder_ScrollFrameChildTitle21" id="21" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+            <Button name="Dung_GroupFinder_ScrollFrameChildTitle21" id="21" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle20" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle20" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-                        <Button name="LFM_GroupFinder_ScrollFrameChildTitle22" id="22" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                        <Button name="Dung_GroupFinder_ScrollFrameChildTitle22" id="22" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle21" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle21" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-                        <Button name="LFM_GroupFinder_ScrollFrameChildTitle23" id="23" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                        <Button name="Dung_GroupFinder_ScrollFrameChildTitle23" id="23" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle22" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle22" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-                        <Button name="LFM_GroupFinder_ScrollFrameChildTitle24" id="24" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                        <Button name="Dung_GroupFinder_ScrollFrameChildTitle24" id="24" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle23" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle23" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
             </Button>
-                        <Button name="LFM_GroupFinder_ScrollFrameChildTitle25" id="25" hidden="true" text="Instance" inherits="LFM_GroupFinder_TitleBtn">
+                        <Button name="Dung_GroupFinder_ScrollFrameChildTitle25" id="25" hidden="true" text="Instance" inherits="Dung_GroupFinder_TitleBtn">
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="LFM_GroupFinder_ScrollFrameChildTitle24" relativePoint="BOTTOMLEFT">
+                    <Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_ScrollFrameChildTitle24" relativePoint="BOTTOMLEFT">
                         <Offset>
                             <AbsDimension x="0" y="1"/>
                         </Offset>
