@@ -1,4 +1,4 @@
-local _, LFM_GroupFinder = ...
+local _, Dung = ...
 
 local Post = {
     ---@type string
@@ -29,10 +29,10 @@ local Post = {
     hide_buffer = 0;
 }
 Post.__index = Post;
-LFM_GroupFinder.Entities.Post = Post;
+Dung.Entities.Post = Post;
 
-local Difficulty = LFM_GroupFinder:GetModel('InstanceDifficulty')
-local Roles = LFM_GroupFinder:GetModel('RoleType');
+local Difficulty = Dung:GetModel('InstanceDifficulty')
+local Roles = Dung:GetModel('RoleType');
 
 ---Gets the post guid
 ---@return string
@@ -95,19 +95,19 @@ end
 ---- Gets if the post requires a tank role
 ---@return boolean
 function Post:NeedsTank()
-    return LFM_GroupFinder:Contains(self.roles_needed, Roles.Tank)
+    return Dung:Contains(self.roles_needed, Roles.Tank)
 end
 
 ---- Gets if the post requires a healer role
 ---@return boolean
 function Post:NeedsHeals()
-    return LFM_GroupFinder:Contains(self.roles_needed, Roles.Heals)
+    return Dung:Contains(self.roles_needed, Roles.Heals)
 end
 
 ---- Gets if the post requires a DPS role
 ---@return boolean
 function Post:NeedsDPS()
-    return LFM_GroupFinder:Contains(self.roles_needed, Roles.DPS)
+    return Dung:Contains(self.roles_needed, Roles.DPS)
 end
 
 ---- Sets the post difficulty
@@ -197,13 +197,13 @@ end
 ---@return number
 function Post:GetMaxTime()
     if self:GetInstance():IsRaid() then
-        return LFM_GroupFinder.TIME_POST_ALIVE_RAID
+        return Dung.TIME_POST_ALIVE_RAID
     else -- IS DUNGEON
         if self:IsHeroic() then
-            return LFM_GroupFinder.TIME_POST_ALIVE_DUNGEON_H
+            return Dung.TIME_POST_ALIVE_DUNGEON_H
         end
     end
-    return LFM_GroupFinder.TIME_POST_ALIVE
+    return Dung.TIME_POST_ALIVE
 end
 
 ---Gets whether the post has expired or not

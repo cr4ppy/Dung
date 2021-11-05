@@ -1,6 +1,6 @@
-local _, LFM_GroupFinder = ...
+local _, Dung = ...
 
-LFM_GroupFinder.Data.HeroicKeywords = {
+Dung.Data.HeroicKeywords = {
     'H',
     'Heroic',
     '(H)',

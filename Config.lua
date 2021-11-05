@@ -1,6 +1,6 @@
-local _, LFM_GroupFinder = ...
+local _, Dung = ...
 
-LFM_GroupFinder.Config = {
+Dung.Config = {
     lang = GetLocale(),
     --locales = {
     --    enUS = {

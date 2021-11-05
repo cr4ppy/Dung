@@ -1,4 +1,4 @@
-local _, LFM_GroupFinder = ...
+local _, Dung = ...
 
 local function dump(var, ...) return DevTools_Dump(var, ...) end
 
@@ -16,21 +16,24 @@ local function dump(var, ...) return DevTools_Dump(var, ...) end
 ------misc. EXCLUDE "." FROM STRINGS
 ------misc. MAKE MESSAGE TEXT GREYISH
 
-LFM_GroupFinder.Database = LFM_GroupFinder_DB or {};
-LFM_GroupFinder.Database.Character = LFM_GroupFinder_DB_Character or {};
-LFM_GroupFinder.Tests = {};
-LFM_GroupFinder.isRunning = true;
-LFM_GroupFinder.POST_HEIGHT = 16;
-LFM_GroupFinder.MAX_HEIGHT = 400;
-LFM_GroupFinder.TIME_POST_ALIVE = 60 * 2.5; --2.5 minutes
-LFM_GroupFinder.TIME_POST_ALIVE_DUNGEON_H = 60 * 3.5; --3.5 minutes
-LFM_GroupFinder.TIME_POST_ALIVE_RAID = 60 * 6; --6 minutes
-LFM_GroupFinder.DungeonCount = 0; -- amount of dungeons we have, gets populated after they get loaded
-LFM_GroupFinder.Data = {};
-LFM_GroupFinder.Data.CollapsedStates = {};
-LFM_GroupFinder.Models = {};
-LFM_GroupFinder.Entities = {};
-LFM_GroupFinder.PostTable = {
+Dung.DB_DEFAULTS = {}
+Dung.DB_DEFAULTS_CHAR = {}
+LFM_GroupFinder_DB = LFM_GroupFinder_DB or Dung.DB_DEFAULTS
+LFM_GroupFinder_DB_Character = LFM_GroupFinder_DB_Character or Dung.DB_DEFAULTS_CHAR;
+
+Dung.Tests = {};
+Dung.isRunning = true;
+Dung.POST_HEIGHT = 16;
+Dung.MAX_HEIGHT = 400;
+Dung.TIME_POST_ALIVE = 10; --2.5 minutes
+Dung.TIME_POST_ALIVE_DUNGEON_H = 60 * 3.5; --3.5 minutes
+Dung.TIME_POST_ALIVE_RAID = 60 * 6; --6 minutes
+Dung.DungeonCount = 0; -- amount of dungeons we have, gets populated after they get loaded
+Dung.Data = {};
+Dung.Data.CollapsedStates = {};
+Dung.Models = {};
+Dung.Entities = {};
+Dung.PostTable = {
     posts = {};
     max_display_count = 25;
     display_count = 25;
@@ -97,7 +100,7 @@ LFM_GroupFinder.PostTable = {
     end,
     ---Sets the direction of the order button depending on current order
     set_order_arrow = function()
-        if not LFM_GroupFinder.PostTable.current_order then
+        if not Dung.PostTable.current_order then
             LFM_GroupFinder_OrderListButton:GetNormalTexture():SetRotation(math.pi);
         else
             LFM_GroupFinder_OrderListButton:GetNormalTexture():SetRotation(0);
@@ -110,7 +113,7 @@ LFM_GroupFinder.PostTable = {
 ---
 ---@param Post table (Post)
 ---@return void
-function LFM_GroupFinder:AddPost(Post)
+function Dung:AddPost(Post)
     table.insert(self.PostTable.posts, Post);
 
     LFM_GroupFinder_BigBoyUpdate();
@@ -121,7 +124,7 @@ end
 ---
 ---@param Post table (Post)
 ---@return boolean
-function LFM_GroupFinder:RemovePost(Post)
+function Dung:RemovePost(Post)
     for i,post in pairs(self.PostTable.posts) do
         if post == Post then
             table.remove(self.PostTable.posts, i)
@@ -136,7 +139,7 @@ end
 --- Get posts ready for the UI - orders them and returns a table of { is_header = (boolean), post = Post }
 ---
 ---@return table
-function LFM_GroupFinder:GetPostsForScrollWindow()
+function Dung:GetPostsForScrollWindow()
     if(not self.PostTable.show_raid and not self.PostTable.show_heroic and not self.PostTable.show_normal) then
         return {}
     end
@@ -196,7 +199,7 @@ end
 ---@param instance_id string
 ---@param finalList table
 ---@return number|nil
-function LFM_GroupFinder:FindDungeonHeaderIndex(instance_id, finalList)
+function Dung:FindDungeonHeaderIndex(instance_id, finalList)
     local list_item;
 
     for index in ipairs(finalList) do
@@ -213,7 +216,7 @@ end
 ---@param msg_parts string
 ---@param Instance table (Instance entity)
 ---@return boolean
-function LFM_GroupFinder:HasExcludedWords(msg_parts, Instance)
+function Dung:HasExcludedWords(msg_parts, Instance)
     for i,exclude_word in ipairs(Instance:GetExcludeWords()) do
         if self:Contains(msg_parts, exclude_word) then
             return true;
@@ -226,7 +229,7 @@ end
 ---
 ---@param msg_parts table
 ---@return boolean
-function LFM_GroupFinder:IsPostHeroic(msg_parts)
+function Dung:IsPostHeroic(msg_parts)
     for i,heroic_keyword in ipairs(self.Data.HeroicKeywords) do
         if  self:Contains(msg_parts, heroic_keyword) or
             self:Contains(msg_parts, heroic_keyword)
@@ -241,7 +244,7 @@ end
 ---
 ---@param post_msg string
 ---@return table
-function LFM_GroupFinder:CheckPost(post_msg)--Checks
+function Dung:CheckPost(post_msg)--Checks
     local final = {};
     local words = self:Split(self:RemoveJunkFromString(string.lower(post_msg)), ' ');
     local Difficulty = self:GetModel('InstanceDifficulty');
@@ -332,35 +335,36 @@ end
 ---
 --- Function that ticks every 5 seconds and removes posts if they've expired. + can do updates to the UI (5 delay so don't do anything big).
 ---@return void
-function LFM_GroupFinder.TickTimers()
-    local posts = LFM_GroupFinder:GetPostsForScrollWindow();
+function Dung.TickTimer()
+    local posts = Dung:GetPostsForScrollWindow();
     local post_count = #posts;
 
-    FauxScrollFrame_Update(LFM_GroupFinder_ScrollFrame, post_count, LFM_GroupFinder.PostTable.display_count, LFM_GroupFinder.POST_HEIGHT, nil, nil, nil, nil, nil, nil)
-
+    FauxScrollFrame_Update(LFM_GroupFinder_ScrollFrame, post_count, Dung.PostTable.display_count, Dung.POST_HEIGHT, nil, nil, nil, nil, nil, nil)
+    
     local btnTitleTime, index;
 
-    for i=1, LFM_GroupFinder.PostTable.display_count, 1 do
+    for i=1, Dung.PostTable.display_count, 1 do
         index = i + FauxScrollFrame_GetOffset(LFM_GroupFinder_ScrollFrame);
         btnTitleTime = _G["LFM_GroupFinder_ScrollFrameChildTitle"..i.."Time"];
 
         if (index <= post_count and not btnTitleTime.is_header) then
             local Post = posts[index].post;
-
+            dump(Post:GetLastTimeSeconds())
             if(Post:HasExpired()) then
-                LFM_GroupFinder:RemovePost(Post);
+
+                Dung:RemovePost(Post);
             else
                 local elapsed = Post:GetElapsedTime();
                 btnTitleTime:SetText(elapsed);
 
-                LFM_GroupFinder.PostTable.set_time_color(btnTitleTime, elapsed)
+                Dung.PostTable.set_time_color(btnTitleTime, elapsed)
             end
         else
             btnTitleTime:SetText('');
         end
     end
 
-	C_Timer.After(5, LFM_GroupFinder.TickTimers)
+	C_Timer.After(5, Dung.TickTimer)
 end
 
 --- Function that returns any existing Post by a players name
@@ -369,7 +373,7 @@ end
 --  todo 1. do we need to compare realm and player guid too?
 ---
 ---@return void
-function LFM_GroupFinder:GetPostForPlayer(playerName, realm, playerGuid, Instance)
+function Dung:GetPostForPlayer(playerName, realm, playerGuid, Instance)
     for i,Post in ipairs(self.PostTable.posts) do
         if Post.player.name == playerName then
             return Post;
@@ -384,7 +388,7 @@ end
 ---@param playerName string
 ---@param guid string
 ---@return void
-function LFM_GroupFinder:OnChat(msg, playerName, guid)
+function Dung:OnChat(msg, playerName, guid)
     if not self.isRunning then return false end;
 
     --limit to one post per player for now,
@@ -448,21 +452,21 @@ end
 ---@param self self
 ---@return void
 function LFM_GroupFinder_BigBoyUpdate(self)
-    local posts = LFM_GroupFinder:GetPostsForScrollWindow();
-    local Roles = LFM_GroupFinder:GetModel('RoleType');
+    local posts = Dung:GetPostsForScrollWindow();
+    local Roles = Dung:GetModel('RoleType');
     local post_count = #posts;
 
     --Get the num of posts we can display in the height of our window (minus 5 to account for the graphic space on top and bottom)
-    LFM_GroupFinder.PostTable.display_count = math.floor((LFM_GroupFinder_Frame:GetHeight() / LFM_GroupFinder.POST_HEIGHT)+0.5) -5;
+    Dung.PostTable.display_count = math.floor((LFM_GroupFinder_Frame:GetHeight() / Dung.POST_HEIGHT)+0.5) -5;
 
     --Stop display count exceeding max amount of posts
-    if(LFM_GroupFinder.PostTable.display_count > LFM_GroupFinder.PostTable.max_display_count) then
-        LFM_GroupFinder.PostTable.display_count = LFM_GroupFinder.PostTable.max_display_count;
+    if(Dung.PostTable.display_count > Dung.PostTable.max_display_count) then
+        Dung.PostTable.display_count = Dung.PostTable.max_display_count;
     end
 
     --Hide every list item before update todo: can be better or not done at all?
-    for i=1, LFM_GroupFinder.PostTable.max_display_count, 1 do
-        if(i > LFM_GroupFinder.PostTable.display_count) then
+    for i=1, Dung.PostTable.max_display_count, 1 do
+        if(i > Dung.PostTable.display_count) then
             _G["LFM_GroupFinder_ScrollFrameChildTitle"..i]:Hide();
         end
     end
@@ -472,7 +476,7 @@ function LFM_GroupFinder_BigBoyUpdate(self)
     LFM_GroupFinder_ScrollFrame:SetHeight(LFM_GroupFinder_Frame:GetHeight() - 95);
 
     --Update the scroll frame faux data (in case window has been re-sized)
-    FauxScrollFrame_Update(LFM_GroupFinder_ScrollFrame, post_count, LFM_GroupFinder.PostTable.display_count, LFM_GroupFinder.POST_HEIGHT, nil, nil, nil, nil, 0, 0 )
+    FauxScrollFrame_Update(LFM_GroupFinder_ScrollFrame, post_count, Dung.PostTable.display_count, Dung.POST_HEIGHT, nil, nil, nil, nil, 0, 0 )
 
     local btnTitle,
     btnTitleTag,
@@ -488,7 +492,7 @@ function LFM_GroupFinder_BigBoyUpdate(self)
     index;
 
     --Loop over the amount of posts we can theoretically display
-    for i=1, LFM_GroupFinder.PostTable.display_count, 1 do
+    for i=1, Dung.PostTable.display_count, 1 do
         index = i + FauxScrollFrame_GetOffset(LFM_GroupFinder_ScrollFrame);
 
         btnTitle = _G["LFM_GroupFinder_ScrollFrameChildTitle"..i];
@@ -511,7 +515,7 @@ function LFM_GroupFinder_BigBoyUpdate(self)
             local post_guid = Post:GetGuid();
             local is_raid = Post:GetInstance():IsRaid();
             local is_heroic = Post:IsHeroic();
-            btnTitle.is_collapsed = LFM_GroupFinder.Data.CollapsedStates[post_guid] == true;
+            btnTitle.is_collapsed = Dung.Data.CollapsedStates[post_guid] == true;
             btnTitle:SetWidth(LFM_GroupFinder_Frame:GetWidth());
 
             LFM_GroupFinder_ScrollFrame:SetWidth(LFM_GroupFinder_Frame:GetWidth() - 38);
@@ -566,9 +570,9 @@ function LFM_GroupFinder_BigBoyUpdate(self)
                 btnTitleNormalText:SetWidth(0);
                 btnTitleTag:SetText(Post:GetDifficultyTag());
 
-                LFM_GroupFinder.PostTable.set_time_color(btnTitleTime, Post:GetElapsedTime())
-                LFM_GroupFinder.PostTable.set_msg_length(btnTitleNormalText, Post:GetRolesNeededCount())
-                LFM_GroupFinder.PostTable.set_difficulty_tag(btnTitleTag, is_raid, is_heroic)
+                Dung.PostTable.set_time_color(btnTitleTime, Post:GetElapsedTime())
+                Dung.PostTable.set_msg_length(btnTitleNormalText, Post:GetRolesNeededCount())
+                Dung.PostTable.set_difficulty_tag(btnTitleTag, is_raid, is_heroic)
 
                 --role icons
                 local n = 1;
@@ -597,11 +601,9 @@ end
 --- Just an init function for init things (only runs once)
 ---
 ---@return void
-function LFM_GroupFinder:Run()
-
-    if not LFM_GroupFinder_DB then LFM_GroupFinder_DB = {} end
-    if not LFM_GroupFinder_DB_Character then LFM_GroupFinder_DB_Character = {} end
-
+function Dung:Run()
+    --ADDON_LOADED
+    LFM_GroupFinder_Frame:RegisterEvent("ADDON_LOADED");
     LFM_GroupFinder_Frame:RegisterEvent("CHAT_MSG_SYSTEM");
 	LFM_GroupFinder_Frame:RegisterEvent("CHAT_MSG_CHANNEL");
 	LFM_GroupFinder_Frame:RegisterEvent("CHAT_MSG_GUILD");
@@ -618,8 +620,6 @@ function LFM_GroupFinder:Run()
     resizeHandle:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up")
     resizeHandle:SetHighlightTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Highlight")
     resizeHandle:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Down")
-
-
 
     resizeHandle:SetScript("OnMouseDown", function()
         LFM_GroupFinder_Frame:StartSizing("BOTTOMRIGHT")
@@ -639,19 +639,53 @@ function LFM_GroupFinder:Run()
     LFM_GroupFinder_ShowHeroic:SetChecked(self.PostTable.show_heroic)
     LFM_GroupFinder_ShowRaid:SetChecked(self.PostTable.show_raid)
 
-    LFM_GroupFinder.PostTable:set_order_arrow();
+    Dung.PostTable:set_order_arrow();
 
     function LFM_GroupFinder_Frame:CHAT_MSG_SYSTEM(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
-        LFM_GroupFinder:OnChat(msg, playerName, guid);
+        Dung:OnChat(msg, playerName, guid);
     end
     function LFM_GroupFinder_Frame:CHAT_MSG_CHANNEL(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
-        LFM_GroupFinder:OnChat(msg, playerName, guid);
+        Dung:OnChat(msg, playerName, guid);
     end
     function LFM_GroupFinder_Frame:CHAT_MSG_GUILD(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
-        LFM_GroupFinder:OnChat(msg, playerName, guid);
+        Dung:OnChat(msg, playerName, guid);
     end
     function LFM_GroupFinder_Frame:CHAT_MSG_OFFICER(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
-        LFM_GroupFinder:OnChat(msg, playerName, guid);
+        Dung:OnChat(msg, playerName, guid);
+    end
+    function LFM_GroupFinder_Frame:ADDON_LOADED(arg1)
+        local function show()
+            SetPortraitTexture(LFM_GroupFinder_FrameIcon, "player");
+            LFM_GroupFinder_Frame:Show();
+            LFM_GroupFinder_BigBoyUpdate();
+        end
+        local function hide()
+            LFM_GroupFinder_Frame:Hide();
+        end
+
+        local function toggleShow()
+            if LFM_GroupFinder_Frame:IsVisible() then
+                hide();
+            else
+                show();
+            end
+        end
+
+        SLASH_LFM_GroupFinder_SlashDung1 = "/dung"
+        SlashCmdList["LFM_GroupFinder_SlashDung"] = function(msg)
+            if msg == 'show' then
+                show();
+                return;
+            elseif msg == 'hide' then
+                hide();
+                return;
+            elseif msg == 'reset' then
+                LFM_GroupFinder_Frame:ClearAllPoints()
+                LFM_GroupFinder_Frame:SetPoint("CENTER", 0, 0)
+                return;
+            end
+            toggleShow();
+        end
     end
 
     local function DispatchEvent(self, event, ...)
@@ -659,46 +693,6 @@ function LFM_GroupFinder:Run()
         handlerMethod(self, ...)
     end
 
-    local function show()
-        SetPortraitTexture(LFM_GroupFinder_FrameIcon, "player");
-        LFM_GroupFinder_Frame:Show();
-        LFM_GroupFinder_BigBoyUpdate();
-    end
-    local function hide()
-        LFM_GroupFinder_Frame:Hide();
-    end
-
-    local function toggleShow()
-        if LFM_GroupFinder_Frame:IsVisible() then
-            hide();
-        else
-            show();
-        end
-    end
-
-    SLASH_LFM_GroupFinder_SlashDung1 = "/dung"
-    SlashCmdList["LFM_GroupFinder_SlashDung"] = function(msg)
-        if msg == 'show' then
-            show();
-            return;
-        elseif msg == 'hide' then
-            hide();
-            return;
-        end
-
-        toggleShow();
-    end
-
-	LFM_GroupFinder.MinimapButton.Init(LFM_GroupFinder.Database, "Interface\\ICONS\\inv_misc_head_dragon_green", function(self, btn)
-        if btn == "LeftButton" then
-            toggleShow();
-        else
-
-        end
-    end)
-
-
+    Dung.TickTimer();
     LFM_GroupFinder_Frame:SetScript("OnEvent", DispatchEvent);
-    --LFM_GroupFinder_Frame:Show();
-    self:TickTimers();
 end

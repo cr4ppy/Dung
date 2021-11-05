@@ -1,13 +1,13 @@
-local _, LFM_GroupFinder = ...
+local _, Dung = ...
 
-local GroupType = LFM_GroupFinder:GetModel('GroupType');
-local Difficulty = LFM_GroupFinder:GetModel('InstanceDifficulty');
-local Instance = LFM_GroupFinder:GetEntity('Instance');
+local GroupType = Dung:GetModel('GroupType');
+local Difficulty = Dung:GetModel('InstanceDifficulty');
+local Instance = Dung:GetEntity('Instance');
 
 ---
 ---Decided to put these in an array... bite me
 ---
-LFM_GroupFinder.Data.Instances = {
+Dung.Data.Instances = {
     -----------------------------------------------------------------------------------------------
     -----------------------------------------------------------------------------------------------
     --- CLASSIC ERA DUNGEONS ----------------------------------------------------------------------
@@ -816,4 +816,4 @@ LFM_GroupFinder.Data.Instances = {
     }),
 }
 
-LFM_GroupFinder.DungeonCount = #LFM_GroupFinder.Data.Instances;
+Dung.DungeonCount = #Dung.Data.Instances;

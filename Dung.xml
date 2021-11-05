@@ -176,7 +176,7 @@
 	</Button>
 
     <Frame name="LFM_GroupFinder_Frame" movable="true" parent="UIParent" inherits="ButtonFrameTemplate" hidden="true" enableMouse="true">
-        <Size x="600" y="350"/>
+        <Size x="380" y="430"/>
         <Layers>
             <Layer level="OVERLAY" textureSubLevel="-2">
 				<Texture name="$parentIcon" file="Interface\Icons\inv_misc_head_dragon_green">
@@ -202,7 +202,7 @@
             </Layer>
         </Layers>
         <Anchors>
-            <Anchor point="LEFT" x="30" y="0"/>
+            <Anchor point="LEFT" x="20" y="97"/>
         </Anchors>
         <Scripts>
          <OnMouseDown>
@@ -218,10 +218,10 @@
           end
          </OnMouseUp>
          <OnHide>
-<!--          if ( this.isMoving ) then-->
-<!--           this:StopMovingOrSizing();-->
-<!--           this.isMoving = false;-->
-<!--          end-->
+          if ( self.isMoving ) then
+           self:StopMovingOrSizing();
+           self.isMoving = false;
+          end
          </OnHide>
         </Scripts>
 

@@ -1,8 +1,8 @@
-local _, LFM_GroupFinder = ...
+local _, Dung = ...
 
-local Roles = LFM_GroupFinder:GetModel('RoleType')
+local Roles = Dung:GetModel('RoleType')
 
-LFM_GroupFinder.Data.RoleKeywords = {
+Dung.Data.RoleKeywords = {
     [Roles.Tank] = {'tank', 'tanks', 'offtank', 'off tank', 'main tank'};
     [Roles.Heals] = {'heals', 'healer', 'heal'},
     [Roles.DPS] = {'dps', 'deeps'},

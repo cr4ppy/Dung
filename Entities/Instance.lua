@@ -1,10 +1,10 @@
-local _, LFM_GroupFinder = ...
+local _, Dung = ...
 
-local isNotTable = LFM_GroupFinder.AssertTable;
-local isNotNumber = LFM_GroupFinder.AssertNumber;
-local isNotString = LFM_GroupFinder.AssertString;
-local Difficulty = LFM_GroupFinder:GetModel('InstanceDifficulty');
-local GroupType = LFM_GroupFinder:GetModel('GroupType');
+local isNotTable = Dung.AssertTable;
+local isNotNumber = Dung.AssertNumber;
+local isNotString = Dung.AssertString;
+local Difficulty = Dung:GetModel('InstanceDifficulty');
+local GroupType = Dung:GetModel('GroupType');
 
 local Instance = {
     ---@type string
@@ -38,7 +38,7 @@ local Instance = {
     --meta_data = {};
 }
 Instance.__index = Instance
-LFM_GroupFinder.Entities.Instance = Instance;
+Dung.Entities.Instance = Instance;
 
 ---Gets the instance description
 ---@return string

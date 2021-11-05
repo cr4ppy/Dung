@@ -1,4 +1,4 @@
-local _, LFM_GroupFinder = ...
+local _, Dung = ...
 
 local Player = {
     ---@type string
@@ -20,7 +20,7 @@ local Player = {
     realm = GetRealmName();
 }
 Player.__index = Player
-LFM_GroupFinder.Entities.Player = Player;
+Dung.Entities.Player = Player;
 
 ---Sets the player name
 ---@param name number

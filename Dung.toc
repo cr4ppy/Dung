@@ -5,18 +5,13 @@
 ## SavedVariablesPerCharacter: LFM_GroupFinder_DB_Character
 ## Version: 1.0
 
-## Mini map icon
-LibGPIOptions.lua
-LibGPIMinimapButton.lua
-LibGPIToolBox.lua
-
 ## Config
 ##Config.lua
 locales.lua
 
 ## Base Name Space
-LFM.lua
-LFM.xml
+Dung.lua
+Dung.xml
 Events.lua
 
 ## Helpers

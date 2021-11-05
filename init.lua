@@ -1,7 +1,7 @@
-local _, LFM_GroupFinder = ...
+local _, Dung = ...
 
-LFM_GroupFinder:Run();
-LFM_GroupFinder:RunFixtures();
+Dung:Run();
+Dung:RunFixtures();
 
 
 

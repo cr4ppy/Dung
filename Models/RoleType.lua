@@ -1,6 +1,6 @@
-local _, LFM_GroupFinder = ...
+local _, Dung = ...
 
-local RoleType = LFM_GroupFinder.Models:CreateModel('RoleType', {
+local RoleType = Dung.Models:CreateModel('RoleType', {
     ---@type number
     Tank = 1;
 

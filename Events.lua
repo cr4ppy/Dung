@@ -1,4 +1,4 @@
-local _, LFM_GroupFinder = ...
+local _, Dung = ...
 
 local function dump(var, ...) return DevTools_Dump(var, ...) end
 
@@ -66,10 +66,10 @@ function LFM_GroupFinder_OnPostClick(self)
 
     if(self.is_header) then
         if(self.is_collapsed == true) then
-            LFM_GroupFinder.Data.CollapsedStates[instance_guid] = nil;
+            Dung.Data.CollapsedStates[instance_guid] = nil;
             self.is_collapsed = false;
         else
-            LFM_GroupFinder.Data.CollapsedStates[instance_guid] = true;
+            Dung.Data.CollapsedStates[instance_guid] = true;
             self.is_collapsed = true;
         end
         LFM_GroupFinder_BigBoyUpdate();
@@ -104,22 +104,22 @@ end
 -----@param self self
 -----@return void
 function LFM_GroupFinder_ToggleAllCollapsed(self)
-    LFM_GroupFinder.PostTable.toggle_hide_all = not LFM_GroupFinder.PostTable.toggle_hide_all --toggle, true = false and false = true
+    Dung.PostTable.toggle_hide_all = not Dung.PostTable.toggle_hide_all --toggle, true = false and false = true
 
-    if(LFM_GroupFinder.PostTable.toggle_hide_all) then
+    if(Dung.PostTable.toggle_hide_all) then
         local Instance;
         local difficulties;
 
-        for i=1, LFM_GroupFinder.DungeonCount do
-            Instance = LFM_GroupFinder.Data.Instances[i];
+        for i=1, Dung.DungeonCount do
+            Instance = Dung.Data.Instances[i];
             difficulties = Instance:GetAvailableDifficulties();
 
             for j=1, #difficulties do
-                LFM_GroupFinder.Data.CollapsedStates[Instance:GetId().. '_' .. difficulties[j]] = true;
+                Dung.Data.CollapsedStates[Instance:GetId().. '_' .. difficulties[j]] = true;
             end
         end
     else
-        LFM_GroupFinder.Data.CollapsedStates = {};
+        Dung.Data.CollapsedStates = {};
     end
 
     LFM_GroupFinder_BigBoyUpdate();
@@ -130,17 +130,17 @@ end
 -----@param self self
 -----@return void
 function LFM_GroupFinder_ToggleType(self)
-    local Difficulty = LFM_GroupFinder:GetModel('InstanceDifficulty');
-    local GroupType = LFM_GroupFinder:GetModel('GroupType');
+    local Difficulty = Dung:GetModel('InstanceDifficulty');
+    local GroupType = Dung:GetModel('GroupType');
 
     if self:GetID() == Difficulty.Normal then
-        LFM_GroupFinder.PostTable.show_normal = not LFM_GroupFinder.PostTable.show_normal;
+        Dung.PostTable.show_normal = not Dung.PostTable.show_normal;
     end
     if self:GetID() == Difficulty.Heroic then
-        LFM_GroupFinder.PostTable.show_heroic = not LFM_GroupFinder.PostTable.show_heroic;
+        Dung.PostTable.show_heroic = not Dung.PostTable.show_heroic;
     end
     if self:GetID() == GroupType.Raid then
-        LFM_GroupFinder.PostTable.show_raid = not LFM_GroupFinder.PostTable.show_raid;
+        Dung.PostTable.show_raid = not Dung.PostTable.show_raid;
     end
 
     LFM_GroupFinder_BigBoyUpdate();
@@ -151,8 +151,8 @@ end
 -----@param self self
 -----@return void
 function LFM_GroupFinder_OrderListButton_OnClick(self)
-    LFM_GroupFinder.PostTable.current_order = not LFM_GroupFinder.PostTable.current_order;
-    LFM_GroupFinder.PostTable:set_order_arrow();
+    Dung.PostTable.current_order = not Dung.PostTable.current_order;
+    Dung.PostTable:set_order_arrow();
 
     LFM_GroupFinder_BigBoyUpdate();
 end

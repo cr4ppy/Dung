@@ -1,8 +1,8 @@
 local function dump(var, ...) return DevTools_Dump(var, ...) end
 
-local _, LFM_GroupFinder = ...
+local _, Dung = ...
 
-function LFM_GroupFinder:RunFixtures(stop)
+function Dung:RunFixtures(stop)
     local name = 'Hippo';
     --local guid_name = UnitName("player")..'-'..GetRealmName();
 
@@ -14,24 +14,24 @@ function LFM_GroupFinder:RunFixtures(stop)
     --    if i == 5 then
     --        name = 'Wfleldo'
     --    end
-    --    LFM_GroupFinder:OnChat(dummy_msg, name..i..'-'..GetRealmName(), nil)
+    --    Dung:OnChat(dummy_msg, name..i..'-'..GetRealmName(), nil)
     --end
     --
 
-    LFM_GroupFinder:OnChat('SLAVE PENS ', 'Bilbo'..'-'..GetRealmName(), nil)
-    LFM_GroupFinder:OnChat('SP PENS H', 'Bilbod'..'-'..GetRealmName(), nil)
-    LFM_GroupFinder:OnChat('karas heals tank dps ed ', 'wefw'..'-'..GetRealmName(), nil)
-    LFM_GroupFinder:OnChat(' {star}LF2M Sethekk (n) Need healer+dps{star} farming first boss. ', 'wefd'..'-'..GetRealmName(), nil)
+    --Dung:OnChat('SLAVE PENS ', 'Bilbo'..'-'..GetRealmName(), nil)
+    --Dung:OnChat('SP PENS H', 'Bilbod'..'-'..GetRealmName(), nil)
+    --Dung:OnChat('karas heals tank dps ed ', 'wefw'..'-'..GetRealmName(), nil)
+    --Dung:OnChat(' {star}LF2M Sethekk (n) Need healer+dps{star} farming first boss. ', 'wefd'..'-'..GetRealmName(), nil)
     --'LFM AC (N) NEED TANK/DPS POST'
     --'DPS LFG ARCATRAZ / SV / SL'
-    --LFM_GroupFinder:OnChat('healer lfg slabs / honor hold rep farm', 'Wfleldosoerr', nil)
-    --LFM_GroupFinder:OnChat('slabs (H)!! lfg / honor hold rep farm honor hold rep farm honor hold rep farm honor hold rep farm', 'Oakee', nil)
-    --LFM_GroupFinder:OnChat('karas heals tank dps ed', 'Donkey', nil)
-    --LFM_GroupFinder:OnChat('dps lfg slabs / honor hold rep farm', 'Donkey', nil)
-    --LFM_GroupFinder:OnChat('{star}LF2M Sethekk (n) Need healer+dps{star} farming first boss.', 'Donkey', nil)
-    --LFM_GroupFinder:OnChat('', 'Donkey', nil)
+    --Dung:OnChat('healer lfg slabs / honor hold rep farm', 'Wfleldosoerr', nil)
+    --Dung:OnChat('slabs (H)!! lfg / honor hold rep farm honor hold rep farm honor hold rep farm honor hold rep farm', 'Oakee', nil)
+    --Dung:OnChat('karas heals tank dps ed', 'Donkey', nil)
+    --Dung:OnChat('dps lfg slabs / honor hold rep farm', 'Donkey', nil)
+    --Dung:OnChat('{star}LF2M Sethekk (n) Need healer+dps{star} farming first boss.', 'Donkey', nil)
+    --Dung:OnChat('', 'Donkey', nil)
 
     --dump(string.gsub("{star}DPS{star}",'{star}', ""));
-    --LFM_GroupFinder_Frame:Show();
-    --LFM_GroupFinder.isRunning = false;
+    --Dung:Show();
+    --Dung.isRunning = false;
 end

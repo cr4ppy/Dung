@@ -1,26 +1,26 @@
-local _, LFM_GroupFinder = ...
+local _, Dung = ...
 
 --Base Model we inherit from
-LFM_GroupFinder.Models.Model = {
+Dung.Models.Model = {
     name = '!defaultModel!';
     labels = {};
 }
 
 --Get the name of the current model you're working with.
-function LFM_GroupFinder.Models.Model:GetName()
+function Dung.Models.Model:GetName()
     return self.name
 end
-function LFM_GroupFinder.Models.Model:SetName(name)
+function Dung.Models.Model:SetName(name)
     self.name = name
     return self
 end
 
 --Create a new Model
-function LFM_GroupFinder.Models:CreateModel(name, o)
-    setmetatable(o, {__index = LFM_GroupFinder.Models.Model});
+function Dung.Models:CreateModel(name, o)
+    setmetatable(o, {__index = Dung.Models.Model});
     o.name = name;
-    self.__index = LFM_GroupFinder.Models.Model;
-    LFM_GroupFinder.Models[name] = o;
+    self.__index = Dung.Models.Model;
+    Dung.Models[name] = o;
     self.name = name;
     return o
 end

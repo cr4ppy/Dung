@@ -1,6 +1,6 @@
-local _, LFM_GroupFinder = ...
+local _, Dung = ...
 
-local InstanceDifficulty = LFM_GroupFinder.Models:CreateModel('InstanceDifficulty', {
+local InstanceDifficulty = Dung.Models:CreateModel('InstanceDifficulty', {
     ---@type number
     Normal = 1;
 

@@ -1,6 +1,6 @@
-local _, LFM_GroupFinder = ...
+local _, Dung = ...
 
-local GroupType = LFM_GroupFinder.Models:CreateModel('GroupType', {
+local GroupType = Dung.Models:CreateModel('GroupType', {
     ---@type number
     Dungeon = 999990;
 
