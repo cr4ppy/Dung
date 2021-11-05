@@ -7,38 +7,7 @@ local _, Dung = ...
 ---@param str string
 ---@return string
 function Dung:RemoveJunkFromString(str)
-    --all strings dealt with here are lowercase - i'm new to lua, i don't know if there's a cleaner way to do this, regex the brackets? {}
-    str = str.gsub(str,'{star}', " ")
-    str = str.gsub(str,'{circle}', " ")
-    str = str.gsub(str,'{coin}', " ")
-    str = str.gsub(str,'{diamond}', " ")
-    str = str.gsub(str,'{triangle}', " ")
-    str = str.gsub(str,'{moon}', " ")
-    str = str.gsub(str,'{square}', " ")
-    str = str.gsub(str,'{cross}', " ")
-    str = str.gsub(str,'{skull}', " ")
-    str = str.gsub(str,'{x}', " ")
-    str = str.gsub(str,'{rt8}', " ")
-    str = str.gsub(str,'{rt7}', " ")
-    str = str.gsub(str,'{rt6}', " ")
-    str = str.gsub(str,'{rt5}', " ")
-    str = str.gsub(str,'{rt4}', " ")
-    str = str.gsub(str,'{rt3}', " ")
-    str = str.gsub(str,'{rt2}', " ")
-    str = str.gsub(str,'{rt1}', " ")
-    --str = str.gsub(str, '.', ' '); todo: this breaks, needs debugging
-    str = str.gsub(str, '+', ' ');
-    str = str.gsub(str, '*', ' ');
-    str = str.gsub(str, '_', ' ');
-    str = str.gsub(str, '|', ' ');
-    str = str.gsub(str, '`', ' ');
-    str = str.gsub(str, '!', ' ');
-    str = str.gsub(str, '-', ' ');
-    str = str.gsub(str, '/', ' ');
-    str = str.gsub(str, '\\', ' ');
-    str = str.gsub(str, ',', ' ');
-    str = str.gsub(str, '  ', ' ');
-    return str
+    return string.gsub(str, "[^A-Za-z0-9]", ' ')
 end
 
 ---
@@ -85,6 +54,8 @@ function Dung:Split(str, sep)
     end
     return result
 end
+
+
 ---
 ---JOIN TABLE INTO STR
 ---
