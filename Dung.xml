@@ -464,7 +464,7 @@
 <!--				</Anchors>-->
 <!--                <Scripts>-->
 <!--                    <OnClick>-->
-<!--                        LFM_GroupFinder:ToggleRole(self);-->
+<!--                        Dung:ToggleRole(self);-->
 <!--                    </OnClick>-->
 <!--				</Scripts>-->
 <!--			</CheckButton>-->
@@ -503,7 +503,7 @@
 <!--				</Anchors>-->
 <!--                <Scripts>-->
 <!--                    <OnClick>-->
-<!--                        LFM_GroupFinder:ToggleRole(self);-->
+<!--                        Dung:ToggleRole(self);-->
 <!--                    </OnClick>-->
 <!--				</Scripts>-->
 <!--			</CheckButton>-->
@@ -542,7 +542,7 @@
 <!--				</Anchors>-->
 <!--                <Scripts>-->
 <!--                    <OnClick>-->
-<!--                        LFM_GroupFinder:ToggleRole(self);-->
+<!--                        Dung:ToggleRole(self);-->
 <!--                    </OnClick>-->
 <!--				</Scripts>-->
 <!--			</CheckButton>-->

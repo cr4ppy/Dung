@@ -85,6 +85,12 @@ function Dung:Split(str, sep)
     end
     return result
 end
+---
+---JOIN TABLE INTO STR
+---
+--function Dung:Join(tbl)
+--
+--end
 
 ---
 ---Model + Entity class getters

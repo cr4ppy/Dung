@@ -6,12 +6,9 @@ local function dump(var, ...) return DevTools_Dump(var, ...) end
 ------1. REMOVE ALL {r3} VARIABLES FROM STRINGS BEFORE CHECKS
 ------2. ADD RECRUITING TO ALL EXCLUDES
 ------3. ADD TRADE KEYWORDS LIKE ENCHANTER/JC FOR IGNORE ON ALL
-------4. CLICK WHISPER ✔️
-------4. SLASH COMMANDS4
-------5. OPTIONS!
-------5. LOCALIZATION
-------6. FIX RAID FILTER?
-------7. SEARCH FILTER
+------5. OPTIONS! - next version 1.1
+------5. LOCALIZATION - next version 1.1
+------7. SEARCH FILTER - next version 1.1
 ------misc. REPLACE IPAIRS
 ------misc. EXCLUDE "." FROM STRINGS
 ------misc. MAKE MESSAGE TEXT GREYISH
@@ -25,7 +22,7 @@ Dung.Tests = {};
 Dung.isRunning = true;
 Dung.POST_HEIGHT = 16;
 Dung.MAX_HEIGHT = 400;
-Dung.TIME_POST_ALIVE = 10; --2.5 minutes
+Dung.TIME_POST_ALIVE = 60 * 2.5; --2.5 minutes
 Dung.TIME_POST_ALIVE_DUNGEON_H = 60 * 3.5; --3.5 minutes
 Dung.TIME_POST_ALIVE_RAID = 60 * 6; --6 minutes
 Dung.DungeonCount = 0; -- amount of dungeons we have, gets populated after they get loaded
@@ -595,30 +592,65 @@ function Dung_GroupFinder_BigBoyUpdate(self)
     end
 end
 
+function Dung:Show()
+    SetPortraitTexture(Dung_GroupFinder_FrameIcon, "player");
+    Dung_GroupFinder_Frame:Show();
+    Dung_GroupFinder_BigBoyUpdate();
+end
+function Dung:Hide()
+    Dung_GroupFinder_Frame:Hide();
+end
+function Dung:Toggle()
+    if Dung_GroupFinder_Frame:IsVisible() then
+        self:Hide()
+    else
+        self:Show()
+    end
+end
+
+
+function Dung:CreateSlashCommand()
+    SLASH_Dung_GroupFinder_SlashDung1 = "/dung"
+
+    SlashCmdList["Dung_GroupFinder_SlashDung"] = function(msg)
+        if msg == 'show' then
+            return self:Show()
+
+        elseif msg == 'hide' then
+            return self:Hide()
+
+        elseif msg == 'reset' then
+            Dung_GroupFinder_Frame:ClearAllPoints()
+            Dung_GroupFinder_Frame:SetPoint("CENTER", 0, 0)
+            return;
+        end
+
+        self:Toggle();
+    end
+end
 
 --- Just an init function for init things (only runs once)
 ---
 ---@return void
 function Dung:Run()
-    --ADDON_LOADED
     Dung_GroupFinder_Frame:RegisterEvent("ADDON_LOADED");
     Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_SYSTEM");
 	Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_CHANNEL");
 	Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_GUILD");
 	Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_OFFICER");
-    --Dung_GroupFinder_Frame:SetPoint("CENTER", 0, 0)
-    --Dung_GroupFinder_Frame:ClearAllPoints();
+
+    --set some frame limits
     Dung_GroupFinder_Frame:SetResizable(true)
     Dung_GroupFinder_Frame:SetMinResize(320, 304)
     Dung_GroupFinder_Frame:SetMaxResize(600, 460)
 
+    --create resize handle
     local resizeHandle = CreateFrame("Button", nil, Dung_GroupFinder_Frame)
     resizeHandle:SetPoint("BOTTOMRIGHT", -6, 7)
     resizeHandle:SetSize(16, 16)
     resizeHandle:SetNormalTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Up")
     resizeHandle:SetHighlightTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Highlight")
     resizeHandle:SetPushedTexture("Interface\\ChatFrame\\UI-ChatIM-SizeGrabber-Down")
-
     resizeHandle:SetScript("OnMouseDown", function()
         Dung_GroupFinder_Frame:StartSizing("BOTTOMRIGHT")
         Dung_GroupFinder_ScrollFrame:Hide()
@@ -629,15 +661,15 @@ function Dung:Run()
         Dung_GroupFinder_BigBoyUpdate()
     end)
 
+    --setting font sizes of check box labels
     Dung_GroupFinder_ShowNormalLabel:SetFont(Dung_GroupFinder_ShowNormalLabel:GetFont(), 9, nil)
     Dung_GroupFinder_ShowHeroicLabel:SetFont(Dung_GroupFinder_ShowNormalLabel:GetFont());
     Dung_GroupFinder_ShowRaidLabel:SetFont(Dung_GroupFinder_ShowNormalLabel:GetFont());
 
+    --showing/hiding check boxes on initial state data
     Dung_GroupFinder_ShowNormal:SetChecked(self.PostTable.show_normal)
     Dung_GroupFinder_ShowHeroic:SetChecked(self.PostTable.show_heroic)
     Dung_GroupFinder_ShowRaid:SetChecked(self.PostTable.show_raid)
-
-    Dung.PostTable:set_order_arrow();
 
     function Dung_GroupFinder_Frame:CHAT_MSG_SYSTEM(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
         Dung:OnChat(msg, playerName, guid);
@@ -652,38 +684,8 @@ function Dung:Run()
         Dung:OnChat(msg, playerName, guid);
     end
     function Dung_GroupFinder_Frame:ADDON_LOADED(arg1)
-        local function show()
-            SetPortraitTexture(Dung_GroupFinder_FrameIcon, "player");
-            Dung_GroupFinder_Frame:Show();
-            Dung_GroupFinder_BigBoyUpdate();
-        end
-        local function hide()
-            Dung_GroupFinder_Frame:Hide();
-        end
-
-        local function toggleShow()
-            if Dung_GroupFinder_Frame:IsVisible() then
-                hide();
-            else
-                show();
-            end
-        end
-
-        SLASH_Dung_GroupFinder_SlashDung1 = "/dung"
-        SlashCmdList["Dung_GroupFinder_SlashDung"] = function(msg)
-            if msg == 'show' then
-                show();
-                return;
-            elseif msg == 'hide' then
-                hide();
-                return;
-            elseif msg == 'reset' then
-                Dung_GroupFinder_Frame:ClearAllPoints()
-                Dung_GroupFinder_Frame:SetPoint("CENTER", 0, 0)
-                return;
-            end
-            toggleShow();
-        end
+        Dung:CreateSlashCommand();
+        Dung.PostTable:set_order_arrow();
     end
 
     local function DispatchEvent(self, event, ...)

@@ -7,16 +7,15 @@ function Dung:RunFixtures(stop)
     --local guid_name = UnitName("player")..'-'..GetRealmName();
 
     --, ,'H ramps tank dps','ramps heals', 'zg tank', 'sp', 'dm heals', 'zg', 'ub', 'sethekk'
-    --for i,dummy_msg in ipairs({'sp H tank dps heals','sp H dps', 'dm', 'zf','ub','H ramps tank dps','ramps heals', 'zg tank', 'sp', 'dm heals', 'zg', 'ub', 'sethekk'}) do
-    --    if i == 5 then
-    --        dummy_msg = 'sp tank heals dps This music is entertaining. It put me in positive thinking. One day this pandemic going away soon where we can enjoy the outdoor without the mask and better understand our physical condition.'
-    --    end
-    --    if i == 5 then
-    --        name = 'Wfleldo'
-    --    end
-    --    Dung:OnChat(dummy_msg, name..i..'-'..GetRealmName(), nil)
-    --end
-    --
+    for i,dummy_msg in ipairs({'sp H tank dps heals','sp H dps', 'dm', 'zf','ub','H ramps tank dps','ramps heals', 'zg tank', 'sp', 'dm heals', 'zg', 'ub', 'sethekk'}) do
+        if i == 5 then
+            dummy_msg = 'sp tank heals dps This music is entertaining. It put me in positive thinking. One day this pandemic going away soon where we can enjoy the outdoor without the mask and better understand our physical condition.'
+        end
+        if i == 5 then
+            name = 'Wfleldo'
+        end
+        Dung:OnChat(dummy_msg, name..i..'-'..GetRealmName(), nil)
+    end
 
     --Dung:OnChat('SLAVE PENS ', 'Bilbo'..'-'..GetRealmName(), nil)
     --Dung:OnChat('SP PENS H', 'Bilbod'..'-'..GetRealmName(), nil)

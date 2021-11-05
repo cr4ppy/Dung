@@ -15,7 +15,7 @@ function Dung_GroupFinder_OnPostHover(self)
 
     --show tool tip
     if self.Post ~= nil and not self.is_header then
-        GameTooltip:SetOwner(self, "ANCHOR_CURSOR_RIGHT", 8, 0);
+        GameTooltip:SetOwner(self, "ANCHOR_CURSOR_RIGHT", 0, 5);
         GameTooltip:SetText(format(self.Post:GetPlayer():GetName()..': %s', '|cffFFFFFF'..self.Post:GetMessage()..'|r'));
         GameTooltip:Show();
     end
