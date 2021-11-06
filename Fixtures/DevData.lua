@@ -18,6 +18,7 @@ function Dung:RunFixtures(stop)
     --end
 
     --Dung:OnChat('DPS LFG Kara', 'Bluefork',nil, 'SHAMAN')
+    --Dung:OnChat('LF1M, heals BOT (N)', 'Bluefork',nil, 'WARLOCK')
     --Dung:OnChat('LF1m heals sethekk H', 'Oakee', nil, 'WARRIOR')
     --Dung:OnChat('LF2 tank/heals SV', 'Wifey', nil, 'MAGE')
     --Dung:OnChat('LF2m DPS HEALS SH H', 'Blindinglight', nil, 'PALADIN')
