@@ -1,7 +1,10 @@
 local _, Dung = ...
 
+--local function dump(var, ...) return DevTools_Dump(var, ...) end
+
 local GroupType = Dung:GetModel('GroupType');
 local Difficulty = Dung:GetModel('InstanceDifficulty');
+local GameVersion = Dung:GetModel('GameVersion');
 local Instance = Dung:GetEntity('Instance');
 
 ---
@@ -639,7 +642,7 @@ Dung.Data.Instances = {
     [47] = Instance:New({
         id = 'Botanica',
         name = 'The Botanica', --1
-        key_words = {'bot', 'the botanica', 'botanica'};
+        key_words = {'bot', 'the botanica', 'botanica', 'bota'};
         exclude_words = {'boost'},
         level_range = { {69, 70}, {70, 70} };
         avail_difficulty_types = {
@@ -667,7 +670,7 @@ Dung.Data.Instances = {
     [49] = Instance:New({
         id = 'MagistersTerrance',
         name = 'Magisters\' Terrance', --1
-        key_words = {'magisters', 'magister', 'magst', 'mags terrace'};
+        key_words = {'magisters', 'magister', 'magst', 'mags terrace', 'mt'};
         exclude_words = {'boost'},
         level_range = { {69, 70}, {70, 70} };
         avail_difficulty_types = {
@@ -802,5 +805,3 @@ Dung.Data.Instances = {
         max_players = 25;
     }),
 }
-
-Dung.DungeonCount = #Dung.Data.Instances;

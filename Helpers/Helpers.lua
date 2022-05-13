@@ -10,6 +10,7 @@ function Dung:RemoveJunkFromString(str)
     return string.gsub(str, "[^A-Za-z0-9]", ' ')
 end
 
+
 ---
 ---ASSERT TYPES
 ---

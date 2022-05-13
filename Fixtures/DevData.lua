@@ -24,6 +24,10 @@ function Dung:RunFixtures(stop)
     --Dung:OnChat('LF2m DPS HEALS SH H', 'Blindinglight', nil, 'PALADIN')
     --Dung:OnChat('LFM heals bm N', 'Oldgrog', nil, 'MAGE')
     --Dung:OnChat('lfg h sl', 'Dadalyf', nil, 'PRIEST')
+    --
+    --Dung:OnChat('LF1m heals scholo', 'Oakee', nil, 'WARRIOR')
+    --Dung:OnChat('LF1m heals naxx', 'Cheefse', nil, 'SHAMAN')
+    --
     --Dung:OnChat('LFM H ramps', 'Cowdoy', nil, 'SHAMAN')
     --Dung:OnChat('LFM karas tank 2 dps', 'Hiit', nil, 'WARRIOR')
     --Dung:OnChat('LF3M crypts dps', 'Hiit', nil, 'WARRIOR')

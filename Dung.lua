@@ -1,7 +1,5 @@
 local _, Dung = ...
 
-local function dump(var, ...) return DevTools_Dump(var, ...) end
-
 --todo: LIST
 ------1. REMOVE ALL {r3} VARIABLES FROM STRINGS BEFORE CHECKS
 ------2. ADD RECRUITING TO ALL EXCLUDES
@@ -17,6 +15,7 @@ Dung.DB_DEFAULTS_CHAR = {}
 Dung_GroupFinder_DB = Dung_GroupFinder_DB or Dung.DB_DEFAULTS
 Dung_GroupFinder_DB_Character = Dung_GroupFinder_DB_Character or Dung.DB_DEFAULTS_CHAR;
 
+Dung.GameVersion = nil; -- set in Dung:Run()
 Dung.Tests = {};
 Dung.isRunning = true;
 Dung.POST_HEIGHT = 16;
@@ -28,6 +27,7 @@ Dung.DungeonCount = 0; -- amount of dungeons we have, gets populated after they 
 Dung.Data = {};
 Dung.Data.CollapsedStates = {};
 Dung.Models = {};
+
 Dung.Entities = {};
 Dung.PostTable = {
     posts = {};
@@ -332,6 +332,8 @@ end
 --- Function that ticks every 5 seconds and removes posts if they've expired. + can do updates to the UI (5 delay so don't do anything big).
 ---@return void
 function Dung.TickTimer()
+    if not Dung.isRunning then return false end;
+
     local posts = Dung:GetPostsForScrollWindow();
     local post_count = #posts;
 
@@ -376,7 +378,7 @@ function Dung:GetPostForPlayer(playerName, realm, playerGuid, Instance)
     return false
 end
 
---- Chat message callback - creating/updating a new post. (used by CHAT_MSG_SYSTEM, CHAT_MSG_CHANNEL, CHAT_MSG_GUILD, CHAT_MSG_OFFICER)
+--- Chat message callback - creating/updating a new post. (used by CHAT_MSG_CHANNEL, CHAT_MSG_GUILD, CHAT_MSG_OFFICER)
 ---
 ---@param msg string
 ---@param playerName string
@@ -595,11 +597,13 @@ end
 
 function Dung:Show()
     SetPortraitTexture(Dung_GroupFinder_FrameIcon, "player");
+    Dung.isRunning = true;
     Dung_GroupFinder_Frame:Show();
     Dung_GroupFinder_BigBoyUpdate();
 end
 function Dung:Hide()
     Dung_GroupFinder_Frame:Hide();
+    Dung.isRunning = false;
 end
 function Dung:Toggle()
     if Dung_GroupFinder_Frame:IsVisible() then
@@ -640,6 +644,23 @@ function Dung:Run()
 	Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_GUILD");
 	Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_OFFICER");
 
+    local GameVersion = Dung:GetModel('GameVersion');
+    Dung.GameVersion = GameVersion.TBC;
+    Dung.DungeonCount = #Dung.Data.Instances;
+
+    local version, _, _, _ = GetBuildInfo()
+    --If vanilla
+    if version:sub(1, 1) == "1" then
+        Dung.GameVersion = GameVersion.Vanilla;
+        Dung.DungeonCount = 33;
+    end
+
+    if Dung.GameVersion == GameVersion.Vanilla then
+        Dung_GroupFinder_ShowHeroic:Hide();
+        Dung_GroupFinder_ShowNormalLabel:SetText('Dungeon');
+        Dung_GroupFinder_ShowRaid:SetPoint("RIGHT", Dung_GroupFinder_ShowNormal, 50, 0)
+    end
+
     --set some frame limits
     Dung_GroupFinder_Frame:SetResizable(true)
     Dung_GroupFinder_Frame:SetMinResize(320, 304)
@@ -675,6 +696,7 @@ function Dung:Run()
     --function Dung_GroupFinder_Frame:CHAT_MSG_SYSTEM(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
         --Dung:OnChat(msg, playerName, guid);
     --end
+
     function Dung_GroupFinder_Frame:CHAT_MSG_CHANNEL(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
         Dung:OnChat(msg, playerName, guid);
     end
