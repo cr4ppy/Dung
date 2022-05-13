@@ -19,6 +19,7 @@ Helpers\Helpers.lua
 
 ## Models
 Models\Model.lua
+Models\GameVersion.lua
 Models\GroupType.lua
 Models\RoleType.lua
 Models\InstanceDifficulty.lua
