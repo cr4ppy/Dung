@@ -1,0 +1,42 @@
+## Interface: 11403
+## Title: Dung - A Classic Group Finder
+## Author: Bluefork
+## SavedVariables: Dung_GroupFinder_DB
+## SavedVariablesPerCharacter: Dung_GroupFinder_DB_Character
+## Version: 1.0
+
+## Config
+##Config.lua
+locales.lua
+
+## Base Name Space
+Dung.lua
+Dung.xml
+Events.lua
+
+## Helpers
+Helpers\Helpers.lua
+
+## Models
+Models\Model.lua
+Models\GameVersion.lua
+Models\GroupType.lua
+Models\RoleType.lua
+Models\InstanceDifficulty.lua
+
+## Entities
+Entities\Entity.lua
+Entities\Instance.lua
+Entities\Post.lua
+Entities\Player.lua
+
+## Data
+Data\RoleKeywords.lua
+Data\HeroicKeywords.lua
+Data\Instances.lua
+
+## Tests
+Tests\Tests.lua
+Fixtures\DevData.lua
+
+init.lua
