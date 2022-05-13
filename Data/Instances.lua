@@ -668,8 +668,8 @@ Dung.Data.Instances = {
         max_players = 5;
     }),
     [49] = Instance:New({
-        id = 'MagistersTerrance',
-        name = 'Magisters\' Terrance', --1
+        id = 'MagistersTerrace',
+        name = 'Magisters\' Terrace', --1
         key_words = {'magisters', 'magister', 'magst', 'mags terrace', 'mt', 'mgt'};
         exclude_words = {'boost'},
         level_range = { {69, 70}, {70, 70} };
