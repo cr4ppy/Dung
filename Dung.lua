@@ -37,7 +37,7 @@ Dung.PostTable = {
     show_heroic = true;
     show_raid = true;
     toggle_hide_all = false;
-    current_order = true;
+    current_order = false;
     search_word = '';
     sort = {
         ---Sorts posts highest to lowest (time posted)
@@ -644,11 +644,11 @@ function Dung:Run()
 	Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_GUILD");
 	Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_OFFICER");
 
-    local GameVersion = Dung:GetModel('GameVersion');
-    Dung.GameVersion = GameVersion.TBC;
     Dung.DungeonCount = #Dung.Data.Instances;
 
-    local version, _, _, _ = GetBuildInfo()
+    local version, _, _, _ = GetBuildInfo();
+    local GameVersion = Dung:GetModel('GameVersion');
+    Dung.GameVersion = GameVersion.TBC;
     --If vanilla
     if version:sub(1, 1) == "1" then
         Dung.GameVersion = GameVersion.Vanilla;
@@ -719,3 +719,4 @@ function Dung:Run()
     Dung.TickTimer();
     Dung_GroupFinder_Frame:SetScript("OnEvent", DispatchEvent);
 end
+

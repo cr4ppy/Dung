@@ -8,7 +8,7 @@ local GameVersion = Dung:GetModel('GameVersion');
 local Instance = Dung:GetEntity('Instance');
 
 ---
----Decided to put these in an array... bite me
+---Decided to put these in an array (for performance)... bite me
 ---
 Dung.Data.Instances = {
     -----------------------------------------------------------------------------------------------
@@ -670,7 +670,7 @@ Dung.Data.Instances = {
     [49] = Instance:New({
         id = 'MagistersTerrance',
         name = 'Magisters\' Terrance', --1
-        key_words = {'magisters', 'magister', 'magst', 'mags terrace', 'mt'};
+        key_words = {'magisters', 'magister', 'magst', 'mags terrace', 'mt', 'mgt'};
         exclude_words = {'boost'},
         level_range = { {69, 70}, {70, 70} };
         avail_difficulty_types = {
