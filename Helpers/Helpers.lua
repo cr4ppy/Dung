@@ -50,12 +50,30 @@ end
 function Dung:Split(str, sep)
     local result = {}
     local regex = string.format(("([^%s]+)"), sep)
+
     for each in string.gmatch(str, regex) do
-      table.insert(result, each)
+        table.insert(result, each)
     end
+
     return result
 end
 
+function Dung:TrimStartEnd(str)
+    return str:gsub("^%s*(.-)%s*$", "%1");
+end
+
+function Dung:SplitSearchString(str, sep)
+    local result = {}
+    local regex = string.format(("([^%s]+)"), sep)
+    local trimmed;
+
+    for each in string.gmatch(str, regex) do
+        trimmed = Dung:TrimStartEnd(each)
+        result[trimmed] = trimmed;
+    end
+
+    return result
+end
 
 ---
 ---JOIN TABLE INTO STR

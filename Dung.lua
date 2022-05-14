@@ -11,10 +11,6 @@ local _, Dung = ...
 ------misc. MAKE MESSAGE TEXT DARKER
 ------misc. MOVE Dung.PostTable to an Entity class (To help clean this file up)
 
-Dung.DB_DEFAULTS = {}
-Dung.DB_DEFAULTS_CHAR = {}
-Dung_GroupFinder_DB = Dung_GroupFinder_DB or Dung.DB_DEFAULTS
-Dung_GroupFinder_DB_Character = Dung_GroupFinder_DB_Character or Dung.DB_DEFAULTS_CHAR;
 
 Dung.GameVersion = nil; -- set in Dung:Run()
 Dung.Tests = {};
@@ -28,6 +24,7 @@ Dung.DungeonCount = 0; -- amount of dungeons we have, gets populated after they 
 Dung.Data = {};
 Dung.Data.CollapsedStates = {};
 Dung.Models = {};
+Dung.IsUpdating = false;
 
 Dung.Entities = {};
 Dung.PostTable = {
@@ -133,6 +130,11 @@ function Dung:RemovePost(Post)
     return false;
 end
 
+function Dung:HasSearchString()
+    return string.len(self.PostTable.search_word) > 0
+end
+
+
 --- Get posts ready for the UI - orders them and returns a table of { is_header = (boolean), post = Post }
 ---
 ---@return table
@@ -171,17 +173,21 @@ function Dung:GetPostsForScrollWindow()
         end
     end
 
-    local instance_guid, index, is_collapsed;
+    local instance_guid, index, is_collapsed, search_keywords, instance, exclude;
+
     for key,post in pairs(self.PostTable.posts) do
         instance_guid = post:GetGuid();
         index = self:FindDungeonHeaderIndex(instance_guid, finalList);
         is_collapsed = self.Data.CollapsedStates[instance_guid] == true;
+        search_keywords = self:SplitSearchString(string.lower(self.PostTable.search_word), ',', true);
+        instance = post:GetInstance();
+        exclude = Dung:HasSearchString() and not instance:CheckKeywords(search_keywords, post:GetDifficulty());
 
-        if(self.PostTable.show_raid and post:GetInstance():IsRaid()) then
+        if self.PostTable.show_raid and instance:IsRaid() and not exclude then
             addToList(post, index, is_collapsed)
-        elseif self.PostTable.show_heroic and post:IsHeroic() then
+        elseif self.PostTable.show_heroic and post:IsHeroic() and not exclude then
             addToList(post, index, is_collapsed)
-        elseif self.PostTable.show_normal and not post:IsHeroic() and not post:GetInstance():IsRaid() then
+        elseif self.PostTable.show_normal and not post:IsHeroic() and not instance:IsRaid() and not exclude then
             addToList(post, index, is_collapsed)
         end
     end
@@ -449,6 +455,9 @@ end
 ---@param self self
 ---@return void
 function Dung_GroupFinder_BigBoyUpdate(self)
+    if Dung.IsUpdating or not Dung.isRunning then return end;
+
+    Dung.IsUpdating = true;
     local posts = Dung:GetPostsForScrollWindow();
     local Roles = Dung:GetModel('RoleType');
     local post_count = #posts;
@@ -594,6 +603,7 @@ function Dung_GroupFinder_BigBoyUpdate(self)
             end
         end
     end
+    Dung.IsUpdating = false;
 end
 
 function Dung:Show()
@@ -682,7 +692,14 @@ function Dung:Run()
         Dung_GroupFinder_Frame:StopMovingOrSizing()
         Dung_GroupFinder_ScrollFrame:Show()
         Dung_GroupFinder_BigBoyUpdate()
-    end)
+    end);
+
+    Dung_GroupFinder_FilterInput:SetWidth(275);
+    Dung_GroupFinder_FilterInputTextureMiddle:SetWidth(275);
+    Dung_GroupFinder_FilterInput:SetHeight(80);
+    if(Dung.PostTable.search_word ~= '') then
+        Dung_GroupFinder_FilterInput:SetText(Dung.PostTable.search_word)
+    end
 
     --setting font sizes of check box labels
     Dung_GroupFinder_ShowNormalLabel:SetFont(Dung_GroupFinder_ShowNormalLabel:GetFont(), 9, nil)
@@ -707,10 +724,28 @@ function Dung:Run()
     function Dung_GroupFinder_Frame:CHAT_MSG_OFFICER(msg, playerName, languageName, channelName, playerName2, specialFlags, zoneChannelID, channelIndex, channelBaseName, unused, lineID, guid)
         Dung:OnChat(msg, playerName, guid);
     end
-    function Dung_GroupFinder_Frame:ADDON_LOADED(arg1)
-        Dung:CreateSlashCommand();
-        Dung.PostTable:set_order_arrow();
+    function Dung_GroupFinder_Frame:ADDON_LOADED(name)
+        if name  == "Dung" then
+            Dung:CreateSlashCommand();
+            Dung.PostTable:set_order_arrow();
+
+            if Dung_GroupFinder_DB_Character then
+                Dung.PostTable.search_word = Dung_GroupFinder_DB_Character.search
+                Dung_GroupFinder_FilterInput:SetText(Dung.PostTable.search_word);
+            else
+                Dung_GroupFinder_DB_Character = {};
+            end
+        end
     end
+
+    function Dung_GroupFinder_Frame:PLAYER_LOGOUT()
+        Dung_GroupFinder_DB_Character = {};
+        Dung_GroupFinder_DB_Character['search'] = Dung.PostTable.search_word;
+    end
+
+    --function Dung_GroupFinder_Frame:PLAYER_LOGIN()
+    --
+    --end
 
     local function DispatchEvent(self, event, ...)
         local handlerMethod = self[event]
@@ -720,4 +755,3 @@ function Dung:Run()
     Dung.TickTimer();
     Dung_GroupFinder_Frame:SetScript("OnEvent", DispatchEvent);
 end
-

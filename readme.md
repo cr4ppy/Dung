@@ -1,16 +1,21 @@
-**/dung**  
-Toggle Dung  
+**Show**  
 
-**/dung hide**  
-Hides Dung  
+    /dung show
+ 
+**Hide**  
 
-**/dung show**  
-Shows Dung  
+    /dung hide
+ 
+**Reset**  
+    Repositions Dung to the middle of the screen  
+    
+    /dung reset
 
-**/dung reset**  
-Repositions dung in the middle of the screen  
 
-**Dung is minimal, easy to use and easy to read.**  
+**Filter dungeon**\
+By name and difficulty seperated by commas in the search bar at the bottom, eg.\
+
+    sp h, mgt, mgt h, kara, za, sethekk H, deadmines, zf
 
 English only for now, plan on having German, Russian, Chinese, Spanish.  
 
