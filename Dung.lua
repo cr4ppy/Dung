@@ -106,10 +106,10 @@ Dung.PostTable = {
 };
 
 
---- Adds a post from the table (then updates table)
+--- Adds a Post(then updates table)
 ---
 ---@param Post table (Post)
----@return void
+---@return boolean
 function Dung:AddPost(Post)
     table.insert(self.PostTable.posts, Post);
 
