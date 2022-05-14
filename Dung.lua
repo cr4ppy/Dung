@@ -9,6 +9,7 @@ local _, Dung = ...
 ------7. SEARCH FILTER - next version 1.1
 ------misc. EXCLUDE "." FROM STRINGS
 ------misc. MAKE MESSAGE TEXT DARKER
+------misc. MOVE Dung.PostTable to an Entity class (To help clean this file up)
 
 Dung.DB_DEFAULTS = {}
 Dung.DB_DEFAULTS_CHAR = {}
