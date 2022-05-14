@@ -16,7 +16,7 @@ English only for now, plan on having German, Russian, Chinese, Spanish.
 
 Only a one person project right now so reach of if you would like to contribute, please do! 
 
-I plan on supporting the addon and adding updates and features for TBC and Season of Mastery.  
+I plan on supporting the addon and adding updates and features for TBC and Season of Mastery, possibly WoTLK (depends on the dungeon finder decision blizzard make).  
 
 Please report any issues or even feature ideas!  
 
