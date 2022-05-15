@@ -430,7 +430,7 @@
                     </OnClick>
 				</Scripts>
 			</CheckButton>
-            <EditBox name="Dung_GroupFinder_FilterInput"  autoFocus="false" frameStrata="HIGH" historyLines="32" bytes="256">
+            <EditBox name="Dung_GroupFinder_FilterInput"  autoFocus="false" historyLines="32" bytes="256">
                 <Size x="250" y="29"/>
                 <Anchors>
                     <Anchor point="BOTTOMLEFT" x="13" y="3"/>
