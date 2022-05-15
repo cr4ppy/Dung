@@ -459,7 +459,7 @@ Dung.Data.Instances = {
     [34] = Instance:New({
         id = 'HellfireRamparts',
         name = 'Hellfire Ramparts', --1
-        key_words = {'ramps', 'hellfireramparts', 'hellfire ramparts', 'ramp'};
+        key_words = {'ramps', 'hellfireramparts', 'hellfire ramparts', 'ramp', 'ramparts'};
         exclude_words = {'boost'},
         level_range = { {59, 67}, {70, 70} };
         avail_difficulty_types = {
@@ -520,7 +520,7 @@ Dung.Data.Instances = {
         level_range = { {64, 70}, {70, 70} };
         avail_difficulty_types = {
             [Difficulty.Normal] = Difficulty.Normal,
-            [Difficulty.Heroic] = Difficulty.Heroic 
+            [Difficulty.Heroic] = Difficulty.Heroic
         };
         current_difficulty = Difficulty.Normal;
         type =  GroupType.Dungeon;

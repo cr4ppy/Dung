@@ -146,6 +146,25 @@ function Dung_GroupFinder_ToggleType(self)
     Dung_GroupFinder_BigBoyUpdate();
 end
 
+----- Toggle filter on/off
+-----
+-----@param self self
+-----@return void
+function Dung_GroupFinder_ToggleFilter(self)
+    local checked = Dung:ToggleUseFilter();
+
+    if not checked then
+        Dung_GroupFinder_FilterInput:SetAlpha(0.5)
+        Dung_GroupFinder_FilterInput:ClearFocus();
+    else
+        Dung_GroupFinder_FilterInput:SetAlpha(1)
+    end
+
+    Dung_GroupFinder_DB_Character.filter = checked;
+
+    Dung_GroupFinder_BigBoyUpdate();
+end
+
 ----- Click to order list asc or desc
 -----
 -----@param self self

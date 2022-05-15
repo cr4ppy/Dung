@@ -11,6 +11,7 @@ local _, Dung = ...
 ------misc. MAKE MESSAGE TEXT DARKER
 ------misc. MOVE Dung.PostTable to an Entity class (To help clean this file up)
 
+--local function dump(var, ...) return DevTools_Dump(var, ...) end
 
 Dung.GameVersion = nil; -- set in Dung:Run()
 Dung.Tests = {};
@@ -37,6 +38,7 @@ Dung.PostTable = {
     toggle_hide_all = false;
     current_order = false;
     search_word = '';
+    filter = true;
     sort = {
         ---Sorts posts highest to lowest (time posted)
         asc = function(postLeft, postRight)
@@ -181,7 +183,7 @@ function Dung:GetPostsForScrollWindow()
         is_collapsed = self.Data.CollapsedStates[instance_guid] == true;
         search_keywords = self:SplitSearchString(string.lower(self.PostTable.search_word), ',', true);
         instance = post:GetInstance();
-        exclude = Dung:HasSearchString() and not instance:CheckKeywords(search_keywords, post:GetDifficulty());
+        exclude = Dung.PostTable.filter and Dung:HasSearchString() and not instance:CheckKeywords(search_keywords, post:GetDifficulty());
 
         if self.PostTable.show_raid and instance:IsRaid() and not exclude then
             addToList(post, index, is_collapsed)
@@ -524,8 +526,6 @@ function Dung_GroupFinder_BigBoyUpdate(self)
             btnTitle.is_collapsed = Dung.Data.CollapsedStates[post_guid] == true;
             btnTitle:SetWidth(Dung_GroupFinder_Frame:GetWidth());
 
-
-
             Dung_GroupFinder_ScrollFrame:SetWidth(Dung_GroupFinder_Frame:GetWidth() - 38);
             btnTitlePlayerName:SetPoint("LEFT", btnTitle, "LEFT", Dung_GroupFinder_Frame:GetWidth()-170, 0)
             btnTitleTag:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b)
@@ -623,6 +623,10 @@ function Dung:Toggle()
         self:Show()
     end
 end
+function Dung:ToggleUseFilter()
+    Dung.PostTable.filter = not Dung.PostTable.filter;
+    return Dung.PostTable.filter;
+end
 
 
 function Dung:CreateSlashCommand()
@@ -694,9 +698,6 @@ function Dung:Run()
         Dung_GroupFinder_BigBoyUpdate()
     end);
 
-    Dung_GroupFinder_FilterInput:SetWidth(275);
-    Dung_GroupFinder_FilterInputTextureMiddle:SetWidth(275);
-    Dung_GroupFinder_FilterInput:SetHeight(80);
     if(Dung.PostTable.search_word ~= '') then
         Dung_GroupFinder_FilterInput:SetText(Dung.PostTable.search_word)
     end
@@ -730,22 +731,24 @@ function Dung:Run()
             Dung.PostTable:set_order_arrow();
 
             if Dung_GroupFinder_DB_Character then
+                Dung.PostTable.filter = Dung_GroupFinder_DB_Character.filter;
                 Dung.PostTable.search_word = Dung_GroupFinder_DB_Character.search
+
                 Dung_GroupFinder_FilterInput:SetText(Dung.PostTable.search_word);
+                Dung_GroupFinder_UseFilter:SetChecked(Dung.PostTable.filter)
+
+                if not Dung.PostTable.filter then
+                    Dung_GroupFinder_FilterInput:SetAlpha(0.5)
+                end
+
             else
-                Dung_GroupFinder_DB_Character = {};
+                Dung_GroupFinder_DB_Character = {
+                    search = '',
+                    filter = true;
+                };
             end
         end
     end
-
-    function Dung_GroupFinder_Frame:PLAYER_LOGOUT()
-        Dung_GroupFinder_DB_Character = {};
-        Dung_GroupFinder_DB_Character['search'] = Dung.PostTable.search_word;
-    end
-
-    --function Dung_GroupFinder_Frame:PLAYER_LOGIN()
-    --
-    --end
 
     local function DispatchEvent(self, event, ...)
         local handlerMethod = self[event]
