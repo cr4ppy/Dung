@@ -730,7 +730,7 @@ function Dung:Run()
             Dung:CreateSlashCommand();
             Dung.PostTable:set_order_arrow();
 
-            if Dung_GroupFinder_DB_Character then
+            if Dung_GroupFinder_DB_Character and Dung_GroupFinder_DB_Character.filter ~= nil and Dung_GroupFinder_DB_Character.search ~= nil then
                 Dung.PostTable.filter = Dung_GroupFinder_DB_Character.filter;
                 Dung.PostTable.search_word = Dung_GroupFinder_DB_Character.search
 
@@ -746,6 +746,7 @@ function Dung:Run()
                     search = '',
                     filter = true;
                 };
+                Dung.PostTable.search_word = ''
             end
         end
     end

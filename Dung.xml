@@ -176,7 +176,7 @@
 	</Button>
 
     <Frame name="Dung_GroupFinder_Frame" movable="true" parent="UIParent" inherits="ButtonFrameTemplate" hidden="true" enableMouse="true">
-        <Size x="380" y="430"/>
+        <Size x="320" y="430"/>
         <Anchors>
             <Anchor point="LEFT" x="20" y="97"/>
         </Anchors>

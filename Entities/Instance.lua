@@ -227,7 +227,7 @@ function Instance:CheckKeywords(keywords, post_difficulty)
 
         --for performance - to try avoid running the code after this block
         for trying_keyword in pairs(keywords) do
-            if string.lower(trying_keyword) == string.lower(dungeon_keyword) then
+            if not postIsHeroic and string.lower(trying_keyword) == string.lower(dungeon_keyword) then
                 return true;
             end
         end
