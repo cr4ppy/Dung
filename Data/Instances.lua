@@ -68,8 +68,8 @@ Dung.Data.Instances = {
         max_players = 5;
     }),
     [5] = Instance:New({
-        id = 'Blackfathom Deeps',
-        name = 'Shadowfang Keep', --1
+        id = 'BlackfathomDeeps',
+        name = 'Blackfathom Deeps', --1
         key_words = {'bfd', 'blackfathom deeps', 'blackfathom', 'fathom', 'fathom deeps'};
         exclude_words = {'boost'},
         level_range = { {18, 21}, {18, 21} };
