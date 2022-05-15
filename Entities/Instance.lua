@@ -214,6 +214,43 @@ function Instance:SetInstanceTypeRef(type)
     return self;
 end
 
+---Checks if this Instances keywords are in the keywords provided, value and key must match, eg. {'kara': 'kara', 'sp': 'sp}
+---@param type number
+---@return self
+function Instance:CheckKeywords(keywords, post_difficulty)
+    local postIsHeroic = post_difficulty == Difficulty.Heroic;
+    local split_trying_keyword;
+    local trying_keyword_asking_for_heroic;
+    local matches_a_dungeon_keyword;
+
+    for index,dungeon_keyword in pairs(self:GetKeyWords()) do
+
+        --for performance - to try avoid running the code after this block
+        for trying_keyword in pairs(keywords) do
+            if string.lower(trying_keyword) == string.lower(dungeon_keyword) then
+                return true;
+            end
+        end
+
+        for trying_keyword in pairs(keywords) do
+            split_trying_keyword = Dung:Split(Dung:RemoveJunkFromString(string.lower(trying_keyword)), ' ', false);
+            trying_keyword_asking_for_heroic = Dung:IsPostHeroic(split_trying_keyword);
+            matches_a_dungeon_keyword = Dung:Contains(split_trying_keyword, dungeon_keyword)
+
+            if postIsHeroic then
+                if matches_a_dungeon_keyword and trying_keyword_asking_for_heroic then
+                    return true
+                end
+            else
+                if matches_a_dungeon_keyword and not trying_keyword_asking_for_heroic then
+                    return true
+                end
+            end
+        end
+    end
+
+    return false;
+end
 ---Get instance type (it's a string label)
 ---@return string
 function Instance:GetType()

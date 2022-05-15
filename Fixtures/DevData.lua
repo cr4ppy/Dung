@@ -1,4 +1,4 @@
-local function dump(var, ...) return DevTools_Dump(var, ...) end
+--local function dump(var, ...) return DevTools_Dump(var, ...) end
 
 local _, Dung = ...
 
@@ -17,8 +17,9 @@ function Dung:RunFixtures(stop)
     --    Dung:OnChat(dummy_msg, name..i..'-'..GetRealmName(), nil)
     --end
 
-    --Dung:OnChat('DPS LFG Kara', 'Bluefork',nil, 'SHAMAN')
-    --Dung:OnChat('LF1M, heals BOT (N)', 'Bluefork',nil, 'WARLOCK')
+    --Dung:OnChat('DPS LFG kara', 'Bluefork',nil, 'SHAMAN')
+    --Dung:OnChat('LF1M, heals SP (N)', 'Cheesey',nil, 'WARLOCK')
+    --Dung:OnChat('LF1M, heals SP h', 'Wowdf',nil, 'PALADIN')
     --Dung:OnChat('LF1m heals sethekk H', 'Oakee', nil, 'WARRIOR')
     --Dung:OnChat('LF2 tank/heals SV', 'Wifey', nil, 'MAGE')
     --Dung:OnChat('LF2m DPS HEALS SH H', 'Blindinglight', nil, 'PALADIN')

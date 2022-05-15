@@ -1,6 +1,6 @@
 local _, Dung = ...
 
-local function dump(var, ...) return DevTools_Dump(var, ...) end
+--local function dump(var, ...) return DevTools_Dump(var, ...) end
 
 ----- Hover on a post
 -----
@@ -146,6 +146,25 @@ function Dung_GroupFinder_ToggleType(self)
     Dung_GroupFinder_BigBoyUpdate();
 end
 
+----- Toggle filter on/off
+-----
+-----@param self self
+-----@return void
+function Dung_GroupFinder_ToggleFilter(self)
+    local checked = Dung:ToggleUseFilter();
+
+    if not checked then
+        Dung_GroupFinder_FilterInput:SetAlpha(0.5)
+        Dung_GroupFinder_FilterInput:ClearFocus();
+    else
+        Dung_GroupFinder_FilterInput:SetAlpha(1)
+    end
+
+    Dung_GroupFinder_DB_Character.filter = checked;
+
+    Dung_GroupFinder_BigBoyUpdate();
+end
+
 ----- Click to order list asc or desc
 -----
 -----@param self self
@@ -157,10 +176,28 @@ function Dung_GroupFinder_OrderListButton_OnClick(self)
     Dung_GroupFinder_BigBoyUpdate();
 end
 
+function Dung_GroupFinder_FilterInput_OnLoad(self)
+    if(Dung.PostTable.search_word ~= '') then
+        self:SetText(Dung.PostTable.search_word)
+    end
+end
+
 ----- Filters list by keyword
 -----
 -----@param self self
------@return void
---function Dung_GroupFinder_FrameFilterInput_TextChange(self)
---    print(self:GetText())
---end
+-----@return boolean
+function Dung_GroupFinder_FilterInput_OnChange(self)
+    local search_keyword = self:GetText();
+
+    if (search_keyword == "") then
+        Dung_GroupFinder_FilterInputPromptText:Show();
+        Dung.PostTable.search_word = "";
+    else
+        Dung_GroupFinder_FilterInputPromptText:Hide();
+        Dung.PostTable.search_word = search_keyword;
+    end
+
+    Dung_GroupFinder_DB_Character['search'] = search_keyword;
+    Dung_GroupFinder_BigBoyUpdate();
+    return true;
+end

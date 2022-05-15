@@ -174,6 +174,7 @@
             </OnClick>
         </Scripts>
 	</Button>
+
     <Frame name="Dung_GroupFinder_Frame" movable="true" parent="UIParent" inherits="ButtonFrameTemplate" hidden="true" enableMouse="true">
         <Size x="380" y="430"/>
         <Anchors>
@@ -429,6 +430,90 @@
                     </OnClick>
 				</Scripts>
 			</CheckButton>
+            <EditBox name="Dung_GroupFinder_FilterInput"  autoFocus="false" frameStrata="HIGH" historyLines="32" bytes="256">
+                <Size x="250" y="29"/>
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" x="13" y="3"/>
+                </Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <FontString name="Dung_GroupFinder_FilterInputPromptText" inherits="GameFontNormal" justifyH="LEFT" justifyV="MIDDLE" text="sp h, mgt, mgt h, kara, sv, za">
+                            <Anchors>
+                                <Anchor point="LEFT" x="0" y="-2"/>
+                            </Anchors>
+                            <Color r="0.35" g="0.35" b="0.35"/>
+                        </FontString>
+                    </Layer>
+                    <Layer level="BACKGROUND">
+                        <Texture name="Dung_GroupFinder_FilterInputTextureLeft" file="Interface\ClassTrainerFrame\UI-ClassTrainer-FilterBorder">
+                            <Size x="12" y="0"/>
+                            <Anchors>
+                                <Anchor point="LEFT" x="-11" y="0"/>
+                            </Anchors>
+                            <TexCoords left="0" right="0.09375" top="1" bottom="0"/>
+                        </Texture>
+                        <Texture name="Dung_GroupFinder_FilterInputTextureMiddle" file="Interface\ClassTrainerFrame\UI-ClassTrainer-FilterBorder">
+                            <Size x="250" y="29"/>
+                            <Anchors>
+                                <Anchor point="LEFT" relativeTo="Dung_GroupFinder_FilterInputTextureLeft" relativePoint="RIGHT"/>
+                            </Anchors>
+                            <TexCoords left="0.09375" right="0.90625" top="1" bottom="0"/>
+                        </Texture>
+                        <Texture name="Dung_GroupFinder_FilterInputTextureRight" file="Interface\ClassTrainerFrame\UI-ClassTrainer-FilterBorder">
+                            <Size x="12" y="29"/>
+                            <Anchors>
+                                <Anchor point="LEFT" relativeTo="Dung_GroupFinder_FilterInputTextureMiddle" relativePoint="RIGHT"/>
+                            </Anchors>
+                            <TexCoords left="0.90625" right="1.0" top="1" bottom="0"/>
+                        </Texture>
+                    </Layer>
+                </Layers>
+                <Scripts>
+
+                    <!--<OnEscapePressed function=""/>-->
+                    <!--<OnEnterPressed function=""/>-->
+                    <!--<OnEditFocusLost function=""/>-->
+                    <!--<OnEditFocusGained function=""/>-->
+                    <OnEscapePressed>
+                        self:ClearFocus();
+                    </OnEscapePressed>
+                    <OnEnterPressed>
+                        self:ClearFocus();
+                    </OnEnterPressed>
+                    <OnTextChanged>
+                        Dung_GroupFinder_FilterInput_OnChange(self)
+                    </OnTextChanged>
+                </Scripts>
+                <FontString inherits="ChatFontNormal" />
+            </EditBox>
+            <CheckButton name="Dung_GroupFinder_UseFilter" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="1">
+                <Size>
+                    <AbsDimension x="22" y="22"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="Dung_GroupFinder_FilterInput">
+                        <Offset>
+                            <AbsDimension x="35" y="-3"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <HitRectInsets>
+                    <AbsInset left="0" right="0" top="0" bottom="0"/>
+                </HitRectInsets>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset>
+                            <AbsDimension x="11" y="3"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        Dung_GroupFinder_ToggleFilter(self);
+                    </OnClick>
+                </Scripts>
+            </CheckButton>
+
 <!--            <CheckButton name="Dung_GroupFinder_ShowTank" checked="true" inherits="InterfaceOptionsBaseCheckButtonTemplate" id="1">-->
 <!--                <Size>-->
 <!--                    <AbsDimension x="20" y="20"/>-->

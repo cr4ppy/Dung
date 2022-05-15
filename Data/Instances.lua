@@ -1,6 +1,5 @@
 local _, Dung = ...
 
---local function dump(var, ...) return DevTools_Dump(var, ...) end
 
 local GroupType = Dung:GetModel('GroupType');
 local Difficulty = Dung:GetModel('InstanceDifficulty');
@@ -69,8 +68,8 @@ Dung.Data.Instances = {
         max_players = 5;
     }),
     [5] = Instance:New({
-        id = 'Blackfathom Deeps',
-        name = 'Shadowfang Keep', --1
+        id = 'BlackfathomDeeps',
+        name = 'Blackfathom Deeps', --1
         key_words = {'bfd', 'blackfathom deeps', 'blackfathom', 'fathom', 'fathom deeps'};
         exclude_words = {'boost'},
         level_range = { {18, 21}, {18, 21} };
@@ -460,7 +459,7 @@ Dung.Data.Instances = {
     [34] = Instance:New({
         id = 'HellfireRamparts',
         name = 'Hellfire Ramparts', --1
-        key_words = {'ramps', 'hellfireramparts', 'hellfire ramparts', 'ramp'};
+        key_words = {'ramps', 'hellfireramparts', 'hellfire ramparts', 'ramp', 'ramparts'};
         exclude_words = {'boost'},
         level_range = { {59, 67}, {70, 70} };
         avail_difficulty_types = {
@@ -521,7 +520,7 @@ Dung.Data.Instances = {
         level_range = { {64, 70}, {70, 70} };
         avail_difficulty_types = {
             [Difficulty.Normal] = Difficulty.Normal,
-            [Difficulty.Heroic] = Difficulty.Heroic 
+            [Difficulty.Heroic] = Difficulty.Heroic
         };
         current_difficulty = Difficulty.Normal;
         type =  GroupType.Dungeon;
@@ -530,7 +529,7 @@ Dung.Data.Instances = {
     [39]= Instance:New({
         id = 'SethekkHalls',
         name = 'Sethekk Halls', --1
-        key_words = {'sethekkhalls', 'sethekk halls','sethek halls', 'seth Halls', 'sethekk', 'seth', 'sathekk', 'sathekk halls', 'sethekk', 'sethek'};
+        key_words = {'sethekkhalls', 'sethekk halls','sethek halls', 'seth Halls', 'sethekk', 'seth', 'sathekk', 'sathekk halls', 'sethekk', 'sethek', 'shettek', 'shettek halls'};
         exclude_words = {'boost'},
         level_range = { {66, 70}, {70, 70} };
         avail_difficulty_types = {
@@ -586,7 +585,7 @@ Dung.Data.Instances = {
     [43] = Instance:New({
         id = 'SteamVault',
         name = 'The Steamvault', --1
-        key_words = {'sv', 'steam vault', 'steamvault', 'steamvaults'};
+        key_words = {'sv', 'steam vault', 'steamvault', 'steamvaults', 'the steam vault', 'steam vault', 'steam'};
         exclude_words = {'boost'},
         level_range = { {69, 70}, {70, 70} };
         avail_difficulty_types = {
@@ -729,7 +728,7 @@ Dung.Data.Instances = {
     [53] = Instance:New({
         id = 'Gruul',
         name = 'Gruul\'s Lair', --1
-        key_words = {'gruul', 'grools', 'grool', 'gruul\'s lair', 'magz'};
+        key_words = {'gruul', 'grools', 'grool', 'gruul\'s lair', 'magz', 'grull'};
         exclude_words = {'boost'},
         level_range = { {70, 70}, {70, 70} };
         avail_difficulty_types = {
