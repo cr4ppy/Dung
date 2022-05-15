@@ -224,10 +224,18 @@ function Instance:CheckKeywords(keywords, post_difficulty)
     local matches_a_dungeon_keyword;
 
     for index,dungeon_keyword in pairs(self:GetKeyWords()) do
+
+        --for performance - to try avoid running the code after this block
         for trying_keyword in pairs(keywords) do
-            split_trying_keyword = Dung:Split(Dung:RemoveJunkFromString(string.lower(trying_keyword)), ' ');
+            if string.lower(trying_keyword) == string.lower(dungeon_keyword) then
+                return true;
+            end
+        end
+
+        for trying_keyword in pairs(keywords) do
+            split_trying_keyword = Dung:Split(Dung:RemoveJunkFromString(string.lower(trying_keyword)), ' ', false);
             trying_keyword_asking_for_heroic = Dung:IsPostHeroic(split_trying_keyword);
-            matches_a_dungeon_keyword = Dung:Contains(split_trying_keyword, dungeon_keyword);
+            matches_a_dungeon_keyword = Dung:Contains(split_trying_keyword, dungeon_keyword)
 
             if postIsHeroic then
                 if matches_a_dungeon_keyword and trying_keyword_asking_for_heroic then

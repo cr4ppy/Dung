@@ -251,7 +251,7 @@ end
 ---@return table
 function Dung:CheckPost(post_msg)--Checks
     local final = {};
-    local words = self:Split(self:RemoveJunkFromString(string.lower(post_msg)), ' ');
+    local words = self:Split(self:RemoveJunkFromString(string.lower(post_msg)), ' ', true);
     local Difficulty = self:GetModel('InstanceDifficulty');
     local Roles = self:GetModel('RoleType');
     local Instance;
@@ -265,35 +265,35 @@ function Dung:CheckPost(post_msg)--Checks
         local is_heroic = self:IsPostHeroic(words) and Instance:IsAvailableInHeroic();
         local roles_needed = {}
 
-        for i,keywords in ipairs(self.Data.RoleKeywords) do
+        for n,keywords in ipairs(self.Data.RoleKeywords) do
             for j,keyword in ipairs(keywords) do
-                if self:Contains(words, keyword) then
-                    roles_needed[i] = true;
+                if words[keyword] ~= nil then
+                    roles_needed[n] = true;
                 end
             end
         end
 
         --todo: these blocks are no good here
-        if self:Contains(words, 'all') then
+        if words['all'] ~= nil then
             roles_needed[Roles.Tank] = true;
             roles_needed[Roles.Heals] = true;
             roles_needed[Roles.DPS] = true;
             roles_needed[Roles.Looking] = nil;
         end
 
-        if self:Contains(words, 'tankheal') or self:Contains(words, 'healtank') then
+        if words['tankheal'] ~= nil or words['healtank'] ~= nil then
             roles_needed[Roles.Tank] = true;
             roles_needed[Roles.Heals] = true;
             roles_needed[Roles.Looking] = nil;
         end
 
-        if self:Contains(words, 'tankdps') or self:Contains(words, 'dpstank') then
+        if words['tankdps'] ~= nil or words['dpstank'] ~= nil then
             roles_needed[Roles.Tank] = true;
             roles_needed[Roles.DPS] = true;
             roles_needed[Roles.Looking] = nil;
         end
 
-        if self:Contains(words, 'dpsheal') or self:Contains(words, 'healdps') then
+        if words['dpsheal'] ~= nil or words['healdps'] ~= nil then
             roles_needed[Roles.Heals] = true;
             roles_needed[Roles.DPS] = true;
             roles_needed[Roles.Looking] = nil;

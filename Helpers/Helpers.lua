@@ -47,12 +47,16 @@ end
 ---
 ---SPLIT STRING INTO TABLE WITH SEP
 ---
-function Dung:Split(str, sep)
+function Dung:Split(str, sep, value_as_key)
     local result = {}
     local regex = string.format(("([^%s]+)"), sep)
 
     for each in string.gmatch(str, regex) do
-        table.insert(result, each)
+        if value_as_key then
+            result[string.lower(each)] = each;
+        else
+            table.insert(result, each)
+        end
     end
 
     return result
