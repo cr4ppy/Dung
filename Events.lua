@@ -12,7 +12,7 @@ function Dung_GroupFinder_OnPostHover(self)
     local btnRole2 = _G[self:GetName().."Role2"];
     local btnRole3 = _G[self:GetName().."Role3"];
     local btnRole4 = _G[self:GetName().."Role4"];
-
+    Dung.Fader(self)
     --show tool tip
     if self.Post ~= nil and not self.is_header then
         GameTooltip:SetOwner(self, "ANCHOR_CURSOR_RIGHT", 0, 5);
@@ -41,7 +41,7 @@ function Dung_GroupFinder_OnPostLeave(self)
     local btnRole2 = _G[self:GetName().."Role2"];
     local btnRole3 = _G[self:GetName().."Role3"];
     local btnRole4 = _G[self:GetName().."Role4"];
-
+    Dung.Fader(self)
     --hide tool tip
     GameTooltip:Hide();
 
@@ -200,4 +200,16 @@ function Dung_GroupFinder_FilterInput_OnChange(self)
     Dung_GroupFinder_DB_Character['search'] = search_keyword;
     Dung_GroupFinder_BigBoyUpdate();
     return true;
+end
+
+function Dung_GroupFinder_FilterInput_Focus(self)
+    if(Dung.CharacterMoving and self:HasFocus()) then
+        Dung_GroupFinder_Frame:SetAlpha(1)
+    end
+end
+
+function Dung_GroupFinder_FilterInput_FocusLost(self)
+    if(Dung.CharacterMoving) then
+        Dung_GroupFinder_Frame:SetAlpha(Dung.FadeAlpha)
+    end
 end

@@ -261,7 +261,7 @@
                 <Anchors>
                     <Anchor point="TOPLEFT">
                         <Offset>
-                            <AbsDimension x="60" y="-28"/>
+                            <AbsDimension x="60" y="-26"/>
                         </Offset>
                     </Anchor>
                 </Anchors>
@@ -472,8 +472,12 @@
 
                     <!--<OnEscapePressed function=""/>-->
                     <!--<OnEnterPressed function=""/>-->
-                    <!--<OnEditFocusLost function=""/>-->
-                    <!--<OnEditFocusGained function=""/>-->
+                    <OnEditFocusLost>
+                        Dung_GroupFinder_FilterInput_FocusLost(self)
+                    </OnEditFocusLost>
+                    <OnEditFocusGained>
+                        Dung_GroupFinder_FilterInput_Focus(self)
+                    </OnEditFocusGained>
                     <OnEscapePressed>
                         self:ClearFocus();
                     </OnEscapePressed>

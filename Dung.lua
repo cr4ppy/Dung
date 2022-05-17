@@ -26,7 +26,23 @@ Dung.Data = {};
 Dung.Data.CollapsedStates = {};
 Dung.Models = {};
 Dung.IsUpdating = false;
+Dung.FadeAlpha = .45;
+Dung.CharacterMoving = false;
 
+function Dung.Fader(self)
+    if not Dung.CharacterMoving then
+        return false;
+    end
+    --frame, minAlpha, maxAlpha, durationSec, fadePredicate
+    if self:IsMouseOver() then
+        Dung_GroupFinder_Frame:SetAlpha(1)
+        PlayerMovementFrameFader.RemoveFrame(Dung_GroupFinder_Frame, 1, 8.0, .5)
+    else
+        if not Dung_GroupFinder_FilterInput:HasFocus() then
+            Dung_GroupFinder_Frame:SetAlpha(Dung.FadeAlpha)
+        end
+    end
+end
 Dung.Entities = {};
 Dung.PostTable = {
     posts = {};
@@ -658,6 +674,24 @@ function Dung:Run()
 	Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_CHANNEL");
 	Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_GUILD");
 	Dung_GroupFinder_Frame:RegisterEvent("CHAT_MSG_OFFICER");
+    Dung_GroupFinder_Frame:RegisterEvent("PLAYER_STOPPED_MOVING");
+    Dung_GroupFinder_Frame:RegisterEvent("PLAYER_STARTED_MOVING");
+    Dung_GroupFinder_Frame:EnableMouse(true)
+
+    function Dung_GroupFinder_Frame:PLAYER_STARTED_MOVING()
+        Dung.CharacterMoving = true;
+
+        if not Dung_GroupFinder_FilterInput:HasFocus() then
+            PlayerMovementFrameFader.AddDeferredFrame(Dung_GroupFinder_Frame, Dung.FadeAlpha, 8.0, .5)
+        end
+    end
+    function Dung_GroupFinder_Frame:PLAYER_STOPPED_MOVING()
+        Dung.CharacterMoving = false;
+        PlayerMovementFrameFader.AddDeferredFrame(Dung_GroupFinder_Frame, 1, 8.0, 3)
+    end
+
+    Dung_GroupFinder_Frame:SetScript("OnEnter", Dung.Fader)
+    Dung_GroupFinder_Frame:SetScript("OnLeave", Dung.Fader)
 
     Dung.DungeonCount = #Dung.Data.Instances;
 
