@@ -11,7 +11,6 @@ robocopy ..\BuildScripts\TBC ..\build\TBC\Dung /XD build .idea .git BuildScripts
 ::Zip it
 powershell Compress-Archive -force -Path ..\build\TBC\Dung ..\build\Dung%ver_id%_TBC.zip
 
-
 :::::::::::::::::::::::::::::::::
 ::::::::::::::VANILLA::::::::::::
 :::::::::::::::::::::::::::::::::
@@ -21,3 +20,10 @@ robocopy .. ..\build\Vanilla\Dung /XD build .idea .git BuildScripts /E
 robocopy ..\BuildScripts\Vanilla ..\build\Vanilla\Dung /XD build .idea .git BuildScripts /E
 ::Zip it
 powershell Compress-Archive -force -Path ..\build\Vanilla\Dung ..\build\Dung%ver_id%_Vanilla-SoM.zip
+
+:::::::::::::::::::::::::::::::::
+::::::::::::::WoWUp Zips:::::::::
+:::::::::::::::::::::::::::::::::
+::Copy Code
+powershell Copy-Item ..\build\Dung%ver_id%_TBC.zip ..\Dung%ver_id%_WoWUp-bc.zip
+powershell Copy-Item ..\build\Dung%ver_id%_Vanilla-SoM.zip ..\Dung%ver_id%_WoWUp-classic.zip
