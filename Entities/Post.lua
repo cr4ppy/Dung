@@ -95,19 +95,19 @@ end
 ---- Gets if the post requires a tank role
 ---@return boolean
 function Post:NeedsTank()
-    return Dung:Contains(self.roles_needed, Roles.Tank)
+    return Dung:ContainsExact(self.roles_needed, Roles.Tank)
 end
 
 ---- Gets if the post requires a healer role
 ---@return boolean
 function Post:NeedsHeals()
-    return Dung:Contains(self.roles_needed, Roles.Heals)
+    return Dung:ContainsExact(self.roles_needed, Roles.Heals)
 end
 
 ---- Gets if the post requires a DPS role
 ---@return boolean
 function Post:NeedsDPS()
-    return Dung:Contains(self.roles_needed, Roles.DPS)
+    return Dung:ContainsExact(self.roles_needed, Roles.DPS)
 end
 
 ---- Sets the post difficulty

@@ -453,7 +453,7 @@ Dung.Data.Instances = {
     Instance:New({
         id = 'Naxx',
         name = 'Naxxramas', --1
-        key_words = {'naxxramas', 'nax', 'naxx', 'sapphiron'};
+        key_words = {'naxxramas', 'nax', 'naxx'};
         exclude_words = {},
         level_range = { {60, 60}, {60, 60} };
         avail_difficulty_types = {
@@ -682,7 +682,7 @@ Dung.Data.Instances = {
     Instance:New({
         id = 'MagistersTerrace',
         name = 'Magisters\' Terrace', --1
-        key_words = {'magisters', 'magister', 'magst', 'mags terrace', 'mt', 'mgt'};
+        key_words = {'magisters', 'magister', 'magst', 'mags terrace', 'mgt'};
         exclude_words = {'boost'},
         level_range = { {69, 70}, {70, 70} };
         avail_difficulty_types = {

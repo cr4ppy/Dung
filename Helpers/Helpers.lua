@@ -31,13 +31,29 @@ function Dung.AssertString(str)
 end
 
 ---
----CONTAINS
+---CONTAINS EXACT STRING
 ---
-function Dung:Contains(tbl, value)
+function Dung:ContainsExact(tbl, value)
     if(type(tbl) ~= 'table') then return false end
 
     for key,val in pairs(tbl) do
         if string.lower(val) == string.lower(value) or string.lower(key) == string.lower(value) then
+            return true;
+        end
+    end
+    return false
+end
+
+---
+---CONTAINS
+---
+function Dung:Contains(tbl, value)
+    if(type(tbl) ~= 'table') then
+        return false
+    end
+
+    for str,val in pairs(tbl) do
+        if string.match(value, val) then
             return true;
         end
     end

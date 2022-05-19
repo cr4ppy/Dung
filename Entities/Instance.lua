@@ -225,7 +225,8 @@ function Instance:CheckKeywords(keywords, post_difficulty)
 
     for index,dungeon_keyword in pairs(self:GetKeyWords()) do
 
-        --for performance - to try avoid running the code after this block
+        --for performance - to try avoid running any code after this block
+        --by doing an exact string comparison with dungeon keyword and search keyword
         for trying_keyword in pairs(keywords) do
             if not postIsHeroic and string.lower(trying_keyword) == string.lower(dungeon_keyword) then
                 return true;
@@ -234,15 +235,29 @@ function Instance:CheckKeywords(keywords, post_difficulty)
 
         for trying_keyword in pairs(keywords) do
             split_trying_keyword = Dung:Split(Dung:RemoveJunkFromString(string.lower(trying_keyword)), ' ', false);
-            trying_keyword_asking_for_heroic = Dung:IsPostHeroic(split_trying_keyword);
-            matches_a_dungeon_keyword = Dung:Contains(split_trying_keyword, dungeon_keyword)
+            trying_keyword_asking_for_heroic = false;
+
+            --If search keywords are > 1 then we will check to see if any of them are a "heroic" keyword
+            --if true mark the search as heroic and remove the heroic keyword from the testing array
+            --so we can continue checking remaining keywords for dungeon keywords
+            if(#split_trying_keyword > 1) then
+                for i,search_word in pairs(split_trying_keyword) do
+                    if(Dung:IsStringSearchHeroic(search_word)) then
+                        split_trying_keyword[i] = nil;
+                        trying_keyword_asking_for_heroic = true;
+                        break;
+                    end
+                end
+            end
+
+            matches_a_dungeon_keyword = Dung:Contains(split_trying_keyword, dungeon_keyword);
+
+            if matches_a_dungeon_keyword and not trying_keyword_asking_for_heroic then
+                return true
+            end
 
             if postIsHeroic then
                 if matches_a_dungeon_keyword and trying_keyword_asking_for_heroic then
-                    return true
-                end
-            else
-                if matches_a_dungeon_keyword and not trying_keyword_asking_for_heroic then
                     return true
                 end
             end

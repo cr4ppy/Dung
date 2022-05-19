@@ -16,6 +16,8 @@ local _, Dung = ...
 Dung.GameVersion = nil; -- set in Dung:Run()
 Dung.Tests = {};
 Dung.isRunning = true;
+Dung.IsUpdating = false;
+Dung.isListening = true;
 Dung.POST_HEIGHT = 16;
 Dung.MAX_HEIGHT = 400;
 Dung.TIME_POST_ALIVE = 60 * 2.5; --2.5 minutes
@@ -25,7 +27,6 @@ Dung.DungeonCount = 0; -- amount of dungeons we have, gets populated after they 
 Dung.Data = {};
 Dung.Data.CollapsedStates = {};
 Dung.Models = {};
-Dung.IsUpdating = false;
 
 Dung.Entities = {};
 Dung.PostTable = {
@@ -223,7 +224,7 @@ end
 ---@return boolean
 function Dung:HasExcludedWords(msg_parts, Instance)
     for i,exclude_word in ipairs(Instance:GetExcludeWords()) do
-        if self:Contains(msg_parts, exclude_word) then
+        if self:ContainsExact(msg_parts, exclude_word) then
             return true;
         end
     end
@@ -234,15 +235,35 @@ end
 ---
 ---@param msg_parts table
 ---@return boolean
-function Dung:IsPostHeroic(msg_parts)
-    for i,heroic_keyword in ipairs(self.Data.HeroicKeywords) do
-        if  self:Contains(msg_parts, heroic_keyword) or
-            self:Contains(msg_parts, heroic_keyword)
-            then
-                return true
+function Dung:IsPostHeroic(msg_parts, keywords)
+    local heroic_keywords = keywords or self.Data.HeroicKeywords;
+
+    for i,heroic_keyword in ipairs(heroic_keywords) do
+        if  self:ContainsExact(msg_parts, heroic_keyword) then
+            return true
         end
     end
     return false;
+end
+
+--- Takes a table of words (split chat message) and determines if the post is heroic difficulty.
+---
+---@param msg_parts table
+---@return number|boolean
+function Dung:IsStringSearchHeroic(str)
+    if str == nil then
+        return false;
+    end
+
+    if self.Data.HeroicKeywordsSearch[str] ~= nil then
+        return true;
+    end
+
+    for key,difficulty in pairs(self.Data.HeroicKeywordsSearch) do
+        if string.match(str, key) then
+            return true;
+        end
+    end
 end
 
 --- Takes a chat message and returns a table of { difficulty, Instance, roles_needed }
@@ -300,7 +321,7 @@ function Dung:CheckPost(post_msg)--Checks
         end
 
         for j,dungeon_keyword in ipairs(Instance:GetKeyWords()) do
-            if self:Contains(words, dungeon_keyword) then
+            if self:ContainsExact(words, dungeon_keyword) then
                 if is_heroic then
                     table.insert(final, {
                         Difficulty.Heroic,
@@ -341,7 +362,7 @@ end
 --- Function that ticks every 5 seconds and removes posts if they've expired. + can do updates to the UI (5 delay so don't do anything big).
 ---@return void
 function Dung.TickTimer()
-    if not Dung.isRunning then return false end;
+    if not Dung.isRunning or not Dung.isListening then return false end;
 
     local posts = Dung:GetPostsForScrollWindow();
     local post_count = #posts;
@@ -394,7 +415,7 @@ end
 ---@param guid string
 ---@return void
 function Dung:OnChat(msg, playerName, guid, fakeClass)
-    if not self.isRunning then return false end;
+    if not self.isRunning or not self.isListening then return false end;
 
     --limit to one post per player for now,
     --this can be changed to make multiple posts with 1 message, eg "sp and ub" makes 2 posts
