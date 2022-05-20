@@ -37,9 +37,14 @@ Dung.PostTable = {
     show_heroic = true;
     show_raid = true;
     toggle_hide_all = false;
-    current_order = true;
     search_word = '';
     filter = true;
+    sort_states = {
+        [1] = 'none',
+        [2] = 'desc',
+        [3] = 'asc',
+    };
+    current_order_state = 1;
     sort = {
         ---Sorts posts highest to lowest (time posted)
         asc = function(postLeft, postRight)
@@ -97,11 +102,19 @@ Dung.PostTable = {
     end,
     ---Sets the direction of the order button depending on current order
     set_order_arrow = function()
-        if not Dung.PostTable.current_order then
-            Dung_GroupFinder_OrderListButton:GetNormalTexture():SetRotation(math.pi);
+
+        if Dung.PostTable.current_order_state > 1 then
+            Dung_GroupFinder_OrderListButton:SetAlpha(1);
+
+            if Dung.PostTable.current_order_state == 2 then
+                Dung_GroupFinder_OrderListButton:GetNormalTexture():SetRotation(math.pi);
+            else
+                Dung_GroupFinder_OrderListButton:GetNormalTexture():SetRotation(0);
+            end
         else
-            Dung_GroupFinder_OrderListButton:GetNormalTexture():SetRotation(0);
+            Dung_GroupFinder_OrderListButton:SetAlpha(0.25);
         end
+
     end
 };
 
@@ -146,11 +159,12 @@ function Dung:GetPostsForScrollWindow()
         return {}
     end
 
-    --sorting
-    if self.PostTable.current_order then -- true = asc, false = desc
-        table.sort(self.PostTable.posts, self.PostTable.sort.desc);
-    else
-        table.sort(self.PostTable.posts, self.PostTable.sort.asc);
+    if self.PostTable.current_order_state > 1 then
+        if self.PostTable.current_order_state == 2 then
+            table.sort(self.PostTable.posts, self.PostTable.sort.desc);
+        else
+            table.sort(self.PostTable.posts, self.PostTable.sort.asc);
+        end
     end
 
     local finalList = {}

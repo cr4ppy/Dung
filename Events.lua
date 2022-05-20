@@ -170,7 +170,13 @@ end
 -----@param self self
 -----@return void
 function Dung_GroupFinder_OrderListButton_OnClick(self)
-    Dung.PostTable.current_order = not Dung.PostTable.current_order;
+
+    if Dung.PostTable.current_order_state >= #Dung.PostTable.sort_states then
+        Dung.PostTable.current_order_state = 1
+    else
+        Dung.PostTable.current_order_state = Dung.PostTable.current_order_state + 1;
+    end
+
     Dung.PostTable:set_order_arrow();
 
     Dung_GroupFinder_BigBoyUpdate();
