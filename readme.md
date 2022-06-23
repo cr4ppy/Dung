@@ -28,8 +28,6 @@ Please report any issues or even feature ideas!
 **Development setup & notes**  
 1. "git clone https://github.com/cr4ppy/Dung.git" into your Addons folder
 2. make a pull request for any changes you do and I can update CurseForge
-3. Code is architected in a classic oop style, eg. get player's name of a dungeon post *Post:GetPlayer():GetName()*, "Entities" are just classes, "Models" are static/lookup classes, "Fixtures" are to generate dummy data for testing, "Helpers" 
-are just some static helper functions added to the Dung object
 
 
 **Build production versions**  
