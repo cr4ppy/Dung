@@ -43,8 +43,8 @@ Dung.Data.Instances = {
     }),
     Instance:New({
         id = 'Deadmines',
-        name = 'Dead Mines', --1
-        key_words = {'vc', 'deadmines', 'dead mines', 'dead mine'};
+        name = 'The Deadmines', --1
+        key_words = {'vc', 'deadmines', 'dead mines', 'dead mine', 'dead', 'dm'};
         exclude_words = {'boost'},
         level_range = { {18, 22}, {18, 22} };
         avail_difficulty_types = {
@@ -122,7 +122,7 @@ Dung.Data.Instances = {
     Instance:New({
         id = 'ScarletMonastery',
         name = 'Scarlet Monastery', --1
-        key_words = {'sm', 'sm any', 'sm all', 'sml', 'scarlet monastery','sm gy', 'smgy', 'scarlet monastery graveyard', 'scarlet monastery gy', 'sm lib', 'sm library', 'smlib', 'sml', 'scarlet monastery library', 'scarlet monastery lib', 'scarlet','scarlett', 'sm arms', 'lib cath', 'arms cath'};
+        key_words = {'sm', 'sm any', 'sm all', 'sml', 'scarlet monastery','sm gy', 'scarlet monastery graveyard', 'scarlet monastery gy', 'sm lib', 'sm library', 'smlib', 'sml', 'scarlet monastery library', 'scarlet monastery lib', 'scarlet','scarlett', 'sm arms', 'lib cath', 'arms cath'};
         exclude_words = {'boost'},
         level_range = { {30, 40}, {30, 40} };
         avail_difficulty_types = {
@@ -276,7 +276,7 @@ Dung.Data.Instances = {
         max_players = 5;
     }),
     Instance:New({
-        id = 'LowerBlackRock',
+        id = 'UpperBlackRock',
         name = 'Upper Blackrock Spire', --1
         key_words = {'ubrs', 'upper blackrock spire', 'uppers'};
         exclude_words = {},
@@ -291,7 +291,7 @@ Dung.Data.Instances = {
     Instance:New({
         id = 'DireMaulE',
         name = 'Dire Maul East', --1
-        key_words = {'dme', 'dire maul east', 'dmeast', 'deast'};
+        key_words = {'dme', 'dire maul east', 'dmeast', 'deast', 'dm'};
         exclude_words = {},
         level_range = { {55, 60}, {55, 60} };
         avail_difficulty_types = {
@@ -304,7 +304,7 @@ Dung.Data.Instances = {
     Instance:New({
         id = 'DireMaulW',
         name = 'Dire Maul West', --1
-        key_words = {'dmw', 'dire maul west', 'dmwest', 'dwest', 'jumprun', 'jump run'};
+        key_words = {'dmw', 'dire maul west', 'dmwest', 'dwest', 'jumprun', 'jump run', 'dm'};
         exclude_words = {},
         level_range = { {58, 60}, {58, 60} };
         avail_difficulty_types = {
@@ -317,20 +317,7 @@ Dung.Data.Instances = {
     Instance:New({
         id = 'DireMaulN',
         name = 'Dire Maul North', --1
-        key_words = {'dmn', 'dire maul north', 'dmnorth', 'dnorth', 'trib', 'trib run', 'tribute', 'tribute run', 'dmt', 'dm buffs'};
-        exclude_words = {},
-        level_range = { {58, 60}, {58, 60} };
-        avail_difficulty_types = {
-            [Difficulty.Normal] = Difficulty.Normal,
-        };
-        current_difficulty = Difficulty.Normal;
-        type =  GroupType.Dungeon;
-        max_players = 5;
-    }),
-    Instance:New({
-        id = 'DireMaulN',
-        name = 'Dire Maul North', --1
-        key_words = {'dmn', 'dire maul north', 'dmnorth', 'dnorth', 'trib', 'trib run', 'tribute', 'tribute run', 'dmt', 'dm buffs'};
+        key_words = {'dmn', 'dire maul north', 'dmnorth', 'dnorth', 'trib', 'trib run', 'tribute', 'tribute run', 'dmt', 'dm buffs', 'dm'};
         exclude_words = {},
         level_range = { {58, 60}, {58, 60} };
         avail_difficulty_types = {
@@ -375,7 +362,7 @@ Dung.Data.Instances = {
     Instance:New({
         id = 'ZulGurub',
         name = 'Zul Gurub', --1
-        key_words = {'zg', '20 mans', '20 man', 'hakkar', 'zg mountrun'};
+        key_words = {'zg', '20 mans', '20 man', 'zg mountrun', 'zulgurub'};
         exclude_words = {},
         level_range = { {60, 60}, {60, 60} };
         avail_difficulty_types = {
@@ -514,7 +501,7 @@ Dung.Data.Instances = {
     Instance:New({
         id = 'ManaTombs',
         name = 'Mana Tombs', --1
-        key_words = {'mt', 'mana tombs', 'mtombs', 'auch tombs', 'mana t'};
+        key_words = {'mt', 'mana tombs', 'mtombs', 'tombs', 'mana t'};
         exclude_words = {'boost'},
         level_range = { {63, 70}, {70, 70} };
         avail_difficulty_types = {
@@ -583,8 +570,8 @@ Dung.Data.Instances = {
     }),
     Instance:New({
         id = 'UberBog',
-        name = 'Uber Bog', --1
-        key_words = {'ub', 'uberbog', 'uber bog'};
+        name = 'The Under Bog', --1
+        key_words = {'ub', 'underbog', 'under bog'};
         exclude_words = {'boost'},
         level_range = { {62, 70}, {70, 70} };
         avail_difficulty_types = {
@@ -741,7 +728,7 @@ Dung.Data.Instances = {
     Instance:New({
         id = 'Gruul',
         name = 'Gruul\'s Lair', --1
-        key_words = {'gruul', 'grools', 'grool', 'gruul\'s lair', 'magz', 'grull'};
+        key_words = {'gruul', 'gruuls', 'grools', 'grool', 'gruul\'s lair', 'grull'};
         exclude_words = {'boost'},
         level_range = { {70, 70}, {70, 70} };
         avail_difficulty_types = {
@@ -816,4 +803,19 @@ Dung.Data.Instances = {
         type =  GroupType.Raid;
         max_players = 25;
     }),
+
+    --Instance:New({
+    --    id = 'IceCrown',
+    --    name = 'Ice Crown Citadel', --1
+    --    key_words = {'icc', 'ice crown', 'icecrown'};
+    --    exclude_words = {'boost'},
+    --    level_range = { {70, 70}, {70, 70} };
+    --    avail_difficulty_types = {
+    --        [Difficulty.Normal] = Difficulty.Normal,
+    --        [Difficulty.Heroic] = Difficulty.Heroic,
+    --    };
+    --    current_difficulty = Difficulty.Normal;
+    --    type = GroupType.Raid;
+    --    max_players = 25;
+    --}),
 }

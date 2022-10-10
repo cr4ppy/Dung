@@ -190,7 +190,7 @@
 				</Texture>
 			</Layer>
             <Layer level="BACKGROUND">
-				<FontString inherits="GameFontHighlight" text="Dung" parentKey="Text">
+				<FontString name="$parentAddonTitle" inherits="GameFontHighlight" text="Dung" parentKey="Text">
 					<Size>
 						<AbsDimension x="500" y="14"/>
 					</Size>
@@ -469,7 +469,12 @@
                     </Layer>
                 </Layers>
                 <Scripts>
-
+                    <OnEnter>
+                        Dung_GroupFinder_HoverFilter(self)
+                    </OnEnter>
+                    <OnLeave>
+                        GameTooltip:Hide()
+                    </OnLeave>
                     <!--<OnEscapePressed function=""/>-->
                     <!--<OnEnterPressed function=""/>-->
                     <!--<OnEditFocusLost function=""/>-->
@@ -511,6 +516,9 @@
                     <OnClick>
                         Dung_GroupFinder_ToggleFilter(self);
                     </OnClick>
+                    <OnEnter>
+                        Dung_GroupFinder_HoverFilter(self);
+                    </OnEnter>
                 </Scripts>
             </CheckButton>
 

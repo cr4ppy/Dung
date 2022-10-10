@@ -1,5 +1,11 @@
 local _, Dung = ...
 
+local str_match = string.match;
+local str_lower = string.lower;
+local str_gsub = string.gsub;
+local str_gmatch = string.gmatch;
+local str_format = string.format;
+
 --- Replaces specific characters/phrases from a string with a whitespace BEFORE we split into a words table.
 ---
 --- eg. vc{skull} or kara-heals = "vc", "kara heals"
@@ -7,7 +13,7 @@ local _, Dung = ...
 ---@param str string
 ---@return string
 function Dung:RemoveJunkFromString(str)
-    return string.gsub(str, "[^A-Za-z0-9]", ' ')
+    return str_gsub(str, "[^A-Za-z0-9]", ' ')
 end
 
 
@@ -37,7 +43,7 @@ function Dung:ContainsExact(tbl, value)
     if(type(tbl) ~= 'table') then return false end
 
     for key,val in pairs(tbl) do
-        if string.lower(val) == string.lower(value) or string.lower(key) == string.lower(value) then
+        if str_lower(val) == str_lower(value) or str_lower(key) == str_lower(value) then
             return true;
         end
     end
@@ -52,9 +58,9 @@ function Dung:Contains(tbl, value)
         return false
     end
 
-    for str,val in pairs(tbl) do
-        if string.match(value, val) then
-            return true;
+    for i,val in pairs(tbl) do
+        if str_match(value, val) then
+            return i;
         end
     end
     return false
@@ -67,9 +73,9 @@ function Dung:Split(str, sep, value_as_key)
     local result = {}
     local regex = string.format(("([^%s]+)"), sep)
 
-    for each in string.gmatch(str, regex) do
+    for each in str_gmatch(str, regex) do
         if value_as_key then
-            result[string.lower(each)] = each;
+            result[str_lower(each)] = each;
         else
             table.insert(result, each)
         end
@@ -84,23 +90,18 @@ end
 
 function Dung:SplitSearchString(str, sep)
     local result = {}
-    local regex = string.format(("([^%s]+)"), sep)
+    local regex = str_format(("([^%s]+)"), sep)
     local trimmed;
+    local index = 0;
 
-    for each in string.gmatch(str, regex) do
+    for each in str_gmatch(str, regex) do
+        index = index + 1;
         trimmed = Dung:TrimStartEnd(each)
-        result[trimmed] = trimmed;
+        result[trimmed] = index;
     end
 
     return result
 end
-
----
----JOIN TABLE INTO STR
----
---function Dung:Join(tbl)
---
---end
 
 ---
 ---Model + Entity class getters
@@ -110,4 +111,8 @@ function Dung:GetModel(name)
 end
 function Dung:GetEntity(name)
     return self.Entities[name];
+end
+
+function Dung:dump(var)
+    return DevTools_Dump(var)
 end

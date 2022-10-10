@@ -14,6 +14,7 @@ Dung.lua
 Dung.xml
 Events.lua
 
+
 ## Helpers
 Helpers\Helpers.lua
 
@@ -29,9 +30,12 @@ Entities\Entity.lua
 Entities\Instance.lua
 Entities\Post.lua
 Entities\Player.lua
+Entities\FilteredDungeon.lua
 
 ## Data
+Database.lua
 Data\RoleKeywords.lua
+Data\NormalKeywords.lua
 Data\HeroicKeywords.lua
 Data\Instances.lua
 

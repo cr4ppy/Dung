@@ -2,6 +2,9 @@ local _, Dung = ...
 
 local InstanceDifficulty = Dung.Models:CreateModel('InstanceDifficulty', {
     ---@type number
+    Any = 0;
+
+    ---@type number
     Normal = 1;
 
     ---@type number
@@ -15,6 +18,7 @@ local InstanceDifficulty = Dung.Models:CreateModel('InstanceDifficulty', {
 
     ---@type table
     Labels = {
+        [0] = "Any";
         [1] = "Normal";
         [2] = "Heroic";
         [3] = "Mythic";

@@ -160,9 +160,21 @@ function Dung_GroupFinder_ToggleFilter(self)
         Dung_GroupFinder_FilterInput:SetAlpha(1)
     end
 
-    Dung_GroupFinder_DB_Character.filter = checked;
+    --Dung_GroupFinder_DB_Character.filter = checked;
+    Dung.DB:setData('filter', checked);
+    Dung:dump(Dung_GroupFinder_DB_Character)
 
     Dung_GroupFinder_BigBoyUpdate();
+end
+
+----- Toggle filter on/off
+-----
+-----@param self self
+-----@return void
+function Dung_GroupFinder_HoverFilter(self)
+    GameTooltip:SetOwner(self, "ANCHOR_CURSOR_RIGHT", 00, 20);
+    GameTooltip:SetText(format(Dung.FilteredDungeonsSummaryString));
+    GameTooltip:Show();
 end
 
 ----- Click to order list asc or desc
@@ -203,7 +215,15 @@ function Dung_GroupFinder_FilterInput_OnChange(self)
         Dung.PostTable.search_word = search_keyword;
     end
 
-    Dung_GroupFinder_DB_Character['search'] = search_keyword;
+    Dung:DetermineFilteredDungeons();
+
+    if self == GameTooltip:GetOwner() or Dung_GroupFinder_UseFilter == GameTooltip:GetOwner() then
+        GameTooltip:SetText(format(Dung.FilteredDungeonsSummaryString));
+    end
+
+    Dung.DB:setData('search', search_keyword);
+
+    --Dung_GroupFinder_DB_Character['search'] = search_keyword;
     Dung_GroupFinder_BigBoyUpdate();
     return true;
 end

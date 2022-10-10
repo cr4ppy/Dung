@@ -13,7 +13,13 @@ Dung.Data.HeroicKeywords = {
 
 --We really just need the key in this table for look ups
 --But I decided to add the heroic difficulty as the value because it's relevant
+
+--not the most elegant, but the fastest
 Dung.Data.HeroicKeywordsSearch = {
-    [string.lower(Dung.Data.HeroicKeywords[1])] = Difficulty.Heroic,
-    [string.lower(Dung.Data.HeroicKeywords[2])] = Difficulty.Heroic,
+    ['h'] = Difficulty.Heroic,
+    ['heroic'] = Difficulty.Heroic,
+    ['he'] = Difficulty.Heroic,
+    ['her'] = Difficulty.Heroic,
+    ['hero'] = Difficulty.Heroic,
+    ['heroi'] = Difficulty.Heroic,
 }

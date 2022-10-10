@@ -47,14 +47,17 @@ function Instance:GetDescription()
     local max = self:GetMaxLevel();
     local levels = '(' .. min .. '-' .. max .. ')'
 
-    if(self:IsHeroic()) then
+    if(self:IsHeroic() and not self:IsRaid()) then
         levels = '- Heroic (' ..min.. ')';
     end
 
     if(self:IsRaid()) then
-        levels = '- Raid (' ..min.. ')';
+        if self:IsHeroic() then
+            levels = '- Heroic Raid (' ..min.. ')';
+        else
+            levels = '- Raid (' ..min.. ')';
+        end
     end
-
     return self.name .. ' ' .. levels --.. ' ' .. self.max_players ..' Players'
 end
 
@@ -216,49 +219,56 @@ end
 
 ---Checks if this Instances keywords are in the keywords provided, value and key must match, eg. {'kara': 'kara', 'sp': 'sp}
 ---@param type number
----@return self
-function Instance:CheckKeywords(keywords, post_difficulty)
-    local postIsHeroic = post_difficulty == Difficulty.Heroic;
+---@return boolean|table
+function Instance:CheckKeywords(keywords)
     local split_trying_keyword;
     local trying_keyword_asking_for_heroic;
+    local trying_keyword_asking_for_normal;
     local matches_a_dungeon_keyword;
 
     for index,dungeon_keyword in pairs(self:GetKeyWords()) do
-
         --for performance - to try avoid running any code after this block
         --by doing an exact string comparison with dungeon keyword and search keyword
         for trying_keyword in pairs(keywords) do
-            if not postIsHeroic and string.lower(trying_keyword) == string.lower(dungeon_keyword) then
-                return true;
+            if string.len(trying_keyword) > 2 then
+                if string.lower(dungeon_keyword) == string.lower(trying_keyword) then
+                    if self:IsAvailableInHeroic() then
+                        return {self, Difficulty.Any, trying_keyword};
+                    end
+
+                    return {self, Difficulty.Normal, trying_keyword};
+                end
             end
         end
 
         for trying_keyword in pairs(keywords) do
-            split_trying_keyword = Dung:Split(Dung:RemoveJunkFromString(string.lower(trying_keyword)), ' ', false);
-            trying_keyword_asking_for_heroic = false;
+            if string.len(trying_keyword) > 1 then
+                split_trying_keyword = Dung:Split(Dung:RemoveJunkFromString(string.lower(trying_keyword)), ' ', false);
+                trying_keyword_asking_for_heroic = false;
+                trying_keyword_asking_for_normal = false;
+                matches_a_dungeon_keyword = Dung:ContainsDungeonKeyword(split_trying_keyword, dungeon_keyword);
 
-            --If search keywords are > 1 then we will check to see if any of them are a "heroic" keyword
-            --if true mark the search as heroic and remove the heroic keyword from the testing array
-            --so we can continue checking remaining keywords for dungeon keywords
-            if(#split_trying_keyword > 1) then
-                for i,search_word in pairs(split_trying_keyword) do
-                    if(Dung:IsStringSearchHeroic(search_word)) then
-                        split_trying_keyword[i] = nil;
-                        trying_keyword_asking_for_heroic = true;
-                        break;
+                if matches_a_dungeon_keyword then
+                    trying_keyword_asking_for_heroic = matches_a_dungeon_keyword[2]
+                    trying_keyword_asking_for_normal = matches_a_dungeon_keyword[3];
+
+                    if trying_keyword_asking_for_heroic and not trying_keyword_asking_for_normal then
+                        if self:IsAvailableInHeroic() then
+                            return {self, Difficulty.Heroic, trying_keyword}
+                        else
+                            return {self, Difficulty.Normal, trying_keyword}
+                        end
                     end
-                end
-            end
 
-            matches_a_dungeon_keyword = Dung:Contains(split_trying_keyword, dungeon_keyword);
+                    if trying_keyword_asking_for_normal and self:IsAvailableInHeroic() then
+                        return {self, Difficulty.Normal, trying_keyword}
+                    end
 
-            if matches_a_dungeon_keyword and not trying_keyword_asking_for_heroic then
-                return true
-            end
+                    if not trying_keyword_asking_for_normal and not trying_keyword_asking_for_heroic and self:IsAvailableInHeroic() then
+                        return {self, Difficulty.Any, trying_keyword}
+                    end
 
-            if postIsHeroic then
-                if matches_a_dungeon_keyword and trying_keyword_asking_for_heroic then
-                    return true
+                    return {self, Difficulty.Normal, trying_keyword}
                 end
             end
         end

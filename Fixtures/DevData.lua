@@ -1,4 +1,3 @@
---local function dump(var, ...) return DevTools_Dump(var, ...) end
 
 local _, Dung = ...
 
@@ -18,24 +17,25 @@ function Dung:RunFixtures(stop)
     --end
 
     --Dung:OnChat('DPS LFG kara', 'Bluefork',nil, 'SHAMAN')
-    --Dung:OnChat('LF1M, heals SP (N)', 'Cheesey',nil, 'WARLOCK')
-    --Dung:OnChat('LF1M, heals SP h', 'Wowdf',nil, 'PALADIN')
+    --Dung:OnChat('LF1M, mgt (N)', 'Cheesey',nil, 'WARLOCK')
+    --Dung:OnChat('LF1M, magisters H', 'Wowdf',nil, 'PALADIN')
     --Dung:OnChat('LF1m heals sethekk H', 'Oakee', nil, 'WARRIOR')
     --Dung:OnChat('LF2 tank/heals SV', 'Wifey', nil, 'MAGE')
     --Dung:OnChat('LF2m DPS HEALS SH H', 'Blindinglight', nil, 'PALADIN')
-    --Dung:OnChat('LFM heals bm N', 'Oldgrog', nil, 'MAGE')
-    --Dung:OnChat('lfg h sl', 'Dadalyf', nil, 'PRIEST')
-    --
+    --Dung:OnChat('LFM heals sfk', 'Oldgrog', nil, 'MAGE')
+    --Dung:OnChat('lfg ICC H', 'Dadalyf', nil, 'PRIEST')
+
     --Dung:OnChat('LF1m heals scholo', 'Oakee', nil, 'WARRIOR')
     --Dung:OnChat('LF1m heals naxx', 'Cheefse', nil, 'SHAMAN')
     --
-    --Dung:OnChat('LFM H ramps', 'Cowdoy', nil, 'SHAMAN')
+    --Dung:OnChat('LFM sp n', 'Cowdoy', nil, 'SHAMAN')
     --Dung:OnChat('LFM karas tank 2 dps', 'Hiit', nil, 'WARRIOR')
-    --Dung:OnChat('LF3M crypts dps', 'Hiit', nil, 'WARRIOR')
-    --Dung:OnChat('LFM karas tank 2 dps', 'Manuc', nil, 'HUNTER')
+    --Dung:OnChat('LF3M ubrs dps', 'Hiit', nil, 'WARRIOR')
+    --Dung:OnChat('LFM sp h tank 2 dps', 'Manuc', nil, 'HUNTER')
     --Dung:OnChat('dps lfg crypts H', 'Trilly', nil, 'HUNTER')
     --Dung:OnChat('LFM RAMPS NEED ALL', 'Nathan', nil, 'PRIEST')
     --dump(string.gsub("{star}DPS{star}",'{star}', ""));
     --Dung:Show();
     --Dung.isRunning = false;
+    --Dung.isListening = false;
 end
