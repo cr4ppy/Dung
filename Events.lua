@@ -162,7 +162,6 @@ function Dung_GroupFinder_ToggleFilter(self)
 
     --Dung_GroupFinder_DB_Character.filter = checked;
     Dung.DB:setData('filter', checked);
-    Dung:dump(Dung_GroupFinder_DB_Character)
 
     Dung_GroupFinder_BigBoyUpdate();
 end
