@@ -332,12 +332,6 @@
                             </Offset>
                         </Anchor>
                     </Anchors>
-                    <Scripts>
-                        <OnClick>
-                            Dung_GroupFinder_ToggleType($parent);
-                        </OnClick>
-                    </Scripts>
-
                 </ButtonText>
 				<Anchors>
 					<Anchor point="TOPLEFT" relativeTo="Dung_GroupFinder_Frame">

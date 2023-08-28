@@ -765,8 +765,7 @@ function Dung:Run()
 
     --set some frame limits
     Dung_GroupFinder_Frame:SetResizable(true)
-    Dung_GroupFinder_Frame:SetMinResize(320, 304)
-    Dung_GroupFinder_Frame:SetMaxResize(600, 460)
+    Dung_GroupFinder_Frame:SetResizeBounds(320, 304, 600, 460)
 
     --create resize handle
     local resizeHandle = CreateFrame("Button", nil, Dung_GroupFinder_Frame)
