@@ -111,7 +111,7 @@
 				</Anchor>
 			</Anchors>
 		</NormalTexture>
-        <HighlightTexture name="$parentHighlight" file="Interface\Buttons\UI-PlusButton-Hilight" alphaMode="ADD">
+        <HighlightTexture name="$parentHighlight" file="Interface\Buttons\UI-PlusButton-Highlight" alphaMode="ADD">
 			<Size>
 				<AbsDimension x="16" y="16"/>
 			</Size>

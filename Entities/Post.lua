@@ -218,15 +218,11 @@ function Post:GetElapsedTime()
     local secs = self:GetLastTimeSeconds()
     local mins = math.floor(secs/60);
 
-    if secs < 30 then
-        return "<30s"
-    end
-
     if mins >= 1 then
         return mins ..'m'
     end
 
-    return "<1m"
+    return secs .. 's';
 end
 
 function Post:New()

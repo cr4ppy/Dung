@@ -63,6 +63,7 @@ end
 function Dung_GroupFinder_OnPostClick(self)
     local instance_guid = self.Post:GetGuid();
     local player_name = self.Post:GetPlayer():GetName();
+    local player_realm = self.Post:GetPlayer():GetRealm();
 
     if(self.is_header) then
         if(self.is_collapsed == true) then
@@ -94,7 +95,7 @@ function Dung_GroupFinder_OnPostClick(self)
             local edit_box = DEFAULT_CHAT_FRAME.editBox;
             ChatEdit_ActivateChat(edit_box);
             edit_box:SetAttribute("chatType", "WHISPER");
-            edit_box:Insert('/whisper '..player_name..' ');
+            edit_box:Insert('/whisper '..player_name..'-' .. player_realm .. ' ');
         end
     end
 end

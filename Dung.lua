@@ -56,7 +56,7 @@ Dung.PostTable = {
         end
     },
     set_time_color = function(textElement, elapsed)
-        if elapsed == '<30s' or elapsed == '<1m' then
+        if string.match(elapsed, "s") then
             textElement:SetTextColor(0,1,0);
         else
             textElement:SetTextColor(1, 0.8, 0)
@@ -404,11 +404,11 @@ function Dung:CheckPost(post_msg)--Checks
 end
 
 
---- Function that ticks every 5 seconds and removes posts if they've expired. + can do updates to the UI (5 delay so don't do anything big).
+--- Function that ticks every 1 seconds and removes posts if they've expired. + can do updates to the UI (1 delay so don't do anything big).
 ---
 ---@return void
 function Dung.TickTimer()
-    if not Dung.isRunning or not Dung.isListening then return false end;
+    --if not Dung.isRunning or not Dung.isListening then return false end;
 
     local posts = Dung:GetPostsForScrollWindow();
     local post_count = #posts;
@@ -436,7 +436,7 @@ function Dung.TickTimer()
         end
     end
 
-	C_Timer.After(5, Dung.TickTimer)
+	C_Timer.After(1, Dung.TickTimer)
 end
 
 --- Function that returns any existing Post by a players name
@@ -933,6 +933,7 @@ function Dung_GroupFinder_BigBoyUpdate(self)
             btnTitleRole3:Hide();
             btnTitleRole4:Hide();
 
+
             btnTitleTime:SetText(Post:GetElapsedTime())
             btnTitlePlayerName:SetTextColor(HIGHLIGHT_FONT_COLOR.r, HIGHLIGHT_FONT_COLOR.g, HIGHLIGHT_FONT_COLOR.b);
 
@@ -948,7 +949,7 @@ function Dung_GroupFinder_BigBoyUpdate(self)
 
                 btnTitle:Show();
                 btnTitle:SetText(Post:GetInstance(Post:GetDifficulty()):GetDescription());
-                btnTitleHighlight:SetTexture("Interface\\Buttons\\UI-PlusButton-Hilight");
+                btnTitleHighlight:SetTexture("Interface\\Buttons\\UI-PlusButton-Highlight");
                 btnTitleNormalText:SetPoint("LEFT", btnTitle, "LEFT", 20, 0);
                 btnTitleNormalText:SetWidth(0);
             else
@@ -964,7 +965,7 @@ function Dung_GroupFinder_BigBoyUpdate(self)
                 --*SUPER HACK* - ty blizz <3
                 QuestLogDummyText:SetText("  "..msg);
                 btnTitle:SetText(msg);
-                btnTitle:SetNormalTexture("");
+                btnTitle:ClearNormalTexture();
                 btnTitleNormalText:SetTextColor(0.9, 0.9, 0.9);
                 btnTitleHighlight:SetTexture("");
                 btnTitlePlayerName:SetFont(btnTitleNormalText:GetFont(), 11)
@@ -991,6 +992,7 @@ function Dung_GroupFinder_BigBoyUpdate(self)
                 end
             end
             btnTitle:Show();
+
             btnTitle.is_header = is_header;
             btnTitle.Post = Post;
         else

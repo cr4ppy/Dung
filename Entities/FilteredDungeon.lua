@@ -70,7 +70,7 @@ function FilteredDungeon:SetInstance(instance)
     return self;
 end
 
----Sets instance
+---Gets instance
 ---@param inst Instance
 ---@return self
 function FilteredDungeon:GetInstance()
